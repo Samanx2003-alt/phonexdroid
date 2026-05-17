@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>🔥 PhoenixStore — متجر الأجهزة القديمة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════ */
+:root {
+  --fire: #FF4500;
+  --ember: #FF6B35;
+  --gold: #FFB300;
+  --green: #00D48A;
+  --blue: #3B82F6;
+  --red: #FF453A;
+  --dark: #07070D;
+  --surface: #0C0C18;
+  --card: #111120;
+  --card2: #161628;
+  --border: #1E1E32;
+  --border2: #262640;
+  --text: #EEEEF5;
+  --soft: #9090B0;
+  --muted: #4A4A65;
+  --radius: 14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;
+  background:var(--dark);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+  padding-bottom:72px;
+}
+
+/* grain overlay */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.4;
+}
+
+/* ══════════════════════════════════
+   HEADER
+══════════════════════════════════ */
+.header{
+  background:linear-gradient(135deg,rgba(255,69,0,.12),rgba(255,179,0,.06));
+  border-bottom:1px solid rgba(255,69,0,.2);
+  padding:14px 16px 0;position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(20px);
+}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{font-size:26px;animation:flicker 3s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:.7}94%{opacity:1}96%{opacity:.85}97%{opacity:1}}
+.logo-text{
+  font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--fire),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-beta{
+  background:rgba(255,69,0,.2);border:1px solid rgba(255,69,0,.3);
+  color:var(--ember);font-size:10px;padding:2px 8px;border-radius:20px;letter-spacing:1px;
+}
+.header-actions{display:flex;gap:8px}
+.icon-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;cursor:pointer;transition:all .2s;
+}
+.icon-btn:hover{border-color:rgba(255,69,0,.4);background:var(--card2)}
+
+/* stats bar */
+.stats-bar{display:flex;gap:16px;padding-bottom:12px;overflow-x:auto;scrollbar-width:none}
+.stats-bar::-webkit-scrollbar{display:none}
+.stat-chip{
+  display:flex;align-items:center;gap:5px;font-size:12px;
+  color:var(--muted);white-space:nowrap;flex-shrink:0;
+}
+.stat-chip b{color:var(--gold);font-weight:700}
+
+/* ══════════════════════════════════
+   SEARCH
+══════════════════════════════════ */
+.search-wrap{
+  padding:10px 16px;background:rgba(7,7,13,.95);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:88px;z-index:40;
+  backdrop-filter:blur(16px);
+}
+.search-inner{
+  display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:10px 14px;
+  transition:border-color .2s;
+}
+.search-inner:focus-within{border-color:rgba(255,69,0,.5)}
+.search-inner input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--text);font-family:'Cairo',sans-serif;font-size:14px;direction:rtl;
+}
+.search-inner input::placeholder{color:var(--muted)}
+.search-clear{color:var(--muted);font-size:16px;cursor:pointer;transition:color .2s}
+.search-clear:hover{color:var(--fire)}
+
+/* ══════════════════════════════════
+   CATEGORIES
+══════════════════════════════════ */
+.cats-wrap{
+  overflow-x:auto;scrollbar-width:none;
+  display:flex;gap:8px;padding:10px 16px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+}
+.cats-wrap::-webkit-scrollbar{display:none}
+.cat-btn{
+  padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;
+  white-space:nowrap;cursor:pointer;flex-shrink:0;
+  border:1px solid var(--border);color:var(--muted);
+  background:var(--card);transition:all .2s;
+}
+.cat-btn:hover{border-color:rgba(255,69,0,.3);color:var(--soft)}
+.cat-btn.active{
+  background:rgba(255,69,0,.15);
+  border-color:rgba(255,69,0,.5);color:var(--ember);
+}
+
+/* ══════════════════════════════════
+   TABS
+══════════════════════════════════ */
+.tabs{
+  display:flex;background:var(--surface);
+  border-bottom:1px solid var(--border);
+}
+.tab-btn{
+  flex:1;padding:12px 8px;text-align:center;font-size:13px;font-weight:700;
+  color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;
+  font-family:'Cairo',sans-serif;background:none;border-top:none;
+  border-left:none;border-right:none;
+}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--fire)}
+
+/* ══════════════════════════════════
+   PAGES
+══════════════════════════════════ */
+.page{display:none;padding:12px 16px;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════════
+   FEATURED BANNER
+══════════════════════════════════ */
+.featured-banner{
+  background:linear-gradient(135deg,rgba(255,69,0,.12),rgba(255,179,0,.06));
+  border:1px solid rgba(255,69,0,.2);border-radius:16px;
+  padding:18px;margin-bottom:16px;position:relative;overflow:hidden;
+}
+.featured-banner::before{
+  content:'🔥';position:absolute;font-size:100px;
+  opacity:.06;left:-10px;top:-10px;pointer-events:none;
+}
+.fb-tag{
+  display:inline-block;background:var(--fire);color:white;
+  font-size:11px;font-weight:700;padding:3px 10px;
+  border-radius:20px;margin-bottom:8px;
+}
+.fb-title{font-size:18px;font-weight:900;margin-bottom:4px}
+.fb-sub{font-size:12px;color:var(--soft);margin-bottom:14px}
+.fb-btn{
+  display:inline-block;background:linear-gradient(135deg,var(--fire),var(--ember));
+  color:white;padding:10px 22px;border-radius:10px;
+  font-size:13px;font-weight:700;cursor:pointer;border:none;
+  font-family:'Cairo',sans-serif;
+  box-shadow:0 4px 16px rgba(255,69,0,.3);
+  transition:transform .2s,opacity .2s;
+}
+.fb-btn:hover{transform:translateY(-2px);opacity:.9}
+
+/* ══════════════════════════════════
+   APP CARDS
+══════════════════════════════════ */
+.apps-grid{display:flex;flex-direction:column;gap:10px}
+
+.app-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;transition:all .2s;
+  position:relative;overflow:hidden;
+}
+.app-card::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--fire),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.app-card:hover{border-color:rgba(255,69,0,.35);transform:translateX(-2px)}
+.app-card:hover::after{opacity:1}
+.app-card:active{transform:scale(.98)}
+
+.app-icon{
+  width:54px;height:54px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.06);
+}
+.app-info{flex:1;min-width:0}
+.app-name{font-size:15px;font-weight:700;margin-bottom:2px}
+.app-desc{
+  font-size:12px;color:var(--muted);margin-bottom:6px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.app-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.app-tag{
+  font-size:10px;padding:2px 8px;border-radius:10px;
+  background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.2);color:var(--ember);
+}
+.app-tag.green{background:rgba(0,212,138,.1);border-color:rgba(0,212,138,.2);color:var(--green)}
+.app-tag.blue{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:var(--blue)}
+.app-size{font-size:11px;color:var(--muted)}
+
+.dl-btn{
+  width:42px;height:42px;border-radius:11px;
+  background:linear-gradient(135deg,var(--fire),var(--ember));
+  color:white;display:flex;align-items:center;justify-content:center;
+  font-size:20px;text-decoration:none;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(255,69,0,.3);
+  transition:transform .2s,box-shadow .2s;
+}
+.dl-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,69,0,.4)}
+.dl-btn.installed{background:linear-gradient(135deg,var(--green),#00A060);box-shadow:0 4px 12px rgba(0,212,138,.3)}
+
+/* ══════════════════════════════════
+   EMPTY STATE
+══════════════════════════════════ */
+.empty{
+  text-align:center;padding:60px 20px;color:var(--muted);
+}
+.empty-icon{font-size:56px;margin-bottom:12px;opacity:.5}
+.empty-title{font-size:16px;font-weight:700;margin-bottom:6px;color:var(--soft)}
+.empty-sub{font-size:13px}
+
+/* ══════════════════════════════════
+   UPLOAD PAGE
+══════════════════════════════════ */
+.upload-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:20px;margin-bottom:16px;
+}
+.section-title{
+  font-size:15px;font-weight:700;color:var(--gold);
+  margin-bottom:16px;display:flex;align-items:center;gap:8px;
+}
+
+.drop-zone{
+  border:2px dashed var(--border);border-radius:12px;
+  padding:28px;text-align:center;cursor:pointer;
+  transition:all .2s;margin-bottom:14px;
+}
+.drop-zone:hover{border-color:rgba(255,69,0,.5);background:rgba(255,69,0,.03)}
+.drop-zone.drag-over{border-color:var(--fire);background:rgba(255,69,0,.06)}
+.dz-icon{font-size:40px;margin-bottom:8px}
+.dz-text{font-size:14px;color:var(--soft);font-weight:600}
+.dz-sub{font-size:12px;color:var(--muted);margin-top:4px}
+
+.form-row{margin-bottom:12px}
+.form-label{font-size:12px;color:var(--soft);margin-bottom:6px;display:block;font-weight:600}
+.form-input{
+  width:100%;background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:14px;outline:none;direction:rtl;
+  transition:border-color .2s;
+}
+.form-input:focus{border-color:rgba(255,69,0,.5)}
+.form-select{
+  width:100%;background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:14px;outline:none;direction:rtl;
+}
+
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.btn-primary{
+  width:100%;padding:14px;border-radius:12px;
+  background:linear-gradient(135deg,var(--fire),var(--ember));
+  color:white;border:none;font-family:'Cairo',sans-serif;
+  font-size:15px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 20px rgba(255,69,0,.3);transition:all .2s;
+}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.prog-wrap{display:none;margin-top:12px}
+.prog-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.prog-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--fire),var(--gold));
+  transition:width .3s ease;width:0%;
+}
+.prog-text{font-size:12px;color:var(--soft);text-align:center}
+
+/* ══════════════════════════════════
+   SETTINGS PAGE
+══════════════════════════════════ */
+.settings-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:16px;margin-bottom:12px;
+}
+.s-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:13px;
+}
+.s-row:last-child{border-bottom:none}
+.s-val{font-size:12px;color:var(--muted)}
+.s-val.green{color:var(--green)}
+
+/* ══════════════════════════════════
+   MODAL
+══════════════════════════════════ */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.75);z-index:200;
+  backdrop-filter:blur(8px);
+  align-items:flex-end;justify-content:center;
+}
+.overlay.show{display:flex;animation:overlayIn .2s ease}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+
+.modal{
+  background:var(--surface);border-radius:22px 22px 0 0;
+  width:100%;max-width:480px;
+  padding:20px;max-height:85vh;overflow-y:auto;
+  border-top:1px solid var(--border2);
+  animation:modalUp .3s cubic-bezier(.175,.885,.32,1.1);
+}
+@keyframes modalUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+.modal-handle{
+  width:44px;height:4px;background:var(--border2);
+  border-radius:2px;margin:0 auto 18px;
+}
+.modal-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
+.modal-icon{
+  width:68px;height:68px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.08);
+}
+.modal-name{font-size:20px;font-weight:700;margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--muted)}
+.modal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+
+.modal-desc{
+  font-size:13px;color:var(--soft);line-height:1.8;
+  margin-bottom:16px;background:var(--card);
+  padding:12px;border-radius:10px;border:1px solid var(--border);
+}
+.modal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.mstat{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:10px;text-align:center;
+}
+.mstat-val{font-size:16px;font-weight:700;color:var(--gold)}
+.mstat-key{font-size:10px;color:var(--muted);margin-top:2px}
+
+.modal-btns{display:flex;gap:10px}
+.btn-install{
+  flex:2;padding:14px;
+  background:linear-gradient(135deg,var(--fire),var(--ember));
+  color:white;border:none;border-radius:12px;
+  font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;
+  text-align:center;text-decoration:none;cursor:pointer;
+  box-shadow:0 4px 16px rgba(255,69,0,.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .2s;
+}
+.btn-install:hover{opacity:.9}
+.btn-delete{
+  flex:1;padding:14px;
+  background:rgba(255,69,58,.08);border:1px solid rgba(255,69,58,.2);
+  color:var(--red);border-radius:12px;
+  font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;
+  transition:all .2s;
+}
+.btn-delete:hover{background:rgba(255,69,58,.15)}
+
+/* ══════════════════════════════════
+   BOTTOM NAV
+══════════════════════════════════ */
+.bnav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(7,7,13,.97);border-top:1px solid var(--border);
+  display:flex;backdrop-filter:blur(20px);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.bitem{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:10px 4px 12px;cursor:pointer;color:var(--muted);
+  font-size:10px;font-weight:700;transition:color .2s;
+}
+.bitem.active{color:var(--fire)}
+.bico{font-size:20px;line-height:1}
+.badge{
+  position:absolute;top:-4px;right:-4px;
+  background:var(--fire);color:white;border-radius:50%;
+  width:16px;height:16px;font-size:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.bico-wrap{position:relative;display:inline-block}
+
+/* ══════════════════════════════════
+   TOAST
+══════════════════════════════════ */
+.toast{
+  position:fixed;bottom:80px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:var(--card2);border:1px solid var(--border2);
+  color:var(--text);padding:10px 20px;border-radius:12px;
+  font-size:13px;font-weight:600;z-index:300;
+  opacity:0;transition:all .3s;white-space:nowrap;
+  box-shadow:0 4px 24px rgba(0,0,0,.5);pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ══════════════════════════════════
+   LOADING
+══════════════════════════════════ */
+.spinner{
+  display:inline-block;width:20px;height:20px;
+  border:2px solid rgba(255,69,0,.2);
+  border-top-color:var(--fire);border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.loading-wrap{text-align:center;padding:40px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <span class="logo-icon">🔥</span>
+      <span class="logo-text">PhoenixStore</span>
+      <span class="logo-beta">BETA</span>
+    </div>
+    <div class="header-actions">
+      <div class="icon-btn" onclick="refreshApps()" title="تحديث">🔄</div>
+      <div class="icon-btn" onclick="switchTab('upload');setNav(document.querySelectorAll('.bitem')[1])" title="رفع">⬆️</div>
+    </div>
+  </div>
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-chip">⏳ جارٍ التحميل...</div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-inner">
+    <span style="color:var(--muted)">🔍</span>
+    <input type="text" id="searchInput" placeholder="ابحث عن تطبيق..." oninput="doSearch(this.value)">
+    <span class="search-clear" onclick="clearSearch()">✕</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="cats-wrap" id="catsBar">
+  <div class="cat-btn active" onclick="filterCat('الكل',this)">الكل</div>
+  <div class="cat-btn" onclick="filterCat('متصفح',this)">🌐 متصفح</div>
+  <div class="cat-btn" onclick="filterCat('فيديو',this)">🎬 فيديو</div>
+  <div class="cat-btn" onclick="filterCat('سوشيال',this)">💬 سوشيال</div>
+  <div class="cat-btn" onclick="filterCat('ملفات',this)">📁 ملفات</div>
+  <div class="cat-btn" onclick="filterCat('أمان',this)">🔒 أمان</div>
+  <div class="cat-btn" onclick="filterCat('إسلاميات',this)">📖 إسلاميات</div>
+  <div class="cat-btn" onclick="filterCat('ألعاب',this)">🎮 ألعاب</div>
+  <div class="cat-btn" onclick="filterCat('عام',this)">📦 عام</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs" id="tabsBar">
+  <button class="tab-btn active" onclick="switchTab('home',this)">🏠 الرئيسية</button>
+  <button class="tab-btn" onclick="switchTab('upload',this)">⬆️ رفع APK</button>
+  <button class="tab-btn" onclick="switchTab('settings',this)">⚙️ إعدادات</button>
+</div>
+
+<!-- ══ HOME PAGE ══ -->
+<div class="page active" id="page-home">
+
+  <div class="featured-banner">
+    <div class="fb-tag">🔥 مرحباً بك</div>
+    <div class="fb-title">أحيِ هاتفك القديم</div>
+    <div class="fb-sub">أندرويد 4.0 → 7.0 · بدون Google · مجاناً</div>
+    <button class="fb-btn" onclick="switchTab('upload');setNav(document.querySelectorAll('.bitem')[1])">⬆️ ارفع تطبيقاً</button>
+  </div>
+
+  <div class="apps-grid" id="appsList">
+    <div class="loading-wrap"><div class="spinner"></div><br>جارٍ تحميل التطبيقات...</div>
+  </div>
+</div>
+
+<!-- ══ UPLOAD PAGE ══ -->
+<div class="page" id="page-upload">
+  <div class="upload-card">
+    <div class="section-title">⬆️ رفع تطبيق جديد</div>
+
+    <div class="drop-zone" id="dropZone" onclick="document.getElementById('apkFile').click()"
+         ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+      <div class="dz-icon" id="dzIcon">📦</div>
+      <div class="dz-text" id="dzText">اضغط لاختيار ملف APK</div>
+      <div class="dz-sub" id="dzSub">أو اسحب الملف هنا</div>
+      <input type="file" id="apkFile" accept=".apk" style="display:none" onchange="fileSelected(this)">
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">اسم التطبيق *</label>
+      <input type="text" class="form-input" id="appName" placeholder="مثال: Via Browser">
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">الفئة *</label>
+      <select class="form-select" id="appCat">
+        <option value="متصفح">🌐 متصفح</option>
+        <option value="فيديو">🎬 فيديو</option>
+        <option value="سوشيال">💬 سوشيال</option>
+        <option value="ملفات">📁 ملفات</option>
+        <option value="أمان">🔒 أمان</option>
+        <option value="إسلاميات">📖 إسلاميات</option>
+        <option value="ألعاب">🎮 ألعاب</option>
+        <option value="عام" selected>📦 عام</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">الوصف</label>
+      <input type="text" class="form-input" id="appDesc" placeholder="وصف مختصر للتطبيق">
+    </div>
+
+    <div class="form-row-2">
+      <div class="form-row" style="margin:0">
+        <label class="form-label">الإصدار</label>
+        <input type="text" class="form-input" id="appVer" placeholder="1.0.0" value="1.0">
+      </div>
+      <div class="form-row" style="margin:0">
+        <label class="form-label">الأيقونة</label>
+        <input type="text" class="form-input" id="appIcon" placeholder="📦" value="📦">
+      </div>
+    </div>
+
+    <button class="btn-primary" id="uploadBtn" onclick="uploadApk()">⬆️ رفع التطبيق</button>
+
+    <div class="prog-wrap" id="progWrap">
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-text" id="progText">جارٍ الرفع...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS PAGE ══ -->
+<div class="page" id="page-settings">
+  <div class="settings-card">
+    <div class="section-title">ℹ️ معلومات المتجر</div>
+    <div class="s-row"><span>الاسم</span><span class="s-val">PhoenixStore</span></div>
+    <div class="s-row"><span>الإصدار</span><span class="s-val">1.0 Beta</span></div>
+    <div class="s-row"><span>المنصة</span><span class="s-val">FastAPI + Python</span></div>
+    <div class="s-row"><span>أندرويد المدعوم</span><span class="s-val">4.0 → 7.1</span></div>
+  </div>
+
+  <div class="settings-card">
+    <div class="section-title">📊 إحصائيات</div>
+    <div class="s-row"><span>إجمالي التطبيقات</span><span class="s-val green" id="statApps">-</span></div>
+    <div class="s-row"><span>إجمالي التحميلات</span><span class="s-val green" id="statDl">-</span></div>
+    <div class="s-row"><span>إجمالي الزيارات</span><span class="s-val green" id="statVisits">-</span></div>
+  </div>
+
+  <div class="settings-card">
+    <div class="section-title">🔗 API Endpoints</div>
+    <div class="s-row"><span>قائمة التطبيقات</span><span class="s-val">GET /api/apps</span></div>
+    <div class="s-row"><span>رفع تطبيق</span><span class="s-val">POST /api/upload</span></div>
+    <div class="s-row"><span>حذف تطبيق</span><span class="s-val">DELETE /api/delete</span></div>
+    <div class="s-row"><span>إحصائيات</span><span class="s-val">GET /api/stats</span></div>
+  </div>
+
+  <div class="settings-card">
+    <div class="section-title">🛠️ إجراءات</div>
+    <div class="s-row">
+      <span>مسح الكاش وإعادة تحميل</span>
+      <button onclick="refreshApps()" style="background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.2);color:var(--ember);padding:6px 14px;border-radius:8px;font-family:Cairo,sans-serif;cursor:pointer;font-size:12px">تحديث</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <div class="bitem active" onclick="switchTab('home',null);setNav(this)">
+    <span class="bico">🏠</span><span>الرئيسية</span>
+  </div>
+  <div class="bitem" onclick="switchTab('upload',null);setNav(this)">
+    <span class="bico">⬆️</span><span>رفع</span>
+  </div>
+  <div class="bitem" onclick="switchTab('settings',null);setNav(this)">
+    <span class="bico">⚙️</span><span>إعدادات</span>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════
+// STATE
+// ══════════════════════════════════
+let allApps = [];
+let currentCat = 'الكل';
+let currentSearch = '';
+
+// ══════════════════════════════════
+// LOAD APPS
+// ══════════════════════════════════
+async function loadApps() {
+  try {
+    const r = await fetch('/api/apps');
+    allApps = await r.json();
+    renderApps();
+    loadStats();
+  } catch(e) {
+    document.getElementById('appsList').innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">⚠️</div>
+        <div class="empty-title">خطأ في الاتصال</div>
+        <div class="empty-sub">تأكد من تشغيل السيرفر</div>
+      </div>`;
+  }
+}
+
+async function loadStats() {
+  try {
+    const r = await fetch('/api/stats');
+    const s = await r.json();
+    document.getElementById('statsBar').innerHTML = `
+      <div class="stat-chip">📦 <b>${s.total_apps||0}</b> تطبيق</div>
+      <div class="stat-chip">⬇️ <b>${s.total_downloads||0}</b> تحميل</div>
+      <div class="stat-chip">👁️ <b>${s.total_visits||0}</b> زيارة</div>
+      <div class="stat-chip">أندرويد <b>4.0+</b></div>`;
+    document.getElementById('statApps').textContent = s.total_apps||0;
+    document.getElementById('statDl').textContent = s.total_downloads||0;
+    document.getElementById('statVisits').textContent = s.total_visits||0;
+  } catch(e){}
+}
+
+function refreshApps() {
+  document.getElementById('appsList').innerHTML = '<div class="loading-wrap"><div class="spinner"></div><br>جارٍ التحديث...</div>';
+  loadApps();
+  showToast('🔄 جارٍ التحديث...');
+}
+
+// ══════════════════════════════════
+// RENDER
+// ══════════════════════════════════
+function renderApps() {
+  let apps = [...allApps];
+  if (currentCat !== 'الكل') apps = apps.filter(a => a.cat === currentCat);
+  if (currentSearch) {
+    const s = currentSearch.toLowerCase();
+    apps = apps.filter(a =>
+      a.name.toLowerCase().includes(s) ||
+      (a.desc||'').toLowerCase().includes(s) ||
+      (a.cat||'').includes(s)
+    );
+  }
+
+  const list = document.getElementById('appsList');
+  if (!apps.length) {
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📦</div>
+        <div class="empty-title">${currentSearch ? 'لا نتائج للبحث' : 'لا توجد تطبيقات بعد'}</div>
+        <div class="empty-sub">${currentSearch ? 'جرّب كلمة بحث مختلفة' : 'ارفع أول تطبيق من تبويب رفع APK'}</div>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = apps.map(a => `
+    <div class="app-card" onclick="openModal(${a.id})">
+      <div class="app-icon" style="background:${a.color||'#1A1A2E'}">${a.icon||'📦'}</div>
+      <div class="app-info">
+        <div class="app-name">${a.name}</div>
+        <div class="app-desc">${a.desc||'تطبيق أندرويد'}</div>
+        <div class="app-meta">
+          <span class="app-tag">${a.cat||'عام'}</span>
+          <span class="app-tag blue">v${a.ver||'1.0'}</span>
+          <span class="app-size">${a.size||'?'}</span>
+        </div>
+      </div>
+      <a href="/apks/${a.file}" class="dl-btn" onclick="event.stopPropagation();trackDl('${a.file}','${a.name}')" download>⬇</a>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════
+// SEARCH & FILTER
+// ══════════════════════════════════
+function doSearch(q) {
+  currentSearch = q.trim();
+  renderApps();
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  currentSearch = '';
+  renderApps();
+}
+
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderApps();
+}
+
+// ══════════════════════════════════
+// DOWNLOAD TRACKING
+// ══════════════════════════════════
+async function trackDl(file, name) {
+  try { await fetch('/api/download/' + file, {method:'POST'}); } catch(e){}
+  showToast('⬇️ جارٍ تحميل ' + name);
+  loadStats();
+}
+
+// ══════════════════════════════════
+// MODAL
+// ══════════════════════════════════
+function openModal(id) {
+  const a = allApps.find(x => x.id === id);
+  if (!a) return;
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-head">
+      <div class="modal-icon" style="background:${a.color||'#1A1A2E'}">${a.icon||'📦'}</div>
+      <div>
+        <div class="modal-name">${a.name}</div>
+        <div class="modal-sub">${a.cat||'عام'} · ${a.date||''}</div>
+        <div class="modal-tags">
+          <span class="app-tag">${a.cat||'عام'}</span>
+          <span class="app-tag blue">v${a.ver||'1.0'}</span>
+          <span class="app-tag green">Android 4.0+</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-desc">${a.desc||'تطبيق أندرويد خفيف ومجاني'}</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val">v${a.ver||'1.0'}</div><div class="mstat-key">الإصدار</div></div>
+      <div class="mstat"><div class="mstat-val">${a.size||'?'}</div><div class="mstat-key">الحجم</div></div>
+      <div class="mstat"><div class="mstat-val">${a.downloads||0}</div><div class="mstat-key">تحميل</div></div>
+    </div>
+    <div class="modal-btns">
+      <a href="/apks/${a.file}" class="btn-install" onclick="trackDl('${a.file}','${a.name}');closeModalDirect()" download>
+        ⬇️ تحميل وتثبيت
+      </a>
+      <button class="btn-delete" onclick="deleteApp('${a.file}','${a.name}')">🗑️</button>
+    </div>`;
+
+  document.getElementById('overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ══════════════════════════════════
+// DELETE
+// ══════════════════════════════════
+async function deleteApp(file, name) {
+  if (!confirm(`هل تريد حذف "${name}"؟`)) return;
+  try {
+    await fetch('/api/delete/' + file, {method:'DELETE'});
+    closeModalDirect();
+    showToast('🗑️ تم حذف ' + name);
+    loadApps();
+  } catch(e) {
+    showToast('❌ فشل الحذف');
+  }
+}
+
+// ══════════════════════════════════
+// UPLOAD
+// ══════════════════════════════════
+function dragOver(e) {
+  e.preventDefault();
+  document.getElementById('dropZone').classList.add('drag-over');
+}
+function dragLeave(e) {
+  document.getElementById('dropZone').classList.remove('drag-over');
+}
+function dropFile(e) {
+  e.preventDefault();
+  dragLeave(e);
+  const f = e.dataTransfer.files[0];
+  if (f && f.name.endsWith('.apk')) {
+    document.getElementById('apkFile').files;
+    const dt = new DataTransfer();
+    dt.items.add(f);
+    document.getElementById('apkFile').files = dt.files;
+    fileSelected({files:[f]});
+  } else {
+    showToast('⚠️ يجب أن يكون الملف APK');
+  }
+}
+
+function fileSelected(input) {
+  const f = input.files[0];
+  if (!f) return;
+  document.getElementById('dzIcon').textContent = '✅';
+  document.getElementById('dzText').textContent = f.name;
+  document.getElementById('dzSub').textContent = (f.size/1024/1024).toFixed(1) + ' MB';
+  document.getElementById('dzText').style.color = 'var(--green)';
+  document.getElementById('dropZone').style.borderColor = 'rgba(0,212,138,.4)';
+  if (!document.getElementById('appName').value)
+    document.getElementById('appName').value = f.name.replace('.apk','').replace(/[-_]/g,' ');
+}
+
+async function uploadApk() {
+  const fi = document.getElementById('apkFile');
+  if (!fi.files[0]) { showToast('⚠️ اختر ملف APK أولاً'); return; }
+
+  const btn = document.getElementById('uploadBtn');
+  const pw = document.getElementById('progWrap');
+  const fill = document.getElementById('progFill');
+  const txt = document.getElementById('progText');
+
+  btn.disabled = true;
+  pw.style.display = 'block';
+
+  let p = 0;
+  const iv = setInterval(() => {
+    p += Math.random() * 12 + 5;
+    if (p > 90) p = 90;
+    fill.style.width = p + '%';
+    txt.textContent = 'جارٍ الرفع... ' + Math.round(p) + '%';
+  }, 200);
+
+  const fd = new FormData();
+  fd.append('file', fi.files[0]);
+  fd.append('name', document.getElementById('appName').value);
+  fd.append('cat', document.getElementById('appCat').value);
+  fd.append('desc', document.getElementById('appDesc').value);
+  fd.append('ver', document.getElementById('appVer').value);
+  fd.append('icon', document.getElementById('appIcon').value);
+
+  try {
+    const r = await fetch('/api/upload', {method:'POST', body:fd});
+    const data = await r.json();
+    clearInterval(iv);
+    fill.style.width = '100%';
+    txt.textContent = 'اكتمل الرفع ✅';
+    showToast('✅ تم رفع التطبيق بنجاح!');
+
+    setTimeout(() => {
+      pw.style.display = 'none';
+      btn.disabled = false;
+      fill.style.width = '0%';
+      // reset form
+      document.getElementById('appName').value = '';
+      document.getElementById('appDesc').value = '';
+      document.getElementById('appVer').value = '1.0';
+      document.getElementById('appIcon').value = '📦';
+      document.getElementById('dzIcon').textContent = '📦';
+      document.getElementById('dzText').textContent = 'اضغط لاختيار ملف APK';
+      document.getElementById('dzSub').textContent = 'أو اسحب الملف هنا';
+      document.getElementById('dzText').style.color = '';
+      document.getElementById('dropZone').style.borderColor = '';
+      loadApps();
+      switchTab('home', document.querySelectorAll('.tab-btn')[0]);
+      setNav(document.querySelectorAll('.bitem')[0]);
+    }, 1500);
+  } catch(e) {
+    clearInterval(iv);
+    showToast('❌ فشل الرفع — تأكد من السيرفر');
+    btn.disabled = false;
+    pw.style.display = 'none';
+  }
+}
+
+// ══════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════
+function switchTab(name, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function setNav(el) {
+  document.querySelectorAll('.bitem').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ══════════════════════════════════
+// TOAST
+// ══════════════════════════════════
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════════
+// INIT
+// ══════════════════════════════════
+loadApps();
+</script>
+</body>
+</html>
