@@ -3,81 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>PhoenixStore - App</title>
+<title>PhoenixStore</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F2F2F7;--surf:#FFFFFF;--card:#FFFFFF;--card2:#F8F8FC;--b1:#E5E5EA;--text:#1C1C1E;--soft:#636366;--muted:#8E8E93;--shadow:rgba(0,0,0,.08);--fire:#FF4500;--gold:#FF9500;--green:#34C759;--blue:#007AFF;--red:#FF3B30;}
-body.dark{--bg:#0A0A12;--surf:#0F0F1A;--card:#141422;--card2:#1A1A2E;--b1:#1E1E32;--text:#EEEEF5;--soft:#9090B0;--muted:#4A4A65;--shadow:rgba(0,0,0,.3);}
+:root{--bg:#F2F2F7;--surf:#FFFFFF;--card:#FFFFFF;--card2:#F8F8FC;--b1:#E5E5EA;--b2:#D1D1D6;--text:#1C1C1E;--soft:#636366;--muted:#8E8E93;--shadow:rgba(0,0,0,.08);--fire:#FF4500;--gold:#FF9500;--green:#34C759;--blue:#007AFF;--red:#FF3B30;}
+body.dark{--bg:#0A0A12;--surf:#0F0F1A;--card:#141422;--card2:#1A1A2E;--b1:#1E1E32;--b2:#262640;--text:#EEEEF5;--soft:#9090B0;--muted:#4A4A65;--shadow:rgba(0,0,0,.3);}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);min-height:100vh;font-family:'Roboto',sans-serif;transition:background .3s}
 body.ar{font-family:'Cairo',sans-serif}
 
 .topbar{background:var(--surf);border-bottom:1px solid var(--b1);padding:0 14px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px var(--shadow)}
 .topbar-inner{display:flex;align-items:center;gap:10px;height:52px;direction:ltr}
-.back-btn{display:flex;align-items:center;gap:5px;color:var(--fire);font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit;background:none;border:none;padding:0}
+.back-btn{display:flex;align-items:center;gap:5px;color:var(--fire);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;background:none;border:none;padding:0;text-decoration:none}
 .topbar-title{flex:1;font-size:15px;font-weight:700;color:var(--text);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hbtn{width:30px;height:30px;border-radius:8px;background:var(--card2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;font-weight:700;color:var(--text);font-family:inherit}
+.hbtn{width:30px;height:30px;border-radius:8px;background:var(--card2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;font-weight:700;color:var(--text);font-family:inherit;background-color:var(--card2)}
 
-/* HERO */
-.hero{background:var(--surf);border-bottom:1px solid var(--b1);padding:18px 16px}
+.hero{background:var(--surf);border-bottom:1px solid var(--b1);padding:16px}
 .hero-main{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;direction:ltr}
-.hero-icon{width:84px;height:84px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px;flex-shrink:0;border:1px solid var(--b1);background:var(--card2)}
+.hero-icon{width:80px;height:80px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;border:1px solid var(--b1);background:var(--card2)}
 .hero-icon img{width:100%;height:100%;object-fit:cover}
-.hero-info{flex:1;min-width:0}
-.hero-name{font-size:20px;font-weight:700;color:var(--text);margin-bottom:3px}
-.hero-dev{font-size:12px;color:var(--muted);margin-bottom:8px}
+.hero-name{font-size:19px;font-weight:700;color:var(--text);margin-bottom:3px}
+.hero-dev{font-size:11px;color:var(--muted);margin-bottom:8px}
 .hero-tags{display:flex;gap:5px;flex-wrap:wrap}
-.tag{font-size:10px;padding:3px 9px;border-radius:6px;font-weight:700}
-.tag.r{background:rgba(255,69,0,.1);color:var(--fire);border:1px solid rgba(255,69,0,.15)}
-.tag.b{background:rgba(0,122,255,.1);color:var(--blue);border:1px solid rgba(0,122,255,.15)}
-.tag.g{background:rgba(52,199,89,.1);color:var(--green);border:1px solid rgba(52,199,89,.15)}
-.tag.o{background:rgba(255,149,0,.1);color:var(--gold);border:1px solid rgba(255,149,0,.15)}
+.tag{font-size:10px;padding:3px 9px;border-radius:6px;font-weight:700;border:1px solid}
+.tag.r{background:rgba(255,69,0,.1);color:var(--fire);border-color:rgba(255,69,0,.15)}
+.tag.b{background:rgba(0,122,255,.1);color:var(--blue);border-color:rgba(0,122,255,.15)}
+.tag.g{background:rgba(52,199,89,.1);color:var(--green);border-color:rgba(52,199,89,.15)}
+.tag.o{background:rgba(255,149,0,.1);color:var(--gold);border-color:rgba(255,149,0,.15)}
 
-/* BTN ROW */
 .btn-row{display:flex;gap:8px;direction:ltr}
-.btn-install{flex:2;padding:13px;background:var(--fire);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(255,69,0,.25);display:flex;align-items:center;justify-content:center;gap:6px}
-body.dark .btn-install{background:linear-gradient(135deg,var(--fire),#FF6B35)}
+.btn-install{flex:2;padding:13px;background:var(--fire);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
 .btn-share{flex:1;padding:13px;background:rgba(0,122,255,.08);border:1.5px solid rgba(0,122,255,.25);color:var(--blue);border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
-.btn-admin-del{flex:1;padding:13px;background:rgba(255,59,48,.08);border:1.5px solid rgba(255,59,48,.2);color:var(--red);border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.btn-del{flex:1;padding:13px;background:rgba(255,59,48,.08);border:1.5px solid rgba(255,59,48,.2);color:var(--red);border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
 
-/* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px 16px 0}
-.stat-box{background:var(--card2);border:1px solid var(--b1);border-radius:10px;padding:10px 6px;text-align:center}
-.stat-v{font-size:13px;font-weight:700;color:var(--fire)}
+.stat-box{background:var(--card2);border:1px solid var(--b1);border-radius:8px;padding:8px 4px;text-align:center}
+.stat-v{font-size:12px;font-weight:700;color:var(--fire)}
 .stat-k{font-size:9px;color:var(--muted);margin-top:2px}
 
-/* SECTIONS */
-.sec{padding:14px 16px 6px}
-.sec-t{font-size:14px;font-weight:700;color:var(--text)}
+.sec{padding:12px 16px 6px;font-size:14px;font-weight:700;color:var(--text)}
+
 .desc-box{margin:0 16px 12px;background:var(--surf);border:1px solid var(--b1);border-radius:10px;padding:12px;font-size:13px;color:var(--soft);line-height:1.7}
 
-/* SIMILAR */
-.sim-list{padding:0 16px 16px;display:flex;flex-direction:column;gap:0}
+/* Screenshots */
+.ss-wrap{overflow-x:auto;display:flex;gap:8px;padding:0 16px 12px;scrollbar-width:none}
+.ss-wrap::-webkit-scrollbar{display:none}
+.ss-wrap img{height:180px;border-radius:10px;flex-shrink:0;border:1px solid var(--b1);cursor:pointer;object-fit:cover}
+
+/* Admin Upload */
+.admin-upload{margin:0 16px 12px;border:2px dashed var(--b2);border-radius:10px;padding:14px;text-align:center;cursor:pointer;font-size:13px;color:var(--muted);transition:border-color .2s}
+.admin-upload:hover{border-color:var(--fire);color:var(--fire)}
+
+/* Ratings */
+.rating-box{margin:0 16px 12px;background:var(--surf);border:1px solid var(--b1);border-radius:10px;padding:14px}
+.avg-rating{font-size:32px;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.avg-stars{font-size:16px}
+.rate-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px}
+.stars-row{display:flex;gap:6px;margin-bottom:10px;direction:ltr}
+.star{font-size:30px;cursor:pointer;color:var(--b2);transition:color .2s;line-height:1}
+.star.on{color:var(--gold)}
+.rate-input{width:100%;background:var(--card2);border:1px solid var(--b1);border-radius:8px;padding:8px 10px;color:var(--text);font-family:inherit;font-size:12px;margin-bottom:7px;outline:none;transition:border-color .2s}
+.rate-input:focus{border-color:var(--fire)}
+.btn-rate{width:100%;padding:10px;background:var(--fire);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+
+/* Reviews */
+.reviews-wrap{padding:0 16px 16px}
+.review-item{padding:10px 0;border-bottom:1px solid var(--b1);direction:ltr}
+.review-item:last-child{border-bottom:none}
+.review-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.review-user{font-size:12px;font-weight:700;color:var(--text)}
+.review-date{font-size:10px;color:var(--muted)}
+.review-stars{color:var(--gold);font-size:11px;margin-bottom:3px}
+.review-comment{font-size:12px;color:var(--soft)}
+
+/* Similar */
+.sim-list{padding:0 16px 16px}
 .sim-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--b1);cursor:pointer;direction:ltr}
 .sim-item:last-child{border-bottom:none}
+.sim-item:hover{opacity:.8}
 .sim-ico{width:46px;height:46px;border-radius:11px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid var(--b1);background:var(--card2);flex-shrink:0}
 .sim-ico img{width:100%;height:100%;object-fit:cover}
-.sim-info{flex:1;min-width:0}
-.sim-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.sim-name{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sim-cat{font-size:10px;color:var(--muted)}
 .sim-sdk{font-size:10px;color:var(--blue);font-weight:700}
-.btn-sim-inst{padding:6px 14px;border-radius:15px;font-size:11px;font-weight:700;background:rgba(0,122,255,.1);border:1.5px solid rgba(0,122,255,.25);color:var(--blue);cursor:pointer;font-family:inherit;flex-shrink:0}
+.btn-sim{padding:6px 14px;border-radius:15px;font-size:11px;font-weight:700;background:rgba(0,122,255,.1);border:1.5px solid rgba(0,122,255,.25);color:var(--blue);cursor:pointer;font-family:inherit;flex-shrink:0;white-space:nowrap}
 
-/* LOADING */
+.img-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.img-overlay img{max-width:95%;max-height:95%;border-radius:10px;object-fit:contain}
+
 .loading{text-align:center;padding:60px;color:var(--muted)}
 .spin{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,69,0,.2);border-top-color:var(--fire);border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-
-/* TOAST */
+.not-found{text-align:center;padding:60px 20px;color:var(--muted)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--card);border:1px solid var(--b1);color:var(--text);padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;z-index:300;opacity:0;transition:all .22s;white-space:nowrap;box-shadow:0 3px 14px var(--shadow);pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-.not-found{text-align:center;padding:60px 20px;color:var(--muted)}
-.not-found-i{font-size:50px;margin-bottom:10px}
 </style>
 </head>
 <body class="light">
-
 <div class="topbar">
   <div class="topbar-inner">
     <button class="back-btn" onclick="window.location='/'">← <span id="t-back">Back</span></button>
@@ -85,25 +107,38 @@ body.dark .btn-install{background:linear-gradient(135deg,var(--fire),#FF6B35)}
     <button class="hbtn" id="themeBtn" onclick="toggleTheme()">🌙</button>
   </div>
 </div>
-
-<div id="mainContent">
-  <div class="loading"><div class="spin"></div><br>Loading...</div>
-</div>
-
+<div id="mainContent"><div class="loading"><div class="spin"></div><br>Loading...</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-let curLang=localStorage.getItem('px_lang')||'en';
-let curTheme=localStorage.getItem('px_theme')||'light';
-let adminToken=localStorage.getItem('px_at')||'';
-let appData=null;
+let curLang = localStorage.getItem('px_lang')||'en';
+let curTheme = localStorage.getItem('px_theme')||'light';
+let adminToken = localStorage.getItem('px_at')||'';
+let selectedStars = 0;
+let currentApp = null;
 
-const T={
-  en:{back:'← Back',install:'⬇️ Install Free',share:'🔗 Share',version:'Version',size:'Size',downloads:'Downloads',android:'Android',desc:'Description',similar:'Similar Apps',free:'Free',noDesc:'Lightweight free Android app.',deleted:'Deleted successfully',shareMsg:'Copy the link to share this app'},
-  ar:{back:'→ رجوع',install:'⬇️ تثبيت مجاني',share:'🔗 مشاركة',version:'الإصدار',size:'الحجم',downloads:'تحميل',android:'أندرويد',desc:'الوصف',similar:'تطبيقات مشابهة',free:'مجاني',noDesc:'تطبيق أندرويد خفيف ومجاني.',deleted:'تم الحذف',shareMsg:'انسخ الرابط لمشاركة التطبيق'}
+const T = {
+  en:{back:'← Back',install:'⬇️ Install Free',share:'🔗 Share',
+      version:'Version',size:'Size',downloads:'Downloads',android:'Android',
+      desc:'Description',similar:'Similar Apps',free:'Free',
+      screenshots:'📸 Screenshots',rating:'⭐ Rating',
+      rateThis:'Rate this app',yourName:'Your name (optional)',
+      yourComment:'Your comment...',submitRate:'Submit Rating',
+      reviews:'💬 Reviews',noDesc:'Lightweight free Android app.',
+      uploadSS:'📸 Upload Screenshots (Admin)',
+      deleted:'Deleted',install2:'Install'},
+  ar:{back:'→ رجوع',install:'⬇️ تثبيت مجاني',share:'🔗 مشاركة',
+      version:'الإصدار',size:'الحجم',downloads:'تحميل',android:'أندرويد',
+      desc:'الوصف',similar:'تطبيقات مشابهة',free:'مجاني',
+      screenshots:'📸 لقطات الشاشة',rating:'⭐ التقييم',
+      rateThis:'قيّم هذا التطبيق',yourName:'اسمك (اختياري)',
+      yourComment:'تعليقك...',submitRate:'إرسال التقييم',
+      reviews:'💬 التقييمات',noDesc:'تطبيق أندرويد خفيف ومجاني.',
+      uploadSS:'📸 رفع لقطات شاشة (أدمن)',
+      deleted:'تم الحذف',install2:'تثبيت'}
 };
 
-window.onload=function(){
+window.onload = function(){
   applyTheme(curTheme);
   applyLang(curLang);
   loadApp();
@@ -113,55 +148,92 @@ function applyTheme(t){
   curTheme=t;
   document.body.classList.remove('light','dark');
   document.body.classList.add(t);
-  document.getElementById('themeBtn').textContent=t==='light'?'🌙':'☀️';
+  document.getElementById('themeBtn').textContent = t==='light'?'🌙':'☀️';
   localStorage.setItem('px_theme',t);
 }
-function toggleTheme(){applyTheme(curTheme==='light'?'dark':'light')}
+function toggleTheme(){ applyTheme(curTheme==='light'?'dark':'light') }
 
 function applyLang(lang){
   curLang=lang;
-  const isAr=lang==='ar';
+  const isAr = lang==='ar';
   document.body.classList.toggle('ar',isAr);
-  document.documentElement.dir=isAr?'rtl':'ltr';
-  document.getElementById('t-back').textContent=T[lang].back;
+  document.documentElement.dir = isAr?'rtl':'ltr';
+  document.getElementById('t-back').textContent = T[lang].back;
 }
 
-function getIconImg(a,sz){
-  const style=`width:${sz}px;height:${sz}px;object-fit:cover;border-radius:${sz-3}px`;
-  if(a.icon_path) return `<img src="/${a.icon_path}" style="${style}" onerror="this.outerHTML='📦'">`;
-  if(a.package) return `<img src="https://play-lh.googleusercontent.com/a/${a.package}" style="${style}" onerror="this.outerHTML='📦'">`;
+function getIconHTML(a, sz){
+  const st = `width:${sz}px;height:${sz}px;object-fit:cover;border-radius:${sz-3}px`;
+  if(a.icon_path) return `<img src="/${a.icon_path}" style="${st}" onerror="this.outerHTML='📦'">`;
+  if(a.package) return `<img src="https://play-lh.googleusercontent.com/a/${a.package}" style="${st}" onerror="this.outerHTML='📦'">`;
   return '📦';
 }
 
 async function loadApp(){
-  const filename=decodeURIComponent(window.location.pathname.replace('/app/',''));
+  // استخرج الـ slug من URL
+  const slug = decodeURIComponent(window.location.pathname.replace('/app/','').replace(/\/$/,''));
   try{
-    const r=await fetch('/api/app/'+encodeURIComponent(filename));
+    const r = await fetch('/api/app-by-slug/' + encodeURIComponent(slug));
     if(!r.ok) throw new Error('not found');
-    const data=await r.json();
-    appData=data.app;
-    renderApp(data.app,data.similar);
+    const data = await r.json();
+    currentApp = data.app;
+    renderApp(data.app, data.similar);
+    loadRatings(data.app.file);
   }catch(e){
-    document.getElementById('mainContent').innerHTML=`
+    document.getElementById('mainContent').innerHTML = `
       <div class="not-found">
-        <div class="not-found-i">😕</div>
-        <div style="font-size:15px;font-weight:700;margin-bottom:6px">App not found</div>
+        <div style="font-size:50px;margin-bottom:10px">😕</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:var(--soft)">App not found</div>
         <a href="/" style="color:var(--fire);font-size:13px;font-weight:700">← Back to Store</a>
       </div>`;
   }
 }
 
-function renderApp(a,similar){
-  const t=T[curLang];
-  const isAdmin=adminToken!=='';
-  document.title=a.name+' - PhoenixStore';
-  document.getElementById('pageTitle').textContent=a.name;
+function renderApp(a, similar){
+  const t = T[curLang];
+  const isAdmin = adminToken !== '';
+  document.title = a.name + ' - PhoenixStore';
+  document.getElementById('pageTitle').textContent = a.name;
 
-  document.getElementById('mainContent').innerHTML=`
+  const avgStars = a.avg_rating ? '★'.repeat(Math.round(a.avg_rating)) + '☆'.repeat(5-Math.round(a.avg_rating)) : '☆☆☆☆☆';
+
+  let ssHTML = '';
+  if(a.screenshots && a.screenshots.length){
+    ssHTML = `<div class="sec">${t.screenshots}</div>
+    <div class="ss-wrap">${a.screenshots.map(s=>`<img src="/${s}" onclick="viewImg('/${s}')">`).join('')}</div>`;
+  }
+
+  let adminUploadHTML = '';
+  if(isAdmin){
+    adminUploadHTML = `
+    <div class="admin-upload" onclick="document.getElementById('ssFile').click()">
+      ${t.uploadSS}
+      <input type="file" id="ssFile" multiple accept="image/*" style="display:none" onchange="uploadScreenshots('${a.file}',this)">
+    </div>`;
+  }
+
+  let similarHTML = '';
+  if(similar && similar.length){
+    similarHTML = `
+    <div class="sec">${t.similar}</div>
+    <div class="sim-list">
+      ${similar.map(s=>`
+        <div class="sim-item" onclick="goToApp('${s.slug||s.file}')">
+          <div class="sim-ico" style="background:${s.color||'#1A1A2E'}">${getIconHTML(s,46)}</div>
+          <div style="flex:1;min-width:0">
+            <div class="sim-name">${s.name}</div>
+            <div class="sim-cat">${s.cat}</div>
+            ${s.min_android?`<div class="sim-sdk">Android ${s.min_android}+</div>`:''}
+          </div>
+          <button class="btn-sim" onclick="event.stopPropagation();doInstall('${s.file}','${s.name}')">${t.install2}</button>
+        </div>`).join('')}
+    </div>`;
+  }
+
+  document.getElementById('mainContent').innerHTML = `
     <div class="hero">
       <div class="hero-main">
-        <div class="hero-icon" style="background:${a.color||'#1A1A2E'}">${getIconImg(a,84)}</div>
-        <div class="hero-info">
+        <div class="hero-icon" style="background:${a.color||'#1A1A2E'}">${getIconHTML(a,80)}</div>
+        <div style="flex:1;min-width:0">
           <div class="hero-name">${a.name}</div>
           <div class="hero-dev">${a.uploader||'admin'} · ${a.date||''}</div>
           <div class="hero-tags">
@@ -174,8 +246,8 @@ function renderApp(a,similar){
       </div>
       <div class="btn-row">
         <button class="btn-install" onclick="doInstall('${a.file}','${a.name}')">${t.install}</button>
-        <button class="btn-share" onclick="shareApp('${a.file}','${a.name}')">${t.share}</button>
-        ${isAdmin?`<button class="btn-admin-del" onclick="deleteApp('${a.file}','${a.name}')">🗑️</button>`:''}
+        <button class="btn-share" onclick="shareApp('${a.name}')">${t.share}</button>
+        ${isAdmin?`<button class="btn-del" onclick="deleteApp('${a.file}','${a.name}')">🗑️</button>`:''}
       </div>
     </div>
 
@@ -186,53 +258,149 @@ function renderApp(a,similar){
       <div class="stat-box"><div class="stat-v">${a.min_android||'?'}+</div><div class="stat-k">${t.android}</div></div>
     </div>
 
-    <div class="sec"><div class="sec-t">${t.desc}</div></div>
+    <div class="sec">${t.desc}</div>
     <div class="desc-box">${a.desc||t.noDesc}</div>
 
-    ${similar.length?`
-    <div class="sec"><div class="sec-t">${t.similar}</div></div>
-    <div class="sim-list">
-      ${similar.map(s=>`
-        <div class="sim-item" onclick="window.location='/app/${encodeURIComponent(s.file)}'">
-          <div class="sim-ico" style="background:${s.color||'#1A1A2E'}">${getIconImg(s,46)}</div>
-          <div class="sim-info">
-            <div class="sim-name">${s.name}</div>
-            <div class="sim-cat">${s.cat}</div>
-            ${s.min_android?`<div class="sim-sdk">Android ${s.min_android}+</div>`:''}
-          </div>
-          <button class="btn-sim-inst" onclick="event.stopPropagation();doInstall('${s.file}','${s.name}')">${t.install||'Install'}</button>
-        </div>`).join('')}
-    </div>`:''}
+    ${ssHTML}
+    ${adminUploadHTML}
+
+    <div class="sec">${t.rating}</div>
+    <div class="rating-box">
+      <div class="avg-rating">
+        <span>${a.avg_rating||'0'}</span>
+        <span class="avg-stars">${avgStars}</span>
+      </div>
+      <div class="rate-title">${t.rateThis}</div>
+      <div class="stars-row" id="starsRow">
+        ${[1,2,3,4,5].map(i=>`<span class="star" id="st${i}" onclick="selectStar(${i},'${a.file}')">★</span>`).join('')}
+      </div>
+      <input type="text" class="rate-input" id="rUser" placeholder="${t.yourName}">
+      <input type="text" class="rate-input" id="rComment" placeholder="${t.yourComment}">
+      <button class="btn-rate" onclick="submitRating('${a.file}')">${t.submitRate}</button>
+    </div>
+
+    <div id="reviewsSection"></div>
+    ${similarHTML}
   `;
 }
 
-async function doInstall(file,name){
-  try{await fetch('/api/download/'+file,{method:'POST'})}catch(e){}
-  const a=document.createElement('a');a.href='/apks/'+file;a.download=file;a.click();
-  showToast('⬇️ Downloading '+name);
+// ── Navigation ──
+function goToApp(slug){
+  window.location.href = '/app/' + encodeURIComponent(slug);
 }
 
-function shareApp(file,name){
-  const url=window.location.href;
+// ── Install ──
+async function doInstall(file, name){
+  try{ await fetch('/api/download/'+file,{method:'POST'}) }catch(e){}
+  const a = document.createElement('a');
+  a.href = '/apks/' + file;
+  a.download = file;
+  a.click();
+  showToast('⬇️ Downloading ' + name);
+}
+
+// ── Share ──
+function shareApp(name){
+  const url = window.location.href;
   if(navigator.share){
-    navigator.share({title:name,url:url}).catch(()=>{});
+    navigator.share({title:name, url:url}).catch(()=>{});
   }else{
     navigator.clipboard.writeText(url).then(()=>showToast('🔗 Link copied!')).catch(()=>showToast('🔗 '+url));
   }
 }
 
-async function deleteApp(file,name){
-  if(!confirm('Delete "'+name+'"?'))return;
+// ── Delete ──
+async function deleteApp(file, name){
+  if(!confirm('Delete "'+name+'"?')) return;
   try{
-    const r=await fetch('/api/delete/'+file,{method:'DELETE',headers:{'X-Admin-Token':adminToken}});
-    if(r.ok){showToast('🗑️ '+T[curLang].deleted);setTimeout(()=>window.location='/',1500);}
-  }catch(e){showToast('❌ Error')}
+    const r = await fetch('/api/delete/'+file,{method:'DELETE',headers:{'X-Admin-Token':adminToken}});
+    if(r.ok){ showToast('🗑️ Deleted'); setTimeout(()=>window.location='/',1500); }
+  }catch(e){ showToast('❌ Error') }
 }
 
+// ── Screenshots Upload ──
+async function uploadScreenshots(file, input){
+  const fd = new FormData();
+  for(const f of input.files) fd.append('files', f);
+  try{
+    const r = await fetch('/api/screenshots/'+encodeURIComponent(file),{method:'POST',headers:{'X-Admin-Token':adminToken},body:fd});
+    const d = await r.json();
+    if(d.success){ showToast('✅ Screenshots uploaded!'); loadApp(); }
+  }catch(e){ showToast('❌ Upload failed') }
+}
+
+// ── View Image ──
+function viewImg(src){
+  const ov = document.createElement('div');
+  ov.className = 'img-overlay';
+  ov.innerHTML = `<img src="${src}">`;
+  ov.onclick = ()=>ov.remove();
+  document.body.appendChild(ov);
+}
+
+// ── Stars ──
+function selectStar(n, file){
+  selectedStars = n;
+  for(let i=1;i<=5;i++){
+    const el = document.getElementById('st'+i);
+    if(el) el.classList.toggle('on', i<=n);
+  }
+}
+
+// ── Submit Rating ──
+async function submitRating(file){
+  if(!selectedStars){ showToast('⚠️ Select a rating'); return }
+  const fd = new FormData();
+  fd.append('stars', selectedStars);
+  fd.append('comment', document.getElementById('rComment').value||'');
+  fd.append('username', document.getElementById('rUser').value||'مجهول');
+  try{
+    const r = await fetch('/api/rate/'+encodeURIComponent(file),{method:'POST',body:fd});
+    const d = await r.json();
+    if(d.success){
+      showToast('✅ Thank you!');
+      document.getElementById('rComment').value='';
+      document.getElementById('rUser').value='';
+      selectedStars=0;
+      for(let i=1;i<=5;i++){ const el=document.getElementById('st'+i); if(el) el.classList.remove('on'); }
+      loadRatings(file);
+    }
+  }catch(e){ showToast('❌ Error') }
+}
+
+// ── Load Ratings ──
+async function loadRatings(file){
+  try{
+    const r = await fetch('/api/ratings/'+encodeURIComponent(file));
+    const d = await r.json();
+    const sec = document.getElementById('reviewsSection');
+    if(!sec) return;
+    if(!d.ratings || !d.ratings.length){ sec.innerHTML=''; return }
+    const t = T[curLang];
+    sec.innerHTML = `
+      <div class="sec">${t.reviews} (${d.ratings.length})</div>
+      <div class="reviews-wrap">
+        ${d.ratings.slice().reverse().map(rv=>`
+          <div class="review-item">
+            <div class="review-head">
+              <span class="review-user">${rv.user||'مجهول'}</span>
+              <span class="review-date">${rv.date||''}</span>
+            </div>
+            <div class="review-stars">${'★'.repeat(rv.stars)}${'☆'.repeat(5-rv.stars)}</div>
+            ${rv.comment?`<div class="review-comment">${rv.comment}</div>`:''}
+          </div>`).join('')}
+      </div>`;
+  }catch(e){}
+}
+
+// ── Toast ──
 let tT;
 function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),2500);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(tT);
+  tT = setTimeout(()=>t.classList.remove('show'), 2500);
 }
 </script>
 </body>
