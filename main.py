@@ -79,26 +79,41 @@ def extract_apk_info(apk_path):
     try:
         from androguard.core.apk import APK
         apk = APK(apk_path)
-        # اسم التطبيق
+
         info["name"] = apk.get_app_name() or ""
-        # الإصدار
         info["version"] = apk.get_androidversion_name() or "1.0"
-        # minSdk
+
         min_sdk = apk.get_min_sdk_version()
         if min_sdk:
             info["min_sdk"] = str(min_sdk)
             info["min_android"] = sdk_to_android(min_sdk)
-        # الأيقونة
-        try:
-            icon_name = apk.get_app_icon()
-            if icon_name:
+
+        # ── PNG Sniper (Gemini's fix) ──
+        icon_name = apk.get_app_icon()
+        icon_data = None
+
+        if icon_name and icon_name.endswith('.xml'):
+            base_name = icon_name.split('/')[-1].replace('.xml','')
+            possible = [f for f in apk.get_files() if base_name in f and f.endswith('.png')]
+            if possible:
+                icon_name = sorted(possible)[-1]
                 icon_data = apk.get_file(icon_name)
-                if icon_data:
-                    icon_filename = os.path.basename(apk_path).replace(".apk",".png")
-                    icon_path = f"icons/{icon_filename}"
-                    with open(icon_path,"wb") as f: f.write(icon_data)
-                    info["icon_path"] = icon_path
-        except: pass
+        elif icon_name:
+            icon_data = apk.get_file(icon_name)
+
+        # Fallback
+        if not icon_data:
+            possible = [f for f in apk.get_files() if ('ic_launcher.png' in f.lower() or 'icon.png' in f.lower()) and 'res/' in f.lower()]
+            if possible:
+                icon_name = sorted(possible)[-1]
+                icon_data = apk.get_file(icon_name)
+
+        if icon_data:
+            icon_filename = os.path.basename(apk_path).replace(".apk",".png")
+            icon_path = f"icons/{icon_filename}"
+            with open(icon_path,"wb") as f: f.write(icon_data)
+            info["icon_path"] = icon_path
+
     except Exception as e:
         print(f"APK extract error: {e}")
     return info
