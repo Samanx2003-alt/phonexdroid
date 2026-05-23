@@ -1,8 +1,8 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request, Header
-from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
+from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-import os, json, shutil, hashlib, httpx, base64
+import os, json, shutil, hashlib, httpx
 from datetime import datetime, date
 from typing import Optional
 
@@ -12,15 +12,14 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 ADMIN_TOKEN = os.getenv("PHOENIX_ADMIN_SECRET", "A1s2d3_4")
 API_SECRET  = os.getenv("PHOENIX_API_SECRET",   "phoenix2026")
 
-os.makedirs("apks",   exist_ok=True)
-os.makedirs("data",   exist_ok=True)
-os.makedirs("icons",  exist_ok=True)
+os.makedirs("apks",  exist_ok=True)
+os.makedirs("data",  exist_ok=True)
+os.makedirs("icons", exist_ok=True)
 
 DB_FILE    = "data/apps.json"
 STATS_FILE = "data/stats.json"
 USERS_FILE = "data/users.json"
 
-# ── Android version map ──
 ANDROID_VERSIONS = {
     1:"1.0",2:"1.1",3:"1.5",4:"1.6",5:"2.0",6:"2.0.1",7:"2.1",
     8:"2.2",9:"2.3",10:"2.3.3",11:"3.0",12:"3.1",13:"3.2",
@@ -33,7 +32,6 @@ def sdk_to_android(sdk):
     try: return ANDROID_VERSIONS.get(int(sdk), str(sdk))
     except: return str(sdk)
 
-# ── DB helpers ──
 def load_db():
     if os.path.exists(DB_FILE):
         with open(DB_FILE,"r",encoding="utf-8") as f: return json.load(f)
@@ -68,52 +66,52 @@ def md5_sign(text): return hashlib.md5(text.encode()).hexdigest()
 def verify_admin(t): return t == ADMIN_TOKEN
 
 def verify_user_token(token):
-    users = load_users()
-    for u,d in users.items():
+    for u,d in load_users().items():
         if d.get("token")==token: return u
     return None
 
-# ── APK Info Extractor ──
 def extract_apk_info(apk_path):
-    info = {"name":"","icon_path":"","version":"1.0","min_sdk":"","min_android":""}
+    info = {"name":"","icon_path":"","version":"1.0","min_sdk":"","min_android":"","package":""}
     try:
         from androguard.core.apk import APK
         apk = APK(apk_path)
-
-        info["name"] = apk.get_app_name() or ""
+        info["name"]    = apk.get_app_name() or ""
         info["version"] = apk.get_androidversion_name() or "1.0"
-
+        info["package"] = apk.get_package() or ""
         min_sdk = apk.get_min_sdk_version()
         if min_sdk:
-            info["min_sdk"] = str(min_sdk)
+            info["min_sdk"]     = str(min_sdk)
             info["min_android"] = sdk_to_android(min_sdk)
-
-        # ── PNG Sniper (Gemini's fix) ──
+        # PNG Sniper (Gemini fix)
         icon_name = apk.get_app_icon()
         icon_data = None
-
         if icon_name and icon_name.endswith('.xml'):
-            base_name = icon_name.split('/')[-1].replace('.xml','')
-            possible = [f for f in apk.get_files() if base_name in f and f.endswith('.png')]
+            base = icon_name.split('/')[-1].replace('.xml','')
+            possible = [f for f in apk.get_files() if base in f and f.endswith('.png')]
             if possible:
                 icon_name = sorted(possible)[-1]
                 icon_data = apk.get_file(icon_name)
         elif icon_name:
             icon_data = apk.get_file(icon_name)
-
-        # Fallback
         if not icon_data:
             possible = [f for f in apk.get_files() if ('ic_launcher.png' in f.lower() or 'icon.png' in f.lower()) and 'res/' in f.lower()]
             if possible:
-                icon_name = sorted(possible)[-1]
-                icon_data = apk.get_file(icon_name)
-
+                icon_data = apk.get_file(sorted(possible)[-1])
+        if not icon_data:
+            # أكبر PNG
+            best_size = 0
+            for fname in apk.get_files():
+                if not fname.endswith('.png'): continue
+                try:
+                    d = apk.get_file(fname)
+                    if d and len(d) > best_size and len(d) > 5000:
+                        best_size = len(d); icon_data = d
+                except: pass
         if icon_data:
-            icon_filename = os.path.basename(apk_path).replace(".apk",".png")
-            icon_path = f"icons/{icon_filename}"
-            with open(icon_path,"wb") as f: f.write(icon_data)
+            icon_file = os.path.basename(apk_path).replace(".apk",".png")
+            icon_path = f"icons/{icon_file}"
+            open(icon_path,"wb").write(icon_data)
             info["icon_path"] = icon_path
-
     except Exception as e:
         print(f"APK extract error: {e}")
     return info
@@ -125,19 +123,15 @@ def sync_apks():
     for f in os.listdir("apks"):
         if f.endswith(".apk") and f not in existing:
             path = f"apks/{f}"
-            apk_info = extract_apk_info(path)
-            name = apk_info["name"] or f.replace(".apk","").replace("-"," ").replace("_"," ").title()
-            db.append({
-                "id":len(db)+1,"file":f,"name":name,
-                "icon":"📦","icon_path":apk_info["icon_path"],
-                "cat":"General","desc":"Android Application",
-                "color":"#1A1A2E","ver":apk_info["version"],
-                "min_sdk":apk_info["min_sdk"],
-                "min_android":apk_info["min_android"],
-                "size":get_size(path),"downloads":0,
-                "date":datetime.now().strftime("%Y-%m-%d"),
-                "uploader":"admin","status":"approved"
-            })
+            info = extract_apk_info(path)
+            name = info["name"] or f.replace(".apk","").replace("-"," ").replace("_"," ").title()
+            db.append({"id":len(db)+1,"file":f,"name":name,"icon":"📦",
+                "icon_path":info["icon_path"],"package":info["package"],
+                "cat":"General","desc":"","color":"#1A1A2E",
+                "ver":info["version"],"min_sdk":info["min_sdk"],
+                "min_android":info["min_android"],"size":get_size(path),
+                "downloads":0,"date":datetime.now().strftime("%Y-%m-%d"),
+                "uploader":"admin","status":"approved"})
             changed = True
     if changed: save_db(db)
     return db
@@ -148,13 +142,14 @@ async def register(username:str=Form(...),email:str=Form(...),password:str=Form(
     users = load_users()
     if username in users: raise HTTPException(400,"اسم المستخدم موجود")
     for u,d in users.items():
-        if d.get("email")==email: raise HTTPException(400,"البريد الإلكتروني مستخدم")
-    if len(username)<3: raise HTTPException(400,"اسم المستخدم قصير جداً (3 أحرف)")
+        if d.get("email")==email: raise HTTPException(400,"البريد مستخدم")
+    if len(username)<3: raise HTTPException(400,"اسم المستخدم قصير (3 أحرف)")
     if len(password)<6: raise HTTPException(400,"كلمة المرور قصيرة (6 أحرف)")
     token = md5_sign(username+password+str(datetime.now()))
-    users[username] = {"password":md5_sign(password),"email":email,"token":token,"joined":datetime.now().strftime("%Y-%m-%d"),"uploads":0,"role":"user"}
+    users[username] = {"password":md5_sign(password),"email":email,"token":token,
+        "joined":datetime.now().strftime("%Y-%m-%d"),"uploads":0,"role":"user"}
     save_users(users)
-    return {"success":True,"token":token,"username":username,"email":email}
+    return {"success":True,"token":token,"username":username}
 
 @app.post("/api/login")
 async def login(email:str=Form(...),password:str=Form(...)):
@@ -162,36 +157,41 @@ async def login(email:str=Form(...),password:str=Form(...)):
     found = None
     for u,d in users.items():
         if d.get("email")==email: found=(u,d); break
-    if not found: raise HTTPException(401,"البريد الإلكتروني غير موجود")
+    if not found: raise HTTPException(401,"البريد غير موجود")
     u,d = found
     if d["password"]!=md5_sign(password): raise HTTPException(401,"كلمة المرور خاطئة")
-    return {"success":True,"token":d["token"],"username":u,"email":email}
+    return {"success":True,"token":d["token"],"username":u}
 
-# ── Apps ──
+# ── Apps API ──
 @app.get("/api/apps")
-def api_apps(cat:str=None,search:str=None,status:str=None):
-    apps = sync_apks()
-    # المستخدم العادي يرى approved فقط
-    apps = [a for a in apps if a.get("status","approved")=="approved"]
+def api_apps(cat:str=None,search:str=None):
+    apps = [a for a in sync_apks() if a.get("status","approved")=="approved"]
     if cat and cat not in ("All","الكل"): apps=[a for a in apps if a.get("cat")==cat]
     if search:
         s=search.lower(); apps=[a for a in apps if s in a["name"].lower() or s in a.get("desc","").lower()]
     return apps
 
+@app.get("/api/app/{filename}")
+def api_app_detail(filename:str):
+    db = load_db()
+    app_data = next((a for a in db if a["file"]==filename or a.get("package")==filename), None)
+    if not app_data: raise HTTPException(404,"التطبيق غير موجود")
+    # تطبيقات مشابهة
+    similar = [a for a in db if a.get("cat")==app_data.get("cat") and a["file"]!=app_data["file"] and a.get("status","approved")=="approved"][:4]
+    return {"app": app_data, "similar": similar}
+
 @app.get("/api/pending")
 def api_pending(x_admin_token:str=Header("")):
     if not verify_admin(x_admin_token): raise HTTPException(403,"غير مصرح")
-    apps = load_db()
-    return [a for a in apps if a.get("status","approved")=="pending"]
+    return [a for a in load_db() if a.get("status","approved")=="pending"]
 
 @app.post("/api/approve/{filename}")
-def approve_app(filename:str, x_admin_token:str=Header("")):
+def approve_app(filename:str,x_admin_token:str=Header("")):
     if not verify_admin(x_admin_token): raise HTTPException(403,"غير مصرح")
     db = load_db()
     for a in db:
         if a["file"]==filename: a["status"]="approved"
-    save_db(db)
-    return {"success":True}
+    save_db(db); return {"success":True}
 
 @app.get("/api/stats")
 def api_stats():
@@ -201,69 +201,43 @@ def api_stats():
     return stats
 
 @app.post("/api/upload")
-async def upload_apk(
-    file:UploadFile=File(...),
-    cat:str=Form("General"),
-    desc:str=Form(""),
-    color:str=Form("#1A1A2E"),
-    user_token:str=Form(""),
-    admin_token:str=Form("")
-):
+async def upload_apk(file:UploadFile=File(...),cat:str=Form("General"),desc:str=Form(""),color:str=Form("#1A1A2E"),user_token:str=Form(""),admin_token:str=Form("")):
     is_admin=verify_admin(admin_token)
     username=verify_user_token(user_token)
     if not is_admin and not username: raise HTTPException(403,"يجب تسجيل الدخول")
     if not file.filename.endswith(".apk"): raise HTTPException(400,"يجب أن يكون APK")
-
-    safe=file.filename.replace(" ","_")
-    path=f"apks/{safe}"
+    safe=file.filename.replace(" ","_"); path=f"apks/{safe}"
     with open(path,"wb") as f: shutil.copyfileobj(file.file,f)
-
-    # استخراج معلومات APK تلقائياً
-    apk_info = extract_apk_info(path)
-    name = apk_info["name"] or safe.replace(".apk","").replace("-"," ").replace("_"," ").title()
-
-    db=load_db()
-    existing=next((a for a in db if a["file"]==safe),None)
+    info = extract_apk_info(path)
+    name = info["name"] or safe.replace(".apk","").replace("-"," ").replace("_"," ").title()
+    db=load_db(); existing=next((a for a in db if a["file"]==safe),None)
     uploader="admin" if is_admin else username
     status="approved" if is_admin else "pending"
-
     if existing:
-        existing.update({
-            "name":name,"cat":cat,"desc":desc,"color":color,
-            "ver":apk_info["version"],"size":get_size(path),
-            "icon_path":apk_info["icon_path"],
-            "min_sdk":apk_info["min_sdk"],
-            "min_android":apk_info["min_android"],
-        })
+        existing.update({"name":name,"cat":cat,"desc":desc,"color":color,
+            "ver":info["version"],"size":get_size(path),"icon_path":info["icon_path"],
+            "min_sdk":info["min_sdk"],"min_android":info["min_android"],"package":info["package"]})
     else:
-        db.append({
-            "id":len(db)+1,"file":safe,"name":name,
-            "icon":"📦","icon_path":apk_info["icon_path"],
-            "cat":cat,"desc":desc,"color":color,
-            "ver":apk_info["version"],
-            "min_sdk":apk_info["min_sdk"],
-            "min_android":apk_info["min_android"],
-            "size":get_size(path),"downloads":0,
-            "date":datetime.now().strftime("%Y-%m-%d"),
-            "uploader":uploader,"status":status
-        })
+        db.append({"id":len(db)+1,"file":safe,"name":name,"icon":"📦",
+            "icon_path":info["icon_path"],"package":info["package"],
+            "cat":cat,"desc":desc,"color":color,"ver":info["version"],
+            "min_sdk":info["min_sdk"],"min_android":info["min_android"],
+            "size":get_size(path),"downloads":0,"date":datetime.now().strftime("%Y-%m-%d"),
+            "uploader":uploader,"status":status})
     save_db(db)
-
     if username:
         users=load_users()
         if username in users:
-            users[username]["uploads"]=users[username].get("uploads",0)+1
-            save_users(users)
-
-    msg = f"تم رفع {safe} ✅" if is_admin else f"تم رفع {safe} — في انتظار موافقة الأدمن ⏳"
-    return {"success":True,"message":msg,"name":name,"version":apk_info["version"],"min_android":apk_info["min_android"]}
+            users[username]["uploads"]=users[username].get("uploads",0)+1; save_users(users)
+    msg = f"تم رفع {safe} ✅" if is_admin else f"في انتظار موافقة الأدمن ⏳"
+    return {"success":True,"message":msg,"name":name,"version":info["version"],"min_android":info["min_android"]}
 
 @app.delete("/api/delete/{filename}")
 def delete_apk(filename:str,x_admin_token:str=Header("")):
     if not verify_admin(x_admin_token): raise HTTPException(403,"غير مصرح")
     for p in [f"apks/{filename}",f"icons/{filename.replace('.apk','.png')}"]:
         if os.path.exists(p): os.remove(p)
-    db=[a for a in load_db() if a["file"]!=filename]; save_db(db)
+    save_db([a for a in load_db() if a["file"]!=filename])
     return {"success":True}
 
 @app.post("/api/download/{filename}")
@@ -271,8 +245,8 @@ def count_download(filename:str):
     db=load_db()
     for a in db:
         if a["file"]==filename: a["downloads"]=a.get("downloads",0)+1
-    save_db(db)
-    stats=load_stats(); stats["total_downloads"]=stats.get("total_downloads",0)+1; save_stats(stats)
+    save_db(db); stats=load_stats()
+    stats["total_downloads"]=stats.get("total_downloads",0)+1; save_stats(stats)
     return {"success":True}
 
 @app.get("/api/proxy-download")
@@ -288,6 +262,13 @@ async def proxy_download(url:str):
 
 app.mount("/apks",StaticFiles(directory="apks"),name="apks")
 app.mount("/icons",StaticFiles(directory="icons"),name="icons")
+
+@app.get("/app/{filename}",response_class=HTMLResponse)
+async def app_page(filename:str,request:Request):
+    """صفحة URL مستقلة لكل تطبيق"""
+    if os.path.exists("app_page.html"):
+        with open("app_page.html","r",encoding="utf-8") as f: return f.read()
+    return "<script>window.location='/'</script>"
 
 @app.get("/",response_class=HTMLResponse)
 async def root(request:Request):
