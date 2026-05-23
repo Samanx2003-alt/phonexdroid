@@ -3,122 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>PhoenixStore</title>
+<title>PhoenixStore 🔥</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
+/* ══ DARK THEME ══ */
+body.dark{
   --bg:#0A0A12;--surf:#0F0F1A;--card:#141422;--card2:#1A1A2E;
   --b1:#1E1E32;--b2:#262640;
-  --fire:#FF4500;--ember:#FF6B35;--gold:#FFB300;
-  --green:#00C87A;--blue:#4FC3F7;--red:#FF453A;--purple:#BB86FC;
   --text:#EEEEF5;--soft:#9090B0;--muted:#4A4A65;
+  --shadow:rgba(0,0,0,.3);
+}
+/* ══ LIGHT THEME ══ */
+body.light{
+  --bg:#F2F2F7;--surf:#FFFFFF;--card:#FFFFFF;--card2:#F8F8FC;
+  --b1:#E5E5EA;--b2:#D1D1D6;
+  --text:#1C1C1E;--soft:#636366;--muted:#8E8E93;
+  --shadow:rgba(0,0,0,.08);
+}
+:root{
+  --fire:#FF4500;--ember:#FF6B35;--gold:#FFB300;
+  --green:#00C87A;--blue:#007AFF;--red:#FF3B30;--purple:#AF52DE;
   --r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:72px;direction:rtl}
-body.en{font-family:'Roboto',sans-serif;direction:ltr}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:72px;transition:background .3s,color .3s}
+body.en{font-family:'Roboto',sans-serif}
+body.en *{direction:ltr}
+body.ar *{direction:rtl}
 
-/* ── TOP BAR ── */
-.topbar{
-  background:var(--surf);border-bottom:1px solid var(--b1);
-  padding:0 16px;position:sticky;top:0;z-index:100;
-  backdrop-filter:blur(20px);
-}
-.topbar-inner{display:flex;align-items:center;gap:10px;height:56px}
-.logo{display:flex;align-items:center;gap:6px;flex:1}
-.logo-txt{font-size:17px;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.search-bar{
-  flex:2;display:flex;align-items:center;gap:8px;
-  background:var(--card2);border-radius:24px;padding:8px 14px;
-  border:1px solid var(--b2);
-}
-.search-bar input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:13px;font-family:inherit}
+/* ══ TOP BAR ══ */
+.topbar{background:var(--surf);border-bottom:1px solid var(--b1);padding:0 12px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px var(--shadow)}
+.topbar-inner{display:flex;align-items:center;gap:8px;height:56px}
+.logo{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.logo-txt{font-size:16px;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.search-bar{flex:1;display:flex;align-items:center;gap:6px;background:var(--card2);border-radius:24px;padding:7px 12px;border:1px solid var(--b1)}
+.search-bar input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:13px;font-family:inherit;min-width:0}
 .search-bar input::placeholder{color:var(--muted)}
-.icon-btn{width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;transition:background .2s}
-.icon-btn:hover{background:var(--card2)}
+.hbtn{width:34px;height:34px;border-radius:10px;background:var(--card2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;transition:background .2s}
+.hbtn:hover{background:var(--b1)}
 
-/* ── CATS ── */
-.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 16px;background:var(--surf);border-bottom:1px solid var(--b1)}
+/* ══ CATS ══ */
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 12px;background:var(--surf);border-bottom:1px solid var(--b1)}
 .cats::-webkit-scrollbar{display:none}
-.cat{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer;flex-shrink:0;background:var(--card);border:1px solid var(--b1);color:var(--muted);transition:all .2s;font-family:inherit}
-.cat.active{background:rgba(255,69,0,.15);border-color:rgba(255,69,0,.5);color:var(--ember)}
+.cat{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer;flex-shrink:0;background:var(--card2);border:1px solid var(--b1);color:var(--muted);transition:all .2s;font-family:inherit}
+.cat.active{background:var(--fire);border-color:var(--fire);color:#fff}
 
-/* ── TABS ── */
-.tabs{display:flex;background:var(--surf);border-bottom:2px solid var(--b1)}
-.tab{flex:1;padding:12px 6px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;font-family:inherit;background:none;border-top:none;border-left:none;border-right:none}
-.tab.active{color:var(--fire);border-bottom-color:var(--fire)}
+/* ══ ANDROID FILTER ══ */
+.sdk-filter{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 12px;background:var(--surf);border-bottom:1px solid var(--b1)}
+.sdk-filter::-webkit-scrollbar{display:none}
+.sdk-btn{padding:5px 12px;border-radius:14px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;flex-shrink:0;background:var(--card2);border:1px solid var(--b1);color:var(--muted);transition:all .2s;font-family:inherit}
+.sdk-btn.active{background:rgba(0,122,255,.15);border-color:var(--blue);color:var(--blue)}
 
-/* ── PAGE ── */
-.page{display:none;animation:fade .25s ease}
-.page.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── BANNER ── */
-.banner{
-  margin:12px;border-radius:16px;overflow:hidden;
-  background:linear-gradient(135deg,#1A0A00,#0A0A1A);
-  border:1px solid rgba(255,69,0,.2);padding:20px;position:relative;
-}
-.banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,69,0,.15),transparent 60%)}
-.banner-tag{display:inline-block;background:var(--fire);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:8px}
-.banner-title{font-size:20px;font-weight:900;margin-bottom:4px;position:relative}
-.banner-sub{font-size:12px;color:var(--soft);margin-bottom:14px;position:relative}
-.banner-btn{display:inline-block;background:linear-gradient(135deg,var(--fire),var(--ember));color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:inherit;box-shadow:0 4px 14px rgba(255,69,0,.3);position:relative}
-
-/* ── SECTION ── */
-.sec-head{padding:16px 16px 8px;display:flex;justify-content:space-between;align-items:center}
-.sec-title{font-size:15px;font-weight:700}
-.sec-more{font-size:12px;color:var(--blue);cursor:pointer}
-
-/* ── APP CARD (Play Store style) ── */
-.app-list{display:flex;flex-direction:column}
-.app-item{
-  display:flex;align-items:center;gap:14px;
-  padding:12px 16px;cursor:pointer;transition:background .15s;
-  border-bottom:1px solid rgba(255,255,255,.03);
-}
-.app-item:hover{background:rgba(255,255,255,.03)}
-.app-item:active{background:rgba(255,255,255,.05)}
-.app-thumb{
-  width:58px;height:58px;border-radius:14px;flex-shrink:0;
-  overflow:hidden;display:flex;align-items:center;justify-content:center;
-  font-size:30px;border:1px solid rgba(255,255,255,.06);
-}
-.app-thumb img{width:100%;height:100%;object-fit:cover}
-.app-meta{flex:1;min-width:0}
-.app-name{font-size:14px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.app-cat{font-size:11px;color:var(--muted);margin-bottom:5px}
-.app-bottom{display:flex;align-items:center;gap:6px}
-.app-stars{color:var(--gold);font-size:10px;letter-spacing:-1px}
-.app-rating{font-size:10px;color:var(--muted)}
-.app-size{font-size:10px;color:var(--muted)}
-.app-sdk{font-size:10px;color:var(--blue);background:rgba(79,195,247,.08);padding:1px 6px;border-radius:6px}
-.app-btn{flex-shrink:0}
-.btn-install{
-  padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700;
-  background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.3);
-  color:var(--blue);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;
-}
-.btn-install:hover{background:rgba(79,195,247,.2)}
-.btn-pending{background:rgba(255,179,0,.1);border-color:rgba(255,179,0,.3);color:var(--gold)}
-
-/* ── HORIZONTAL SCROLL ── */
-.h-scroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 16px 12px}
-.h-scroll::-webkit-scrollbar{display:none}
-.app-card-h{
-  flex-shrink:0;width:130px;cursor:pointer;
-  background:var(--card);border:1px solid var(--b1);border-radius:14px;
-  overflow:hidden;transition:transform .2s;
-}
-.app-card-h:hover{transform:translateY(-2px)}
-.app-card-h-thumb{width:100%;height:90px;display:flex;align-items:center;justify-content:center;font-size:40px}
-.app-card-h-info{padding:8px}
-.app-card-h-name{font-size:12px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.app-card-h-cat{font-size:10px;color:var(--muted)}
-
-/* ── STATS ── */
-.stats-row{display:flex;gap:0;background:var(--surf);border-bottom:1px solid var(--b1)}
+/* ══ STATS ══ */
+.stats-row{display:flex;background:var(--surf);border-bottom:1px solid var(--b1)}
 .stat-item{flex:1;text-align:center;padding:10px 4px;border-left:1px solid var(--b1)}
 .stat-item:last-child{border-left:none}
 body.en .stat-item{border-left:none;border-right:1px solid var(--b1)}
@@ -126,171 +64,238 @@ body.en .stat-item:last-child{border-right:none}
 .stat-n{font-size:17px;font-weight:900;color:var(--gold)}
 .stat-l{font-size:10px;color:var(--muted);margin-top:2px}
 
-/* ── MODAL ── */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;backdrop-filter:blur(12px);align-items:flex-end;justify-content:center}
+/* ══ TABS ══ */
+.tabs{display:flex;background:var(--surf);border-bottom:2px solid var(--b1)}
+.tab{flex:1;padding:12px 4px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;font-family:inherit;background:none;border-top:none;border-left:none;border-right:none}
+.tab.active{color:var(--fire);border-bottom-color:var(--fire)}
+
+/* ══ PAGE ══ */
+.page{display:none;animation:fade .25s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ BANNER ══ */
+.banner{margin:12px;border-radius:16px;overflow:hidden;padding:20px;position:relative;background:linear-gradient(135deg,#FF4500,#FF8C00)}
+.banner::before{content:'🔥';position:absolute;font-size:100px;opacity:.15;right:-10px;top:-10px}
+.banner-tag{display:inline-block;background:rgba(255,255,255,.25);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:8px}
+.banner-title{font-size:20px;font-weight:900;margin-bottom:4px;color:#fff;position:relative}
+.banner-sub{font-size:12px;color:rgba(255,255,255,.85);margin-bottom:14px;position:relative}
+.banner-btn{display:inline-block;background:#fff;color:var(--fire);padding:10px 22px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:inherit;position:relative}
+
+/* ══ SECTION ══ */
+.sec-head{padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:center}
+.sec-title{font-size:15px;font-weight:700}
+body.light .sec-title{color:#1C1C1E}
+
+/* ══ APP ITEM (Play Store) ══ */
+.app-list{display:flex;flex-direction:column;background:var(--surf)}
+.app-item{display:flex;align-items:center;gap:14px;padding:12px 16px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--b1)}
+.app-item:hover{background:var(--card2)}
+body.light .app-item:hover{background:#F2F2F7}
+.app-thumb{width:58px;height:58px;border-radius:14px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:30px;border:1px solid var(--b1);background:var(--card2)}
+.app-thumb img{width:100%;height:100%;object-fit:cover;border-radius:13px}
+.app-meta{flex:1;min-width:0}
+.app-name{font-size:14px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-cat{font-size:11px;color:var(--muted);margin-bottom:4px}
+.app-bottom{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.app-stars{color:#FF9500;font-size:10px}
+.app-rating{font-size:10px;color:var(--muted)}
+.app-size{font-size:10px;color:var(--muted)}
+.app-sdk{font-size:10px;color:var(--blue);background:rgba(0,122,255,.08);padding:1px 7px;border-radius:6px;font-weight:700}
+.btn-get{padding:7px 18px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(0,122,255,.1);border:1px solid rgba(0,122,255,.3);color:var(--blue);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;flex-shrink:0}
+body.light .btn-get{background:#E8F0FE;border-color:#4285F4;color:#4285F4}
+.btn-get:hover{background:rgba(0,122,255,.2)}
+
+/* ══ GAME CARD ══ */
+.games-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 12px 12px}
+.game-card{background:var(--card);border:1px solid var(--b1);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .2s}
+.game-card:hover{transform:translateY(-2px)}
+body.light .game-card{box-shadow:0 2px 8px var(--shadow)}
+.game-thumb{width:100%;height:100px;display:flex;align-items:center;justify-content:center;font-size:44px;background:var(--card2)}
+.game-thumb img{width:100%;height:100%;object-fit:cover}
+.game-info{padding:8px 10px}
+.game-name{font-size:13px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-cat{font-size:10px;color:var(--muted)}
+.game-sdk{font-size:10px;color:var(--blue);font-weight:700}
+
+/* ══ MODAL ══ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;backdrop-filter:blur(10px);align-items:flex-end;justify-content:center}
 .overlay.show{display:flex;animation:ov .2s}
 @keyframes ov{from{opacity:0}to{opacity:1}}
-.modal{background:var(--surf);border-radius:22px 22px 0 0;width:100%;max-width:500px;padding:20px;max-height:90vh;overflow-y:auto;border-top:1px solid var(--b2);animation:mu .3s cubic-bezier(.175,.885,.32,1.1)}
+.modal{background:var(--surf);border-radius:22px 22px 0 0;width:100%;max-width:500px;padding:20px;max-height:90vh;overflow-y:auto;border-top:1px solid var(--b1);animation:mu .3s cubic-bezier(.175,.885,.32,1.1)}
 @keyframes mu{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.m-handle{width:40px;height:4px;background:var(--b2);border-radius:2px;margin:0 auto 18px}
+.m-handle{width:40px;height:4px;background:var(--b1);border-radius:2px;margin:0 auto 18px}
 .m-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
-.m-icon{width:74px;height:74px;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;border:1px solid rgba(255,255,255,.08)}
+.m-icon{width:74px;height:74px;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;border:1px solid var(--b1);background:var(--card2)}
 .m-icon img{width:100%;height:100%;object-fit:cover}
 .m-name{font-size:19px;font-weight:700;margin-bottom:3px}
 .m-dev{font-size:12px;color:var(--muted);margin-bottom:6px}
 .m-tags{display:flex;gap:5px;flex-wrap:wrap}
-.m-tag{font-size:10px;padding:2px 8px;border-radius:8px;background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.2);color:var(--ember)}
-.m-tag.blue{background:rgba(79,195,247,.1);border-color:rgba(79,195,247,.2);color:var(--blue)}
+.m-tag{font-size:10px;padding:2px 8px;border-radius:8px;background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.2);color:var(--fire)}
+.m-tag.blue{background:rgba(0,122,255,.1);border-color:rgba(0,122,255,.2);color:var(--blue)}
 .m-tag.green{background:rgba(0,200,122,.1);border-color:rgba(0,200,122,.2);color:var(--green)}
 .m-tag.gold{background:rgba(255,179,0,.1);border-color:rgba(255,179,0,.2);color:var(--gold)}
 .m-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
-.m-stat{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:10px 6px;text-align:center}
-.m-stat-v{font-size:13px;font-weight:700;color:var(--gold)}
+.m-stat{background:var(--card2);border:1px solid var(--b1);border-radius:10px;padding:10px 6px;text-align:center}
+.m-stat-v{font-size:13px;font-weight:700;color:var(--fire)}
 .m-stat-k{font-size:9px;color:var(--muted);margin-top:2px}
-.m-desc{font-size:13px;color:var(--soft);line-height:1.7;background:var(--card);padding:12px;border-radius:10px;border:1px solid var(--b1);margin-bottom:14px}
+.m-desc{font-size:13px;color:var(--soft);line-height:1.7;background:var(--card2);padding:12px;border-radius:10px;border:1px solid var(--b1);margin-bottom:14px}
 .m-btns{display:flex;gap:10px}
-.m-btn-get{flex:2;padding:14px;background:linear-gradient(135deg,var(--fire),var(--ember));color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(255,69,0,.3);display:flex;align-items:center;justify-content:center;gap:6px}
-.m-btn-del{flex:1;padding:14px;background:rgba(255,69,58,.08);border:1px solid rgba(255,69,58,.2);color:var(--red);border-radius:12px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.m-btn-get{flex:2;padding:14px;background:var(--fire);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(255,69,0,.3);display:flex;align-items:center;justify-content:center;gap:6px}
+body.light .m-btn-get{background:linear-gradient(135deg,#4285F4,#1A73E8);box-shadow:0 4px 16px rgba(66,133,244,.3)}
+.m-btn-del{flex:1;padding:14px;background:rgba(255,59,48,.08);border:1px solid rgba(255,59,48,.2);color:var(--red);border-radius:12px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
 .m-btn-approve{flex:1;padding:14px;background:rgba(0,200,122,.1);border:1px solid rgba(0,200,122,.3);color:var(--green);border-radius:12px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
 
-/* ── UPLOAD ── */
-.pad{padding:12px 16px}
+/* ══ UPLOAD ══ */
+.pad{padding:12px}
 .card{background:var(--card);border:1px solid var(--b1);border-radius:14px;padding:16px;margin-bottom:12px}
-.card-t{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+body.light .card{box-shadow:0 2px 8px var(--shadow);border:none}
+.card-t{font-size:14px;font-weight:700;color:var(--fire);margin-bottom:14px;display:flex;align-items:center;gap:6px}
 .dz{border:2px dashed var(--b2);border-radius:12px;padding:22px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:12px}
-.dz:hover,.dz.drag{border-color:rgba(255,69,0,.5);background:rgba(255,69,0,.03)}
+.dz:hover,.dz.drag{border-color:var(--fire);background:rgba(255,69,0,.03)}
 .dz-i{font-size:34px;margin-bottom:6px}
 .dz-t{font-size:13px;color:var(--soft);font-weight:700}
 .dz-s{font-size:11px;color:var(--muted);margin-top:3px}
 .fl{margin-bottom:10px}
 .fl label{font-size:11px;color:var(--soft);margin-bottom:5px;display:block;font-weight:700}
-.fi,.fs{width:100%;background:var(--surf);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;color:var(--text);font-family:inherit;font-size:13px;outline:none;transition:border-color .2s}
-.fi:focus,.fs:focus{border-color:rgba(255,69,0,.5)}
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn-p{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--fire),var(--ember));color:#fff;border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 18px rgba(255,69,0,.2);transition:opacity .2s}
+.fi,.fs{width:100%;background:var(--card2);border:1px solid var(--b1);border-radius:10px;padding:9px 12px;color:var(--text);font-family:inherit;font-size:13px;outline:none;transition:border-color .2s}
+body.light .fi, body.light .fs{background:#F2F2F7}
+.fi:focus,.fs:focus{border-color:var(--fire)}
+.btn-p{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--fire),var(--ember));color:#fff;border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .2s}
+body.light .btn-p{background:linear-gradient(135deg,#4285F4,#1A73E8)}
 .btn-p:disabled{opacity:.5;cursor:not-allowed}
 .prog{display:none;margin-top:10px}
 .prog-b{height:5px;background:var(--b1);border-radius:3px;overflow:hidden;margin-bottom:5px}
 .prog-f{height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));transition:width .3s;width:0%}
 .prog-t{font-size:11px;color:var(--soft);text-align:center}
-.apk-preview{background:var(--card2);border:1px solid var(--b2);border-radius:12px;padding:12px;margin-bottom:12px;display:none}
-.apk-preview-inner{display:flex;align-items:center;gap:10px}
-.apk-preview-icon{width:46px;height:46px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--card);border:1px solid var(--b1);flex-shrink:0}
-.apk-preview-icon img{width:100%;height:100%;object-fit:cover}
-.apk-preview-name{font-size:14px;font-weight:700}
-.apk-preview-ver{font-size:11px;color:var(--muted)}
-.apk-preview-sdk{font-size:11px;color:var(--blue)}
+.apk-prev{background:var(--card2);border:1px solid var(--b2);border-radius:12px;padding:12px;margin-bottom:12px;display:none}
+.apk-prev-inner{display:flex;align-items:center;gap:10px}
+.apk-prev-icon{width:46px;height:46px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--card);border:1px solid var(--b1);flex-shrink:0}
+.apk-prev-icon img{width:100%;height:100%;object-fit:cover}
 
-/* ── AUTH ── */
-.auth-tabs{display:flex;background:var(--surf);border-radius:10px;padding:3px;margin-bottom:14px}
+/* ══ AUTH ══ */
+.auth-tabs{display:flex;background:var(--card2);border-radius:10px;padding:3px;margin-bottom:14px}
 .auth-tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;color:var(--muted);transition:all .2s;font-family:inherit;background:none;border:none}
-.auth-tab.active{background:var(--card2);color:var(--text)}
+.auth-tab.active{background:var(--surf);color:var(--text);box-shadow:0 1px 4px var(--shadow)}
 .u-box{display:flex;align-items:center;gap:10px;padding:12px;background:var(--card2);border-radius:12px;margin-bottom:12px;border:1px solid var(--b1)}
 .u-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--fire),var(--ember));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .u-name{font-size:14px;font-weight:700}
 .u-role{font-size:11px;color:var(--muted)}
-.btn-out{padding:7px 14px;background:rgba(255,69,58,.1);border:1px solid rgba(255,69,58,.2);color:var(--red);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-out{padding:7px 14px;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2);color:var(--red);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
 
-/* ── SETTINGS ── */
-.s-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+/* ══ SETTINGS ══ */
+.s-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--b1);font-size:13px}
 .s-row:last-child{border-bottom:none}
 .s-v{font-size:12px;color:var(--muted)}
 .s-v.g{color:var(--green)}
-.lang-toggle{display:flex;gap:6px}
-.lang-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:var(--card);border:1px solid var(--b1);color:var(--muted);transition:all .2s}
-.lang-btn.active{background:rgba(255,69,0,.15);border-color:rgba(255,69,0,.5);color:var(--ember)}
+.toggle-group{display:flex;gap:6px}
+.tgl-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:var(--card2);border:1px solid var(--b1);color:var(--muted);transition:all .2s}
+.tgl-btn.active{background:rgba(255,69,0,.15);border-color:var(--fire);color:var(--fire)}
 
-/* ── BOTTOM NAV ── */
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,18,.97);border-top:1px solid var(--b1);display:flex;backdrop-filter:blur(20px);z-index:100}
+/* ══ ABOUT ══ */
+.about-card{text-align:center;padding:24px;background:var(--card);border-radius:16px;margin-bottom:12px;border:1px solid var(--b1)}
+.about-logo{font-size:56px;margin-bottom:10px}
+.about-name{font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+.about-ver{font-size:12px;color:var(--muted);margin-bottom:16px}
+.contact-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;background:var(--fire);color:#fff;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:inherit}
+body.light .contact-btn{background:linear-gradient(135deg,#4285F4,#1A73E8)}
+
+/* ══ REQUIRE LOGIN ══ */
+.req{text-align:center;padding:30px;color:var(--muted)}
+.req-i{font-size:44px;margin-bottom:10px}
+.req-t{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--soft)}
+
+/* ══ BOTTOM NAV ══ */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--surf);border-top:1px solid var(--b1);display:flex;z-index:100;box-shadow:0 -2px 8px var(--shadow)}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px 11px;cursor:pointer;color:var(--muted);font-size:10px;font-weight:700;transition:color .2s}
 .bi.active{color:var(--fire)}
 .bi-ico{font-size:20px;line-height:1}
 
-/* ── PENDING BADGE ── */
-.badge{background:var(--red);color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;display:flex;align-items:center;justify-content:center;position:absolute;top:-4px;right:-4px}
-.rel{position:relative;display:inline-block}
-
-/* ── EMPTY ── */
+/* ══ EMPTY ══ */
 .empty{text-align:center;padding:50px 20px;color:var(--muted)}
 .empty-i{font-size:50px;margin-bottom:10px;opacity:.4}
 .empty-t{font-size:15px;font-weight:700;color:var(--soft);margin-bottom:5px}
-.empty-s{font-size:12px}
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--card2);border:1px solid var(--b2);color:var(--text);padding:9px 18px;border-radius:10px;font-size:12px;font-weight:600;z-index:300;opacity:0;transition:all .25s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5);pointer-events:none}
+/* ══ TOAST ══ */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--card);border:1px solid var(--b2);color:var(--text);padding:9px 18px;border-radius:10px;font-size:12px;font-weight:600;z-index:300;opacity:0;transition:all .25s;white-space:nowrap;box-shadow:0 4px 20px var(--shadow);pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .spin{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,69,0,.2);border-top-color:var(--fire);border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .loading{text-align:center;padding:40px;color:var(--muted)}
-
-/* ── REQUIRE LOGIN ── */
-.req-login{text-align:center;padding:30px 20px;color:var(--muted)}
-.req-login-i{font-size:44px;margin-bottom:10px}
-.req-login-t{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--soft)}
 </style>
 </head>
-<body>
+<body class="dark ar">
 
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="logo">
-      <span>🔥</span>
-      <span class="logo-txt">PhoenixStore</span>
-    </div>
+    <div class="logo"><span>🔥</span><span class="logo-txt">PhoenixStore</span></div>
     <div class="search-bar">
       <span style="color:var(--muted)">🔍</span>
-      <input type="text" id="searchInput" placeholder="" oninput="doSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="ابحث عن تطبيق..." oninput="doSearch(this.value)">
       <span style="color:var(--muted);cursor:pointer;font-size:12px" onclick="clearSearch()">✕</span>
     </div>
-    <div class="icon-btn" onclick="goTo('account')">👤</div>
+    <!-- زر اللغة -->
+    <div class="hbtn" id="langBtn" onclick="toggleLang()" title="Language">🌐</div>
+    <!-- زر الوضع -->
+    <div class="hbtn" id="themeBtn" onclick="toggleTheme()" title="Theme">🌙</div>
+    <div class="hbtn" onclick="goTo('account')">👤</div>
   </div>
 </div>
 
 <!-- CATS -->
 <div class="cats" id="catsBar">
-  <div class="cat active" onclick="filterCat('All',this)" data-ar="الكل" data-en="All">الكل</div>
-  <div class="cat" onclick="filterCat('Browser',this)" data-ar="🌐 متصفح" data-en="🌐 Browser">🌐 متصفح</div>
-  <div class="cat" onclick="filterCat('Video',this)" data-ar="🎬 فيديو" data-en="🎬 Video">🎬 فيديو</div>
-  <div class="cat" onclick="filterCat('Social',this)" data-ar="💬 سوشيال" data-en="💬 Social">💬 سوشيال</div>
-  <div class="cat" onclick="filterCat('Files',this)" data-ar="📁 ملفات" data-en="📁 Files">📁 ملفات</div>
-  <div class="cat" onclick="filterCat('Security',this)" data-ar="🔒 أمان" data-en="🔒 Security">🔒 أمان</div>
-  <div class="cat" onclick="filterCat('Games',this)" data-ar="🎮 ألعاب" data-en="🎮 Games">🎮 ألعاب</div>
-  <div class="cat" onclick="filterCat('General',this)" data-ar="📦 عام" data-en="📦 General">📦 عام</div>
+  <div class="cat active" onclick="filterCat('All',this)">الكل</div>
+  <div class="cat" onclick="filterCat('Browser',this)">🌐 متصفح</div>
+  <div class="cat" onclick="filterCat('Video',this)">🎬 فيديو</div>
+  <div class="cat" onclick="filterCat('Social',this)">💬 سوشيال</div>
+  <div class="cat" onclick="filterCat('Files',this)">📁 ملفات</div>
+  <div class="cat" onclick="filterCat('Security',this)">🔒 أمان</div>
+  <div class="cat" onclick="filterCat('Games',this)">🎮 ألعاب</div>
+  <div class="cat" onclick="filterCat('General',this)">📦 عام</div>
+</div>
+
+<!-- ANDROID FILTER -->
+<div class="sdk-filter" id="sdkFilter">
+  <div class="sdk-btn active" onclick="filterSdk('',this)">🤖 الكل</div>
+  <div class="sdk-btn" onclick="filterSdk('2.3',this)">Android 2.3+</div>
+  <div class="sdk-btn" onclick="filterSdk('4.0',this)">Android 4.0+</div>
+  <div class="sdk-btn" onclick="filterSdk('4.4',this)">Android 4.4+</div>
+  <div class="sdk-btn" onclick="filterSdk('5.0',this)">Android 5.0+</div>
+  <div class="sdk-btn" onclick="filterSdk('6.0',this)">Android 6.0+</div>
 </div>
 
 <!-- STATS -->
 <div class="stats-row">
-  <div class="stat-item"><div class="stat-n" id="s1">-</div><div class="stat-l" data-ar="تطبيق" data-en="Apps">تطبيق</div></div>
-  <div class="stat-item"><div class="stat-n" id="s2">-</div><div class="stat-l" data-ar="تحميل" data-en="Downloads">تحميل</div></div>
-  <div class="stat-item"><div class="stat-n" id="s3">-</div><div class="stat-l" data-ar="زيارة" data-en="Visits">زيارة</div></div>
+  <div class="stat-item"><div class="stat-n" id="s1">-</div><div class="stat-l" id="sl1">تطبيق</div></div>
+  <div class="stat-item"><div class="stat-n" id="s2">-</div><div class="stat-l" id="sl2">تحميل</div></div>
+  <div class="stat-item"><div class="stat-n" id="s3">-</div><div class="stat-l" id="sl3">زيارة</div></div>
 </div>
 
 <!-- TABS -->
 <div class="tabs">
-  <button class="tab active" onclick="goTo('home')" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</button>
-  <button class="tab" onclick="goTo('upload')" data-ar="⬆️ رفع" data-en="⬆️ Upload">⬆️ رفع</button>
-  <button class="tab" onclick="goTo('account')" data-ar="👤 حسابي" data-en="👤 Account">👤 حسابي</button>
-  <button class="tab" onclick="goTo('settings')" data-ar="⚙️ إعدادات" data-en="⚙️ Settings">⚙️ إعدادات</button>
+  <button class="tab active" onclick="goTo('home')">🏠 <span class="t-home">الرئيسية</span></button>
+  <button class="tab" onclick="goTo('upload')">⬆️ <span class="t-upload">رفع</span></button>
+  <button class="tab" onclick="goTo('account')">👤 <span class="t-account">حسابي</span></button>
+  <button class="tab" onclick="goTo('about')">ℹ️ <span class="t-about">حول</span></button>
 </div>
 
 <!-- ══ HOME ══ -->
 <div class="page active" id="page-home">
   <div class="banner">
-    <div class="banner-tag" data-ar="🔥 مرحباً بك" data-en="🔥 Welcome">🔥 مرحباً بك</div>
-    <div class="banner-title" data-ar="أحيِ هاتفك القديم" data-en="Revive Your Old Phone">أحيِ هاتفك القديم</div>
-    <div class="banner-sub" data-ar="أندرويد 2.3 → 7.1 · بدون Google · مجاناً" data-en="Android 2.3 → 7.1 · No Google · Free">أندرويد 2.3 → 7.1 · بدون Google · مجاناً</div>
-    <button class="banner-btn" onclick="goTo('upload')" data-ar="⬆️ ارفع تطبيقاً" data-en="⬆️ Upload App">⬆️ ارفع تطبيقاً</button>
+    <div class="banner-tag" id="b-tag">🔥 مرحباً بك</div>
+    <div class="banner-title" id="b-title">أحيِ هاتفك القديم</div>
+    <div class="banner-sub" id="b-sub">أندرويد 2.3 → 7.1 · بدون Google · مجاناً</div>
+    <button class="banner-btn" onclick="goTo('upload')" id="b-btn">⬆️ ارفع تطبيقاً</button>
   </div>
 
-  <div id="featuredSection" style="display:none">
-    <div class="sec-head"><span class="sec-title" data-ar="⭐ مميز" data-en="⭐ Featured">⭐ مميز</span></div>
-    <div class="h-scroll" id="featuredList"></div>
+  <!-- GAMES SECTION -->
+  <div id="gamesSection">
+    <div class="sec-head"><span class="sec-title" id="t-games">🎮 الألعاب</span></div>
+    <div class="games-grid" id="gamesList"></div>
   </div>
 
-  <div class="sec-head">
-    <span class="sec-title" data-ar="📱 جميع التطبيقات" data-en="📱 All Apps">📱 جميع التطبيقات</span>
-  </div>
+  <div class="sec-head"><span class="sec-title" id="t-apps">📱 جميع التطبيقات</span></div>
   <div class="app-list" id="appsList">
     <div class="loading"><div class="spin"></div><br>جارٍ التحميل...</div>
   </div>
@@ -299,52 +304,40 @@ body.en .stat-item:last-child{border-right:none}
 <!-- ══ UPLOAD ══ -->
 <div class="page" id="page-upload">
   <div class="pad">
-    <div id="uploadNoAuth" class="req-login" style="display:none">
-      <div class="req-login-i">🔒</div>
-      <div class="req-login-t" data-ar="يجب تسجيل الدخول للرفع" data-en="Login required to upload">يجب تسجيل الدخول للرفع</div>
-      <button onclick="goTo('account')" style="padding:9px 20px;background:linear-gradient(135deg,var(--fire),var(--ember));color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer" data-ar="تسجيل الدخول" data-en="Login">تسجيل الدخول</button>
+    <div id="uploadNoAuth" class="req" style="display:none">
+      <div class="req-i">🔒</div>
+      <div class="req-t" id="t-needlogin">يجب تسجيل الدخول للرفع</div>
+      <button onclick="goTo('account')" style="padding:9px 20px;background:var(--fire);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer" id="t-loginbtn">تسجيل الدخول</button>
     </div>
     <div id="uploadForm" class="card">
-      <div class="card-t">⬆️ <span data-ar="رفع تطبيق جديد" data-en="Upload New App">رفع تطبيق جديد</span></div>
-      <!-- APK Preview after upload -->
-      <div class="apk-preview" id="apkPreview">
-        <div style="font-size:11px;color:var(--green);margin-bottom:8px">✅ <span data-ar="تم استخراج المعلومات تلقائياً" data-en="Info extracted automatically">تم استخراج المعلومات تلقائياً</span></div>
-        <div class="apk-preview-inner">
-          <div class="apk-preview-icon" id="prevIcon">📦</div>
-          <div>
-            <div class="apk-preview-name" id="prevName">-</div>
-            <div class="apk-preview-ver" id="prevVer">-</div>
-            <div class="apk-preview-sdk" id="prevSdk">-</div>
-          </div>
+      <div class="card-t">⬆️ <span id="t-uploadtitle">رفع تطبيق جديد</span></div>
+      <div class="apk-prev" id="apkPrev">
+        <div style="font-size:11px;color:var(--green);margin-bottom:8px">✅ <span id="t-extracted">تم استخراج المعلومات تلقائياً</span></div>
+        <div class="apk-prev-inner">
+          <div class="apk-prev-icon" id="prevIcon">📦</div>
+          <div><div style="font-size:14px;font-weight:700" id="prevName">-</div><div style="font-size:11px;color:var(--muted)" id="prevVer">-</div><div style="font-size:11px;color:var(--blue)" id="prevSdk">-</div></div>
         </div>
       </div>
       <div class="dz" id="dropZone" onclick="document.getElementById('apkFile').click()" ondragover="dov(event)" ondragleave="dol()" ondrop="dof(event)">
         <div class="dz-i" id="dzI">📦</div>
-        <div class="dz-t" id="dzT" data-ar="اضغط لاختيار ملف APK" data-en="Tap to select APK file">اضغط لاختيار ملف APK</div>
-        <div class="dz-s" id="dzS" data-ar="أو اسحب الملف هنا" data-en="Or drag file here">أو اسحب الملف هنا</div>
+        <div class="dz-t" id="dzT">اضغط لاختيار ملف APK</div>
+        <div class="dz-s" id="dzS">أو اسحب الملف هنا</div>
         <input type="file" id="apkFile" accept=".apk" style="display:none" onchange="fileSel(this)">
       </div>
-      <div class="fl">
-        <label data-ar="الفئة *" data-en="Category *">الفئة *</label>
+      <div class="fl"><label id="t-cat">الفئة</label>
         <select class="fs" id="appCat">
-          <option value="Browser" data-ar="🌐 متصفح" data-en="🌐 Browser">🌐 متصفح</option>
-          <option value="Video" data-ar="🎬 فيديو" data-en="🎬 Video">🎬 فيديو</option>
-          <option value="Social" data-ar="💬 سوشيال" data-en="💬 Social">💬 سوشيال</option>
-          <option value="Files" data-ar="📁 ملفات" data-en="📁 Files">📁 ملفات</option>
-          <option value="Security" data-ar="🔒 أمان" data-en="🔒 Security">🔒 أمان</option>
-          <option value="Games" data-ar="🎮 ألعاب" data-en="🎮 Games">🎮 ألعاب</option>
-          <option value="General" selected data-ar="📦 عام" data-en="📦 General">📦 عام</option>
+          <option value="Browser">🌐 متصفح</option>
+          <option value="Video">🎬 فيديو</option>
+          <option value="Social">💬 سوشيال</option>
+          <option value="Files">📁 ملفات</option>
+          <option value="Security">🔒 أمان</option>
+          <option value="Games">🎮 ألعاب</option>
+          <option value="General" selected>📦 عام</option>
         </select>
       </div>
-      <div class="fl">
-        <label data-ar="الوصف" data-en="Description">الوصف</label>
-        <input type="text" class="fi" id="appDesc" placeholder="">
-      </div>
-      <button class="btn-p" id="uploadBtn" onclick="uploadApk()">⬆️ <span data-ar="رفع التطبيق" data-en="Upload App">رفع التطبيق</span></button>
-      <div class="prog" id="prog">
-        <div class="prog-b"><div class="prog-f" id="progF"></div></div>
-        <div class="prog-t" id="progT">0%</div>
-      </div>
+      <div class="fl"><label id="t-desc">الوصف</label><input type="text" class="fi" id="appDesc" placeholder=""></div>
+      <button class="btn-p" id="uploadBtn" onclick="uploadApk()">⬆️ <span id="t-uploadbtn">رفع التطبيق</span></button>
+      <div class="prog" id="prog"><div class="prog-b"><div class="prog-f" id="progF"></div></div><div class="prog-t" id="progT">0%</div></div>
     </div>
   </div>
 </div>
@@ -352,90 +345,84 @@ body.en .stat-item:last-child{border-right:none}
 <!-- ══ ACCOUNT ══ -->
 <div class="page" id="page-account">
   <div class="pad">
-    <!-- Logged In -->
     <div id="loggedView" style="display:none">
       <div class="u-box">
-        <div class="u-av" id="uAvatar">😊</div>
-        <div style="flex:1">
-          <div class="u-name" id="uName">-</div>
-          <div class="u-role" id="uRole">-</div>
-        </div>
-        <button class="btn-out" onclick="doLogout()" data-ar="خروج" data-en="Logout">خروج</button>
+        <div class="u-av" id="uAv">😊</div>
+        <div style="flex:1"><div class="u-name" id="uName">-</div><div class="u-role" id="uRole">-</div></div>
+        <button class="btn-out" onclick="doLogout()" id="t-logout">خروج</button>
       </div>
-      <!-- Pending for admin -->
       <div id="pendingSection" style="display:none">
         <div class="card">
-          <div class="card-t">⏳ <span data-ar="تطبيقات بانتظار الموافقة" data-en="Pending Approval">تطبيقات بانتظار الموافقة</span></div>
+          <div class="card-t">⏳ <span id="t-pending">انتظار الموافقة</span></div>
           <div id="pendingList"></div>
         </div>
       </div>
     </div>
-    <!-- Auth Forms -->
     <div id="authView">
       <div class="card">
         <div class="auth-tabs">
-          <button class="auth-tab active" id="tabLogin" onclick="showAuth('login')" data-ar="تسجيل الدخول" data-en="Login">تسجيل الدخول</button>
-          <button class="auth-tab" id="tabReg" onclick="showAuth('register')" data-ar="إنشاء حساب" data-en="Register">إنشاء حساب</button>
+          <button class="auth-tab active" id="tabLogin" onclick="showAuth('login')" id="t-loginTab">تسجيل الدخول</button>
+          <button class="auth-tab" id="tabReg" onclick="showAuth('register')" id="t-regTab">إنشاء حساب</button>
         </div>
-        <!-- Login -->
         <div id="formLogin">
-          <div class="fl"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" class="fi" id="lEmail" placeholder="example@email.com"></div>
-          <div class="fl"><label data-ar="كلمة المرور" data-en="Password">كلمة المرور</label><input type="password" class="fi" id="lPass" placeholder="••••••••"></div>
-          <br><button class="btn-p" onclick="doLogin()">🔑 <span data-ar="تسجيل الدخول" data-en="Login">تسجيل الدخول</span></button>
+          <div class="fl"><label id="t-email">البريد الإلكتروني</label><input type="email" class="fi" id="lEmail" placeholder="example@email.com"></div>
+          <div class="fl"><label id="t-pass">كلمة المرور</label><input type="password" class="fi" id="lPass" placeholder="••••••••"></div>
+          <br><button class="btn-p" onclick="doLogin()">🔑 <span id="t-loginbtn2">تسجيل الدخول</span></button>
         </div>
-        <!-- Register -->
         <div id="formReg" style="display:none">
-          <div class="fl"><label data-ar="اسم المستخدم *" data-en="Username *">اسم المستخدم *</label><input type="text" class="fi" id="rUser" placeholder="min 3 chars"></div>
-          <div class="fl"><label data-ar="البريد الإلكتروني *" data-en="Email *">البريد الإلكتروني *</label><input type="email" class="fi" id="rEmail" placeholder="example@email.com"></div>
-          <div class="fl"><label data-ar="كلمة المرور *" data-en="Password *">كلمة المرور *</label><input type="password" class="fi" id="rPass" placeholder="min 6 chars"></div>
-          <br><button class="btn-p" onclick="doRegister()">✅ <span data-ar="إنشاء الحساب" data-en="Create Account">إنشاء الحساب</span></button>
+          <div class="fl"><label id="t-user">اسم المستخدم *</label><input type="text" class="fi" id="rUser" placeholder="min 3 chars"></div>
+          <div class="fl"><label id="t-remail">البريد الإلكتروني *</label><input type="email" class="fi" id="rEmail" placeholder="example@email.com"></div>
+          <div class="fl"><label id="t-rpass">كلمة المرور *</label><input type="password" class="fi" id="rPass" placeholder="min 6 chars"></div>
+          <br><button class="btn-p" onclick="doRegister()">✅ <span id="t-regbtn">إنشاء الحساب</span></button>
         </div>
       </div>
-      <!-- Admin -->
       <div class="card">
-        <div class="card-t">🔐 <span data-ar="دخول الأدمن" data-en="Admin Access">دخول الأدمن</span></div>
-        <div class="fl"><label data-ar="رمز الأدمن" data-en="Admin Token">رمز الأدمن</label><input type="password" class="fi" id="adminIn" placeholder="Admin token"></div>
-        <br><button class="btn-p" onclick="saveAdmin()" data-ar="🔓 دخول" data-en="🔓 Enter">🔓 دخول</button>
+        <div class="card-t">🔐 <span id="t-adminTitle">دخول الأدمن</span></div>
+        <div class="fl"><label id="t-adminLabel">رمز الأدمن</label><input type="password" class="fi" id="adminIn" placeholder="Admin token"></div>
+        <br><button class="btn-p" onclick="saveAdmin()" id="t-adminBtn">🔓 دخول</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SETTINGS ══ -->
-<div class="page" id="page-settings">
+<!-- ══ ABOUT ══ -->
+<div class="page" id="page-about">
   <div class="pad">
-    <div class="card">
-      <div class="card-t">🌐 <span data-ar="اللغة" data-en="Language">اللغة</span></div>
-      <div class="s-row">
-        <span data-ar="اختر اللغة" data-en="Select Language">اختر اللغة</span>
-        <div class="lang-toggle">
-          <button class="lang-btn active" id="btnAr" onclick="setLang('ar')">عربي</button>
-          <button class="lang-btn" id="btnEn" onclick="setLang('en')">English</button>
-        </div>
+    <div class="about-card">
+      <div class="about-logo">🔥</div>
+      <div class="about-name">PhoenixStore</div>
+      <div class="about-ver" id="t-ver">الإصدار 2.0 · 2026</div>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:20px;line-height:1.7" id="t-about-desc">
+        متجر تطبيقات مجاني للأجهزة القديمة<br>يدعم أندرويد 2.3.6 حتى 7.1<br>بدون Google · HTTP · مفتوح للجميع
       </div>
+      <a href="mailto:samanx2003@yahoo.com" class="contact-btn">
+        📧 <span id="t-contact">تواصل معنا</span>
+      </a>
     </div>
     <div class="card">
-      <div class="card-t">ℹ️ <span data-ar="معلومات" data-en="Info">معلومات</span></div>
-      <div class="s-row"><span data-ar="المتجر" data-en="Store">المتجر</span><span class="s-v">PhoenixStore v2.0</span></div>
-      <div class="s-row"><span data-ar="أندرويد المدعوم" data-en="Android Support">أندرويد المدعوم</span><span class="s-v">2.3.6 → 7.1</span></div>
-      <div class="s-row"><span>HTTP</span><span class="s-v g">✅ Active</span></div>
-      <div class="s-row"><span data-ar="استخراج APK" data-en="APK Extraction">استخراج APK</span><span class="s-v g">✅ Auto</span></div>
+      <div class="card-t" id="t-features">✨ المميزات</div>
+      <div class="s-row"><span id="f1">استخراج الأيقونة تلقائياً</span><span>✅</span></div>
+      <div class="s-row"><span id="f2">دعم HTTP للأجهزة القديمة</span><span>✅</span></div>
+      <div class="s-row"><span id="f3">تسجيل دخول آمن</span><span>✅</span></div>
+      <div class="s-row"><span id="f4">وضع ليلي ونهاري</span><span>✅</span></div>
+      <div class="s-row"><span id="f5">عربي وإنجليزي</span><span>✅</span></div>
+      <div class="s-row"><span id="f6">Proxy للأجهزة القديمة</span><span>✅</span></div>
     </div>
     <div class="card">
-      <div class="card-t">📊 <span data-ar="إحصائيات" data-en="Statistics">إحصائيات</span></div>
-      <div class="s-row"><span data-ar="التطبيقات" data-en="Apps">التطبيقات</span><span class="s-v g" id="stA">-</span></div>
-      <div class="s-row"><span data-ar="التحميلات" data-en="Downloads">التحميلات</span><span class="s-v g" id="stD">-</span></div>
-      <div class="s-row"><span data-ar="الزيارات" data-en="Visits">الزيارات</span><span class="s-v g" id="stV">-</span></div>
+      <div class="card-t">📊 <span id="t-stats2">إحصائيات</span></div>
+      <div class="s-row"><span id="t-totalApps">إجمالي التطبيقات</span><span class="s-v g" id="stA">-</span></div>
+      <div class="s-row"><span id="t-totalDl">إجمالي التحميلات</span><span class="s-v g" id="stD">-</span></div>
+      <div class="s-row"><span id="t-totalVis">الزيارات</span><span class="s-v g" id="stV">-</span></div>
     </div>
   </div>
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bnav">
-  <div class="bi active" onclick="goTo('home')"><span class="bi-ico">🏠</span><span data-ar="الرئيسية" data-en="Home">الرئيسية</span></div>
-  <div class="bi" onclick="goTo('upload')"><span class="bi-ico">⬆️</span><span data-ar="رفع" data-en="Upload">رفع</span></div>
-  <div class="bi" onclick="goTo('account')"><span class="bi-ico">👤</span><span data-ar="حسابي" data-en="Account">حسابي</span></div>
-  <div class="bi" onclick="goTo('settings')"><span class="bi-ico">⚙️</span><span data-ar="إعدادات" data-en="Settings">إعدادات</span></div>
+  <div class="bi active" onclick="goTo('home')"><span class="bi-ico">🏠</span><span class="t-home">الرئيسية</span></div>
+  <div class="bi" onclick="goTo('upload')"><span class="bi-ico">⬆️</span><span class="t-upload">رفع</span></div>
+  <div class="bi" onclick="goTo('account')"><span class="bi-ico">👤</span><span class="t-account">حسابي</span></div>
+  <div class="bi" onclick="goTo('about')"><span class="bi-ico">ℹ️</span><span class="t-about">حول</span></div>
 </div>
 
 <!-- MODAL -->
@@ -447,39 +434,174 @@ body.en .stat-item:last-child{border-right:none}
 <div class="toast" id="toast"></div>
 
 <script>
-// ── STATE ──
-let allApps=[], curCat='All', curSearch='';
+// ══════════════════════════════════
+// STATE
+// ══════════════════════════════════
+let allApps=[], curCat='All', curSearch='', curSdk='';
 let userToken=localStorage.getItem('px_ut')||'';
 let userName=localStorage.getItem('px_un')||'';
 let adminToken=localStorage.getItem('px_at')||'';
-let curLang=localStorage.getItem('px_lang')||'ar';
+let curLang=localStorage.getItem('px_lang')||'';
+let curTheme=localStorage.getItem('px_theme')||'dark';
 
-// ── INIT ──
+// ══════════════════════════════════
+// TRANSLATIONS
+// ══════════════════════════════════
+const T={
+  ar:{
+    search:'ابحث عن تطبيق...',apps:'تطبيق',downloads:'تحميل',visits:'زيارة',
+    home:'الرئيسية',upload:'رفع',account:'حسابي',about:'حول',
+    welcome:'🔥 مرحباً بك',revive:'أحيِ هاتفك القديم',
+    sub:'أندرويد 2.3 → 7.1 · بدون Google · مجاناً',uploadbtn:'⬆️ ارفع تطبيقاً',
+    games:'🎮 الألعاب',allapps:'📱 جميع التطبيقات',
+    needlogin:'يجب تسجيل الدخول للرفع',loginbtn:'تسجيل الدخول',
+    uploadtitle:'رفع تطبيق جديد',extracted:'تم استخراج المعلومات تلقائياً',
+    apkselect:'اضغط لاختيار ملف APK',drag:'أو اسحب الملف هنا',
+    cat:'الفئة',desc:'الوصف',uploadbtn2:'رفع التطبيق',
+    email:'البريد الإلكتروني',pass:'كلمة المرور',loginbtn2:'تسجيل الدخول',
+    user:'اسم المستخدم *',remail:'البريد الإلكتروني *',rpass:'كلمة المرور *',
+    regbtn:'إنشاء الحساب',logout:'خروج',pending:'انتظار الموافقة',
+    adminTitle:'دخول الأدمن',adminLabel:'رمز الأدمن',adminBtn:'🔓 دخول',
+    ver:'الإصدار 2.0 · 2026',aboutDesc:'متجر تطبيقات مجاني للأجهزة القديمة\nيدعم أندرويد 2.3.6 حتى 7.1\nبدون Google · HTTP · مفتوح للجميع',
+    contact:'تواصل معنا',features:'✨ المميزات',
+    f1:'استخراج الأيقونة تلقائياً',f2:'دعم HTTP للأجهزة القديمة',
+    f3:'تسجيل دخول آمن',f4:'وضع ليلي ونهاري',f5:'عربي وإنجليزي',f6:'Proxy للأجهزة القديمة',
+    stats2:'إحصائيات',totalApps:'إجمالي التطبيقات',totalDl:'إجمالي التحميلات',totalVis:'الزيارات',
+    install:'تثبيت',free:'مجاني',version:'الإصدار',size:'الحجم',dlcount:'تحميل',
+    approve:'موافقة',adminRole:'صلاحيات كاملة ✅',userRole:'مستخدم مسجل ✅',
+    adminName:'👑 أدمن',noApps:'لا توجد تطبيقات',
+    sdkAll:'🤖 الكل',
+  },
+  en:{
+    search:'Search apps...',apps:'Apps',downloads:'Downloads',visits:'Visits',
+    home:'Home',upload:'Upload',account:'Account',about:'About',
+    welcome:'🔥 Welcome',revive:'Revive Your Old Phone',
+    sub:'Android 2.3 → 7.1 · No Google · Free',uploadbtn:'⬆️ Upload App',
+    games:'🎮 Games',allapps:'📱 All Apps',
+    needlogin:'Login required to upload',loginbtn:'Login',
+    uploadtitle:'Upload New App',extracted:'Info extracted automatically',
+    apkselect:'Tap to select APK file',drag:'Or drag file here',
+    cat:'Category',desc:'Description',uploadbtn2:'Upload App',
+    email:'Email',pass:'Password',loginbtn2:'Login',
+    user:'Username *',remail:'Email *',rpass:'Password *',
+    regbtn:'Create Account',logout:'Logout',pending:'Pending Approval',
+    adminTitle:'Admin Access',adminLabel:'Admin Token',adminBtn:'🔓 Enter',
+    ver:'Version 2.0 · 2026',aboutDesc:'Free app store for old Android devices\nSupports Android 2.3.6 to 7.1\nNo Google · HTTP · Open for all',
+    contact:'Contact Us',features:'✨ Features',
+    f1:'Auto icon extraction',f2:'HTTP support for old devices',
+    f3:'Secure login',f4:'Dark & Light mode',f5:'Arabic & English',f6:'Proxy for old devices',
+    stats2:'Statistics',totalApps:'Total Apps',totalDl:'Total Downloads',totalVis:'Visits',
+    install:'Install',free:'Free',version:'Version',size:'Size',dlcount:'Downloads',
+    approve:'Approve',adminRole:'Full Access ✅',userRole:'Registered User ✅',
+    adminName:'👑 Admin',noApps:'No apps found',
+    sdkAll:'🤖 All',
+  }
+};
+
+// ══════════════════════════════════
+// INIT
+// ══════════════════════════════════
 window.onload=function(){
-  setLang(curLang,false);
+  // تحديد اللغة تلقائياً
+  if(!curLang){
+    const bl=navigator.language||navigator.userLanguage||'ar';
+    curLang=bl.startsWith('ar')?'ar':'en';
+    localStorage.setItem('px_lang',curLang);
+  }
+  applyTheme(curTheme);
+  applyLang(curLang);
   updateAuthUI();
   loadApps();
   loadStats();
 };
 
-// ── LANGUAGE ──
-function setLang(lang,save=true){
-  curLang=lang;
-  if(save) localStorage.setItem('px_lang',lang);
-  document.body.className=lang==='en'?'en':'';
-  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-  document.documentElement.lang=lang;
-  // تحديث كل النصوص
-  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-    if(el.tagName==='INPUT') el.placeholder=el.getAttribute('data-'+lang)||'';
-    else el.textContent=el.getAttribute('data-'+lang)||el.textContent;
-  });
-  document.getElementById('btnAr').classList.toggle('active',lang==='ar');
-  document.getElementById('btnEn').classList.toggle('active',lang==='en');
-  document.getElementById('searchInput').placeholder=lang==='ar'?'ابحث عن تطبيق...':'Search for apps...';
+// ══════════════════════════════════
+// THEME
+// ══════════════════════════════════
+function applyTheme(t){
+  curTheme=t;
+  document.body.classList.remove('dark','light');
+  document.body.classList.add(t);
+  document.getElementById('themeBtn').textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('px_theme',t);
 }
 
-// ── LOAD APPS ──
+function toggleTheme(){
+  applyTheme(curTheme==='dark'?'light':'dark');
+}
+
+// ══════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════
+function applyLang(lang){
+  curLang=lang;
+  localStorage.setItem('px_lang',lang);
+  document.body.classList.remove('ar','en');
+  document.body.classList.add(lang);
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.documentElement.lang=lang;
+  document.getElementById('langBtn').textContent=lang==='ar'?'EN':'عر';
+  const t=T[lang];
+  document.getElementById('searchInput').placeholder=t.search;
+  document.getElementById('sl1').textContent=t.apps;
+  document.getElementById('sl2').textContent=t.downloads;
+  document.getElementById('sl3').textContent=t.visits;
+  document.querySelectorAll('.t-home').forEach(e=>e.textContent=t.home);
+  document.querySelectorAll('.t-upload').forEach(e=>e.textContent=t.upload);
+  document.querySelectorAll('.t-account').forEach(e=>e.textContent=t.account);
+  document.querySelectorAll('.t-about').forEach(e=>e.textContent=t.about);
+  document.getElementById('b-tag').textContent=t.welcome;
+  document.getElementById('b-title').textContent=t.revive;
+  document.getElementById('b-sub').textContent=t.sub;
+  document.getElementById('b-btn').textContent=t.uploadbtn;
+  document.getElementById('t-games').textContent=t.games;
+  document.getElementById('t-apps').textContent=t.allapps;
+  const el=id=>document.getElementById(id);
+  if(el('t-needlogin'))el('t-needlogin').textContent=t.needlogin;
+  if(el('t-loginbtn'))el('t-loginbtn').textContent=t.loginbtn;
+  if(el('t-uploadtitle'))el('t-uploadtitle').textContent=t.uploadtitle;
+  if(el('t-extracted'))el('t-extracted').textContent=t.extracted;
+  if(el('dzT'))el('dzT').textContent=t.apkselect;
+  if(el('dzS'))el('dzS').textContent=t.drag;
+  if(el('t-cat'))el('t-cat').textContent=t.cat;
+  if(el('t-desc'))el('t-desc').textContent=t.desc;
+  if(el('t-uploadbtn'))el('t-uploadbtn').textContent=t.uploadbtn2;
+  if(el('t-email'))el('t-email').textContent=t.email;
+  if(el('t-pass'))el('t-pass').textContent=t.pass;
+  if(el('t-loginbtn2'))el('t-loginbtn2').textContent=t.loginbtn2;
+  if(el('t-user'))el('t-user').textContent=t.user;
+  if(el('t-remail'))el('t-remail').textContent=t.remail;
+  if(el('t-rpass'))el('t-rpass').textContent=t.rpass;
+  if(el('t-regbtn'))el('t-regbtn').textContent=t.regbtn;
+  if(el('t-logout'))el('t-logout').textContent=t.logout;
+  if(el('t-pending'))el('t-pending').textContent=t.pending;
+  if(el('t-adminTitle'))el('t-adminTitle').textContent=t.adminTitle;
+  if(el('t-adminLabel'))el('t-adminLabel').textContent=t.adminLabel;
+  if(el('t-adminBtn'))el('t-adminBtn').textContent=t.adminBtn;
+  if(el('t-ver'))el('t-ver').textContent=t.ver;
+  if(el('t-contact'))el('t-contact').textContent=t.contact;
+  if(el('t-features'))el('t-features').textContent=t.features;
+  ['f1','f2','f3','f4','f5','f6'].forEach(f=>{if(el(f))el(f).textContent=t[f]});
+  if(el('t-stats2'))el('t-stats2').textContent=t.stats2;
+  if(el('t-totalApps'))el('t-totalApps').textContent=t.totalApps;
+  if(el('t-totalDl'))el('t-totalDl').textContent=t.totalDl;
+  if(el('t-totalVis'))el('t-totalVis').textContent=t.totalVis;
+  // cats
+  const cats=document.querySelectorAll('.cat');
+  const catLabels=lang==='ar'?['الكل','🌐 متصفح','🎬 فيديو','💬 سوشيال','📁 ملفات','🔒 أمان','🎮 ألعاب','📦 عام']:['All','🌐 Browser','🎬 Video','💬 Social','📁 Files','🔒 Security','🎮 Games','📦 General'];
+  cats.forEach((c,i)=>{if(catLabels[i])c.textContent=catLabels[i]});
+  // sdk filter
+  document.querySelector('.sdk-btn').textContent=t.sdkAll;
+  renderApps();
+}
+
+function toggleLang(){
+  applyLang(curLang==='ar'?'en':'ar');
+}
+
+// ══════════════════════════════════
+// LOAD
+// ══════════════════════════════════
 async function loadApps(){
   try{
     const r=await fetch('/api/apps');
@@ -492,7 +614,7 @@ async function loadApps(){
 
 async function loadStats(){
   try{
-    const r=await fetch('/api/stats'); const s=await r.json();
+    const r=await fetch('/api/stats');const s=await r.json();
     document.getElementById('s1').textContent=s.total_apps||0;
     document.getElementById('s2').textContent=s.total_downloads||0;
     document.getElementById('s3').textContent=s.total_visits||0;
@@ -502,31 +624,63 @@ async function loadStats(){
   }catch(e){}
 }
 
-function refreshApps(){loadApps();loadStats();showToast('🔄 Refreshing...')}
+// ══════════════════════════════════
+// RENDER
+// ══════════════════════════════════
+function getIcon(a,size=58){
+  if(a.icon_path){
+    return `<img src="/${a.icon_path}" style="width:${size}px;height:${size}px;object-fit:cover" onerror="this.outerHTML='📦'">`;
+  }
+  // جلب من الإنترنت
+  const pkg = a.file.replace(/_[0-9].+/,'').replace('.apk','').split('_')[0];
+  return `<img src="https://play-lh.googleusercontent.com/a/${pkg}" style="width:${size}px;height:${size}px;object-fit:cover" onerror="this.outerHTML='📦'">`;
+}
 
-// ── RENDER ──
-function getIconHTML(a){
-  if(a.icon_path) return `<img src="/${a.icon_path}" onerror="this.parentNode.innerHTML='📦'">`;
-  return a.icon||'📦';
+function androidVersionCompare(appVer, filterVer){
+  if(!filterVer||!appVer) return true;
+  const toNum=v=>v.split('.').map(n=>parseInt(n)||0).reduce((a,b,i)=>a+b*Math.pow(100,2-i),0);
+  return toNum(appVer)>=toNum(filterVer);
 }
 
 function renderApps(){
+  const t=T[curLang];
   let apps=[...allApps];
   if(curCat!=='All') apps=apps.filter(a=>a.cat===curCat);
   if(curSearch){const s=curSearch.toLowerCase();apps=apps.filter(a=>a.name.toLowerCase().includes(s)||(a.desc||'').toLowerCase().includes(s))}
+  if(curSdk) apps=apps.filter(a=>androidVersionCompare(a.min_android,curSdk));
+
+  // ألعاب منفصلة
+  const games=apps.filter(a=>a.cat==='Games');
+  const others=apps.filter(a=>a.cat!=='Games'||curCat==='Games');
+
+  // عرض الألعاب
+  const gSec=document.getElementById('gamesSection');
+  const gList=document.getElementById('gamesList');
+  if(games.length&&curCat==='All'){
+    gSec.style.display='block';
+    gList.innerHTML=games.map(a=>`
+      <div class="game-card" onclick="openModal(${a.id})">
+        <div class="game-thumb" style="background:${a.color||'#1A1A2E'}">${getIcon(a,100)}</div>
+        <div class="game-info">
+          <div class="game-name">${a.name}</div>
+          <div class="game-cat">${a.cat}</div>
+          ${a.min_android?`<div class="game-sdk">Android ${a.min_android}+</div>`:''}
+        </div>
+      </div>`).join('');
+  }else{gSec.style.display='none'}
 
   const list=document.getElementById('appsList');
-  if(!apps.length){
-    list.innerHTML=`<div class="empty"><div class="empty-i">📦</div><div class="empty-t">${curLang==='ar'?'لا توجد تطبيقات':'No apps found'}</div></div>`;
+  const showApps=curCat==='All'?others:apps;
+  if(!showApps.length){
+    list.innerHTML=`<div class="empty"><div class="empty-i">📦</div><div class="empty-t">${t.noApps}</div></div>`;
     return;
   }
-
-  list.innerHTML=apps.map(a=>`
+  list.innerHTML=showApps.map(a=>`
     <div class="app-item" onclick="openModal(${a.id})">
-      <div class="app-thumb" style="background:${a.color||'#1A1A2E'}">${getIconHTML(a)}</div>
+      <div class="app-thumb" style="background:${a.color||'#1A1A2E'}">${getIcon(a,58)}</div>
       <div class="app-meta">
         <div class="app-name">${a.name}</div>
-        <div class="app-cat">${curLang==='ar'?a.cat:a.cat} · ${a.uploader||'admin'}</div>
+        <div class="app-cat">${a.cat} · ${a.uploader||'admin'}</div>
         <div class="app-bottom">
           <span class="app-stars">★★★★★</span>
           <span class="app-rating">5.0</span>
@@ -534,15 +688,16 @@ function renderApps(){
           ${a.min_android?`<span class="app-sdk">Android ${a.min_android}+</span>`:''}
         </div>
       </div>
-      <div class="app-btn">
-        <button class="btn-install" onclick="event.stopPropagation();doInstall('${a.file}','${a.name}')">${curLang==='ar'?'تثبيت':'Install'}</button>
-      </div>
+      <button class="btn-get" onclick="event.stopPropagation();doInstall('${a.file}','${a.name}')">${t.install}</button>
     </div>`).join('');
 }
 
-// ── SEARCH & FILTER ──
+// ══════════════════════════════════
+// SEARCH & FILTER
+// ══════════════════════════════════
 function doSearch(q){curSearch=q.trim();renderApps()}
 function clearSearch(){document.getElementById('searchInput').value='';curSearch='';renderApps()}
+
 function filterCat(cat,el){
   curCat=cat;
   document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
@@ -550,23 +705,33 @@ function filterCat(cat,el){
   renderApps();
 }
 
-// ── INSTALL ──
+function filterSdk(sdk,el){
+  curSdk=sdk;
+  document.querySelectorAll('.sdk-btn').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  renderApps();
+}
+
+// ══════════════════════════════════
+// INSTALL
+// ══════════════════════════════════
 async function doInstall(file,name){
   try{await fetch('/api/download/'+file,{method:'POST'})}catch(e){}
-  const a=document.createElement('a');
-  a.href='/apks/'+file;a.download=file;a.click();
-  showToast((curLang==='ar'?'⬇️ جارٍ تحميل ':'⬇️ Downloading ')+name);
+  const a=document.createElement('a');a.href='/apks/'+file;a.download=file;a.click();
+  showToast('⬇️ '+(curLang==='ar'?'جارٍ تحميل ':'Downloading ')+name);
   loadStats();
 }
 
-// ── MODAL ──
+// ══════════════════════════════════
+// MODAL
+// ══════════════════════════════════
 function openModal(id){
   const a=allApps.find(x=>x.id===id);if(!a)return;
   const isAdmin=adminToken!=='';
-  const ar=curLang==='ar';
+  const t=T[curLang];
   document.getElementById('mBody').innerHTML=`
     <div class="m-head">
-      <div class="m-icon" style="background:${a.color||'#1A1A2E'}">${getIconHTML(a)}</div>
+      <div class="m-icon" style="background:${a.color||'#1A1A2E'}">${getIcon(a,74)}</div>
       <div style="flex:1">
         <div class="m-name">${a.name}</div>
         <div class="m-dev">${a.uploader||'admin'} · ${a.date||''}</div>
@@ -574,19 +739,19 @@ function openModal(id){
           <span class="m-tag">${a.cat}</span>
           <span class="m-tag blue">v${a.ver||'1.0'}</span>
           ${a.min_android?`<span class="m-tag gold">Android ${a.min_android}+</span>`:''}
-          <span class="m-tag green">${ar?'مجاني':'Free'}</span>
+          <span class="m-tag green">${t.free}</span>
         </div>
       </div>
     </div>
     <div class="m-stats">
-      <div class="m-stat"><div class="m-stat-v">v${a.ver||'1.0'}</div><div class="m-stat-k">${ar?'الإصدار':'Version'}</div></div>
-      <div class="m-stat"><div class="m-stat-v">${a.size||'?'}</div><div class="m-stat-k">${ar?'الحجم':'Size'}</div></div>
-      <div class="m-stat"><div class="m-stat-v">${a.downloads||0}</div><div class="m-stat-k">${ar?'تحميل':'Downloads'}</div></div>
+      <div class="m-stat"><div class="m-stat-v">v${a.ver||'1.0'}</div><div class="m-stat-k">${t.version}</div></div>
+      <div class="m-stat"><div class="m-stat-v">${a.size||'?'}</div><div class="m-stat-k">${t.size}</div></div>
+      <div class="m-stat"><div class="m-stat-v">${a.downloads||0}</div><div class="m-stat-k">${t.dlcount}</div></div>
       <div class="m-stat"><div class="m-stat-v">${a.min_android||'?'}+</div><div class="m-stat-k">Android</div></div>
     </div>
-    <div class="m-desc">${a.desc||(ar?'تطبيق أندرويد خفيف ومجاني':'Lightweight free Android app')}</div>
+    <div class="m-desc">${a.desc||(curLang==='ar'?'تطبيق أندرويد خفيف ومجاني':'Lightweight free Android app')}</div>
     <div class="m-btns">
-      <button class="m-btn-get" onclick="doInstall('${a.file}','${a.name}');closeMD()">⬇️ ${ar?'تثبيت مجاناً':'Install Free'}</button>
+      <button class="m-btn-get" onclick="doInstall('${a.file}','${a.name}');closeMD()">⬇️ ${t.install}</button>
       ${isAdmin?`<button class="m-btn-del" onclick="delApp('${a.file}','${a.name}')">🗑️</button>`:''}
     </div>`;
   document.getElementById('overlay').classList.add('show');
@@ -596,18 +761,20 @@ function openModal(id){
 function closeM(e){if(e.target===document.getElementById('overlay'))closeMD()}
 function closeMD(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=''}
 
-// ── DELETE ──
+// ══════════════════════════════════
+// DELETE
+// ══════════════════════════════════
 async function delApp(file,name){
-  const ar=curLang==='ar';
-  if(!confirm(`${ar?'حذف':'Delete'} "${name}"?`))return;
+  if(!confirm(`Delete "${name}"?`))return;
   try{
     const r=await fetch('/api/delete/'+file,{method:'DELETE',headers:{'X-Admin-Token':adminToken}});
     if(r.ok){closeMD();showToast('🗑️ '+name);loadApps();}
-    else showToast('❌ '+(ar?'فشل الحذف':'Delete failed'));
   }catch(e){showToast('❌ Error')}
 }
 
-// ── PENDING ──
+// ══════════════════════════════════
+// PENDING
+// ══════════════════════════════════
 async function loadPending(){
   if(!adminToken)return;
   try{
@@ -615,15 +782,15 @@ async function loadPending(){
     const apps=await r.json();
     const sec=document.getElementById('pendingSection');
     const list=document.getElementById('pendingList');
+    const t=T[curLang];
     if(apps.length){
       sec.style.display='block';
-      const ar=curLang==='ar';
       list.innerHTML=apps.map(a=>`
         <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--b1)">
           <div style="flex:1;font-size:13px;font-weight:700">${a.name}</div>
           <div style="font-size:11px;color:var(--muted)">${a.uploader}</div>
-          <button onclick="approveApp('${a.file}')" style="padding:6px 12px;background:rgba(0,200,122,.1);border:1px solid rgba(0,200,122,.3);color:var(--green);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">${ar?'موافقة':'Approve'}</button>
-          <button onclick="delApp('${a.file}','${a.name}')" style="padding:6px 10px;background:rgba(255,69,58,.1);border:1px solid rgba(255,69,58,.2);color:var(--red);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">🗑️</button>
+          <button onclick="approveApp('${a.file}')" style="padding:6px 12px;background:rgba(0,200,122,.1);border:1px solid rgba(0,200,122,.3);color:var(--green);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">${t.approve}</button>
+          <button onclick="delApp('${a.file}','${a.name}')" style="padding:6px 10px;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2);color:var(--red);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">🗑️</button>
         </div>`).join('');
     }else{sec.style.display='none'}
   }catch(e){}
@@ -636,7 +803,9 @@ async function approveApp(file){
   }catch(e){showToast('❌ Error')}
 }
 
-// ── UPLOAD ──
+// ══════════════════════════════════
+// UPLOAD
+// ══════════════════════════════════
 function dov(e){e.preventDefault();document.getElementById('dropZone').classList.add('drag')}
 function dol(){document.getElementById('dropZone').classList.remove('drag')}
 function dof(e){
@@ -666,7 +835,7 @@ async function uploadApk(){
   const fill=document.getElementById('progF');
   const txt=document.getElementById('progT');
   btn.disabled=true;prog.style.display='block';
-  document.getElementById('apkPreview').style.display='none';
+  document.getElementById('apkPrev').style.display='none';
   let p=0;
   const iv=setInterval(()=>{p+=Math.random()*8+4;if(p>85)p=85;fill.style.width=p+'%';txt.textContent=Math.round(p)+'%'},200);
   const fd=new FormData();
@@ -679,10 +848,9 @@ async function uploadApk(){
     const r=await fetch('/api/upload',{method:'POST',body:fd});
     const data=await r.json();
     clearInterval(iv);fill.style.width='100%';txt.textContent='100% ✅';
-    // عرض المعلومات المستخرجة
-    if(data.name||data.version||data.min_android){
-      document.getElementById('apkPreview').style.display='block';
-      document.getElementById('prevName').textContent=data.name||fi.files[0].name;
+    if(data.name){
+      document.getElementById('apkPrev').style.display='block';
+      document.getElementById('prevName').textContent=data.name;
       document.getElementById('prevVer').textContent='v'+(data.version||'1.0');
       document.getElementById('prevSdk').textContent=data.min_android?`Android ${data.min_android}+`:'';
     }
@@ -690,9 +858,7 @@ async function uploadApk(){
     setTimeout(()=>{
       prog.style.display='none';btn.disabled=false;fill.style.width='0%';
       document.getElementById('dzI').textContent='📦';
-      document.getElementById('dzT').setAttribute('data-ar','اضغط لاختيار ملف APK');
-      document.getElementById('dzT').setAttribute('data-en','Tap to select APK file');
-      document.getElementById('dzT').textContent=curLang==='ar'?'اضغط لاختيار ملف APK':'Tap to select APK file';
+      document.getElementById('dzT').textContent=T[curLang].apkselect;
       document.getElementById('dzT').style.color='';
       document.getElementById('dropZone').style.borderColor='';
       document.getElementById('appDesc').value='';
@@ -702,7 +868,9 @@ async function uploadApk(){
   }catch(e){clearInterval(iv);showToast('❌ Upload failed');btn.disabled=false;prog.style.display='none'}
 }
 
-// ── AUTH ──
+// ══════════════════════════════════
+// AUTH
+// ══════════════════════════════════
 function showAuth(t){
   document.getElementById('formLogin').style.display=t==='login'?'block':'none';
   document.getElementById('formReg').style.display=t==='register'?'block':'none';
@@ -720,10 +888,9 @@ async function doLogin(){
     if(!r.ok){const d=await r.json();showToast('❌ '+d.detail);return}
     const data=await r.json();
     userToken=data.token;userName=data.username;
-    localStorage.setItem('px_ut',userToken);
-    localStorage.setItem('px_un',userName);
+    localStorage.setItem('px_ut',userToken);localStorage.setItem('px_un',userName);
     updateAuthUI();
-    showToast('✅ '+(curLang==='ar'?'مرحباً ':'Welcome ')+userName+'!');
+    showToast('✅ '+(curLang==='ar'?'مرحباً ':'Welcome ')+userName);
   }catch(e){showToast('❌ Error')}
 }
 
@@ -738,10 +905,9 @@ async function doRegister(){
     if(!r.ok){const d=await r.json();showToast('❌ '+d.detail);return}
     const data=await r.json();
     userToken=data.token;userName=data.username;
-    localStorage.setItem('px_ut',userToken);
-    localStorage.setItem('px_un',userName);
+    localStorage.setItem('px_ut',userToken);localStorage.setItem('px_un',userName);
     updateAuthUI();
-    showToast('✅ '+(curLang==='ar'?'تم إنشاء الحساب!':'Account created!'));
+    showToast('✅ '+(curLang==='ar'?'تم إنشاء الحساب':'Account created'));
   }catch(e){showToast('❌ Error')}
 }
 
@@ -755,9 +921,7 @@ function saveAdmin(){
 
 function doLogout(){
   userToken='';userName='';adminToken='';
-  localStorage.removeItem('px_ut');
-  localStorage.removeItem('px_un');
-  localStorage.removeItem('px_at');
+  localStorage.removeItem('px_ut');localStorage.removeItem('px_un');localStorage.removeItem('px_at');
   updateAuthUI();
   showToast('👋 '+(curLang==='ar'?'تم تسجيل الخروج':'Logged out'));
 }
@@ -765,16 +929,15 @@ function doLogout(){
 function updateAuthUI(){
   const loggedIn=userToken!==''||adminToken!=='';
   const isAdmin=adminToken!=='';
-  const ar=curLang==='ar';
+  const t=T[curLang];
   document.getElementById('loggedView').style.display=loggedIn?'block':'none';
   document.getElementById('authView').style.display=loggedIn?'none':'block';
   if(loggedIn){
-    document.getElementById('uAvatar').textContent=isAdmin?'👑':'😊';
-    document.getElementById('uName').textContent=isAdmin?(ar?'👑 أدمن':'👑 Admin'):userName;
-    document.getElementById('uRole').textContent=isAdmin?(ar?'صلاحيات كاملة ✅':'Full Access ✅'):(ar?'مستخدم مسجل ✅':'Registered User ✅');
-    if(isAdmin) loadPending();
+    document.getElementById('uAv').textContent=isAdmin?'👑':'😊';
+    document.getElementById('uName').textContent=isAdmin?t.adminName:userName;
+    document.getElementById('uRole').textContent=isAdmin?t.adminRole:t.userRole;
+    if(isAdmin)loadPending();
   }
-  // upload form
   if(loggedIn){
     document.getElementById('uploadNoAuth').style.display='none';
     document.getElementById('uploadForm').style.display='block';
@@ -784,30 +947,27 @@ function updateAuthUI(){
   }
 }
 
-// ── NAVIGATION ──
-const pageMap={'home':'page-home','upload':'page-upload','account':'page-account','settings':'page-settings'};
-
+// ══════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════
+const pages=['home','upload','account','about'];
 function goTo(name){
-  Object.keys(pageMap).forEach(k=>{
-    document.getElementById(pageMap[k]).classList.toggle('active',k===name);
+  pages.forEach(p=>{
+    document.getElementById('page-'+p).classList.toggle('active',p===name);
   });
-  document.querySelectorAll('.tab').forEach((t,i)=>{
-    const keys=Object.keys(pageMap);
-    t.classList.toggle('active',keys[i]===name);
-  });
-  document.querySelectorAll('.bi').forEach((b,i)=>{
-    const keys=Object.keys(pageMap);
-    b.classList.toggle('active',keys[i]===name);
-  });
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',pages[i]===name)});
+  document.querySelectorAll('.bi').forEach((b,i)=>{b.classList.toggle('active',pages[i]===name)});
   window.scrollTo(0,0);
-  if(name==='account'&&adminToken) loadPending();
+  if(name==='account'&&adminToken)loadPending();
 }
 
-// ── TOAST ──
-let tTimer;
+// ══════════════════════════════════
+// TOAST
+// ══════════════════════════════════
+let tT;
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove('show'),2600);
+  clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),2600);
 }
 </script>
 </body>
