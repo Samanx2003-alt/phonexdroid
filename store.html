@@ -3,75 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="description" content="PhoenixStore - Free APK store for old Android 2.3-7.1 devices. Download apps and games without Google Play.">
+<meta name="theme-color" content="#FF4500">
+<link rel="manifest" href="/manifest.json">
 <title>PhoenixStore 🔥</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ══ LIGHT (DEFAULT) ══ */
-:root{
-  --bg:#F2F2F7;--surf:#FFFFFF;--card:#FFFFFF;--card2:#F8F8FC;
-  --b1:#E5E5EA;--b2:#D1D1D6;
-  --text:#1C1C1E;--soft:#636366;--muted:#8E8E93;
-  --shadow:rgba(0,0,0,.08);
-  --fire:#FF4500;--ember:#FF6B35;--gold:#FF9500;
-  --green:#34C759;--blue:#007AFF;--red:#FF3B30;
-  --r:12px;
-}
-/* ══ DARK ══ */
-body.dark{
-  --bg:#0A0A12;--surf:#0F0F1A;--card:#141422;--card2:#1A1A2E;
-  --b1:#1E1E32;--b2:#262640;
-  --text:#EEEEF5;--soft:#9090B0;--muted:#4A4A65;
-  --shadow:rgba(0,0,0,.3);
-}
+:root{--bg:#F2F2F7;--surf:#FFF;--card:#FFF;--card2:#F8F8FC;--b1:#E5E5EA;--b2:#D1D1D6;--text:#1C1C1E;--soft:#636366;--muted:#8E8E93;--shadow:rgba(0,0,0,.08);--fire:#FF4500;--gold:#FF9500;--green:#34C759;--blue:#007AFF;--red:#FF3B30;}
+body.dark{--bg:#0A0A12;--surf:#0F0F1A;--card:#141422;--card2:#1A1A2E;--b1:#1E1E32;--b2:#262640;--text:#EEEEF5;--soft:#9090B0;--muted:#4A4A65;--shadow:rgba(0,0,0,.3);}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;overflow-x:hidden}
-body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:72px;transition:background .3s,color .3s}
+body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:72px;transition:background .3s,color .3s;font-family:'Roboto',sans-serif}
+body.ar{font-family:'Cairo',sans-serif}
 
-/* ══ TOPBAR ══ */
 .topbar{background:var(--surf);border-bottom:1px solid var(--b1);padding:0 12px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px var(--shadow)}
 .topbar-inner{display:flex;align-items:center;gap:8px;height:52px;direction:ltr}
 .logo{display:flex;align-items:center;gap:5px;flex-shrink:0;text-decoration:none}
-.logo-txt{font-size:15px;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.logo-txt{font-size:15px;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .search-wrap{flex:1;min-width:0}
 .search-bar{display:flex;align-items:center;gap:6px;background:var(--card2);border-radius:20px;padding:7px 12px;border:1px solid var(--b1)}
 .search-bar input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--text);font-size:13px;font-family:inherit}
 .search-bar input::placeholder{color:var(--muted)}
-.hbtns{display:flex;gap:6px;flex-shrink:0}
-.hbtn{width:32px;height:32px;border-radius:8px;background:var(--card2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;font-weight:700;color:var(--text);flex-shrink:0;transition:background .2s;font-family:inherit}
+.hbtns{display:flex;gap:5px;flex-shrink:0}
+.hbtn{width:32px;height:32px;border-radius:8px;background:var(--card2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;font-weight:700;color:var(--text);font-family:inherit;transition:background .2s}
 .hbtn:hover{background:var(--b2)}
 
-/* ══ CATS ══ */
 .cats-wrap{background:var(--surf);border-bottom:1px solid var(--b1);overflow-x:auto;scrollbar-width:none}
 .cats-wrap::-webkit-scrollbar{display:none}
 .cats{display:flex;gap:6px;padding:8px 12px;width:max-content}
 .cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer;background:var(--card2);border:1px solid var(--b1);color:var(--muted);transition:all .2s;font-family:inherit}
 .cat.active{background:var(--fire);border-color:var(--fire);color:#fff}
 
-/* ══ SDK FILTER ══ */
 .sdk-wrap{background:var(--surf);border-bottom:1px solid var(--b1);overflow-x:auto;scrollbar-width:none}
 .sdk-wrap::-webkit-scrollbar{display:none}
 .sdks{display:flex;gap:6px;padding:6px 12px;width:max-content}
 .sdk{padding:5px 12px;border-radius:14px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;background:var(--card2);border:1px solid var(--b1);color:var(--muted);transition:all .2s;font-family:inherit}
 .sdk.active{background:rgba(0,122,255,.12);border-color:var(--blue);color:var(--blue)}
 
-/* ══ STATS ══ */
+/* Sort bar */
+.sort-wrap{background:var(--surf);border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:8px;padding:6px 12px;overflow-x:auto;scrollbar-width:none}
+.sort-wrap::-webkit-scrollbar{display:none}
+.sort-label{font-size:11px;color:var(--muted);flex-shrink:0;font-family:inherit}
+.sort-btn{padding:4px 10px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;background:var(--card2);border:1px solid var(--b1);color:var(--muted);font-family:inherit;white-space:nowrap;transition:all .2s}
+.sort-btn.active{background:rgba(255,69,0,.12);border-color:var(--fire);color:var(--fire)}
+
 .stats{display:flex;background:var(--surf);border-bottom:1px solid var(--b1)}
 .stat{flex:1;text-align:center;padding:10px 4px;border-right:1px solid var(--b1)}
 .stat:last-child{border-right:none}
 .stat-n{font-size:17px;font-weight:900;color:var(--gold)}
 .stat-l{font-size:10px;color:var(--muted);margin-top:2px}
 
-/* ══ TABS ══ */
 .tabs{display:flex;background:var(--surf);border-bottom:2px solid var(--b1)}
 .tab{flex:1;padding:11px 4px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;font-family:inherit;background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap}
 .tab.active{color:var(--fire);border-bottom-color:var(--fire)}
 
-/* ══ PAGE ══ */
 .page{display:none;animation:fade .2s ease}
 .page.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
-/* ══ BANNER ══ */
 .banner{margin:10px;border-radius:14px;overflow:hidden;padding:18px;position:relative;background:linear-gradient(135deg,#FF4500,#FF8C00)}
 .banner::after{content:'🔥';position:absolute;font-size:90px;opacity:.12;right:10px;top:-5px;pointer-events:none}
 .banner-tag{display:inline-block;background:rgba(255,255,255,.25);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:6px}
@@ -79,28 +68,10 @@ body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:72px
 .banner-s{font-size:11px;color:rgba(255,255,255,.85);margin-bottom:12px;position:relative}
 .banner-b{display:inline-block;background:#fff;color:var(--fire);padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit;position:relative}
 
-/* ══ SEC HEAD ══ */
 .sec{padding:12px 14px 6px;display:flex;justify-content:space-between;align-items:center}
 .sec-t{font-size:14px;font-weight:700;color:var(--text)}
+.sec-count{font-size:11px;color:var(--muted)}
 
-/* ══ APP ITEM ══ */
-.app-list{background:var(--surf)}
-.app-item{display:flex;align-items:center;padding:11px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--b1);gap:12px;direction:ltr}
-.app-item:hover{background:var(--card2)}
-.app-ico{width:54px;height:54px;border-radius:13px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--b1);background:var(--card2)}
-.app-ico img{width:100%;height:100%;object-fit:cover;border-radius:12px}
-.app-info{flex:1;min-width:0;overflow:hidden}
-.app-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
-.app-sub{font-size:11px;color:var(--muted);margin:2px 0 4px}
-.app-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.app-stars{color:#FF9500;font-size:10px;letter-spacing:-1px}
-.app-sz{font-size:10px;color:var(--muted)}
-.app-sdk-badge{font-size:10px;font-weight:700;color:var(--blue);background:rgba(0,122,255,.1);padding:1px 7px;border-radius:5px;border:1px solid rgba(0,122,255,.2)}
-.app-btn-wrap{flex-shrink:0}
-.btn-inst{padding:7px 16px;border-radius:18px;font-size:12px;font-weight:700;background:rgba(0,122,255,.1);border:1.5px solid rgba(0,122,255,.3);color:var(--blue);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
-.btn-inst:hover{background:rgba(0,122,255,.2)}
-
-/* ══ GAMES GRID ══ */
 .games-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 10px 10px}
 .game-card{background:var(--card);border:1px solid var(--b1);border-radius:13px;overflow:hidden;cursor:pointer;transition:transform .2s;box-shadow:0 1px 4px var(--shadow)}
 .game-card:active{transform:scale(.97)}
@@ -110,35 +81,22 @@ body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:72px
 .game-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
 .game-sdk{font-size:10px;color:var(--blue);font-weight:700}
 
-/* ══ MODAL ══ */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;backdrop-filter:blur(8px);align-items:flex-end;justify-content:center}
-.overlay.show{display:flex;animation:ov .2s}
-@keyframes ov{from{opacity:0}to{opacity:1}}
-.modal{background:var(--surf);border-radius:20px 20px 0 0;width:100%;max-width:500px;padding:18px;max-height:90vh;overflow-y:auto;border-top:1px solid var(--b1);animation:mu .3s cubic-bezier(.175,.885,.32,1.1)}
-@keyframes mu{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.m-handle{width:36px;height:4px;background:var(--b2);border-radius:2px;margin:0 auto 16px}
-.m-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;direction:ltr}
-.m-icon{width:68px;height:68px;border-radius:15px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0;border:1px solid var(--b1);background:var(--card2)}
-.m-icon img{width:100%;height:100%;object-fit:cover}
-.m-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:2px}
-.m-dev{font-size:11px;color:var(--muted);margin-bottom:6px}
-.m-tags{display:flex;gap:4px;flex-wrap:wrap}
-.m-tag{font-size:10px;padding:2px 8px;border-radius:6px;background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.15);color:var(--fire)}
-.m-tag.b{background:rgba(0,122,255,.1);border-color:rgba(0,122,255,.15);color:var(--blue)}
-.m-tag.g{background:rgba(52,199,89,.1);border-color:rgba(52,199,89,.15);color:var(--green)}
-.m-tag.o{background:rgba(255,149,0,.1);border-color:rgba(255,149,0,.15);color:var(--gold)}
-.m-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
-.m-stat{background:var(--card2);border:1px solid var(--b1);border-radius:8px;padding:8px 4px;text-align:center}
-.m-stat-v{font-size:12px;font-weight:700;color:var(--fire)}
-.m-stat-k{font-size:9px;color:var(--muted);margin-top:1px}
-.m-desc{font-size:12px;color:var(--soft);line-height:1.65;background:var(--card2);padding:10px;border-radius:8px;border:1px solid var(--b1);margin-bottom:12px}
-.m-btns{display:flex;gap:8px}
-.m-get{flex:2;padding:13px;background:var(--fire);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;box-shadow:0 4px 14px rgba(255,69,0,.25)}
-body.dark .m-get{background:linear-gradient(135deg,var(--fire),var(--ember))}
-.m-del{flex:1;padding:13px;background:rgba(255,59,48,.08);border:1px solid rgba(255,59,48,.2);color:var(--red);border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer}
-.m-share{flex:1;padding:13px;background:rgba(0,122,255,.08);border:1px solid rgba(0,122,255,.2);color:var(--blue);border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.app-list{background:var(--surf)}
+.app-item{display:flex;align-items:center;padding:11px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--b1);gap:12px;direction:ltr}
+.app-item:hover{background:var(--card2)}
+.app-ico{width:54px;height:54px;border-radius:13px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--b1);background:var(--card2)}
+.app-ico img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.app-info{flex:1;min-width:0}
+.app-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.app-sub{font-size:11px;color:var(--muted);margin:2px 0 4px}
+.app-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.app-stars{color:#FF9500;font-size:10px}
+.app-sz{font-size:10px;color:var(--muted)}
+.app-sdk-badge{font-size:10px;font-weight:700;color:var(--blue);background:rgba(0,122,255,.1);padding:1px 7px;border-radius:5px}
+.btn-get{padding:7px 16px;border-radius:18px;font-size:12px;font-weight:700;background:rgba(0,122,255,.1);border:1.5px solid rgba(0,122,255,.3);color:var(--blue);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.btn-get:hover{background:rgba(0,122,255,.2)}
 
-/* ══ UPLOAD ══ */
+/* Upload */
 .pad{padding:10px}
 .card{background:var(--card);border:1px solid var(--b1);border-radius:13px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px var(--shadow)}
 .card-t{font-size:13px;font-weight:700;color:var(--fire);margin-bottom:12px}
@@ -151,29 +109,25 @@ body.dark .m-get{background:linear-gradient(135deg,var(--fire),var(--ember))}
 .fl label{font-size:11px;color:var(--soft);margin-bottom:4px;display:block;font-weight:700}
 .fi,.fs{width:100%;background:var(--card2);border:1px solid var(--b1);border-radius:8px;padding:8px 10px;color:var(--text);font-family:inherit;font-size:12px;outline:none;transition:border-color .2s}
 .fi:focus,.fs:focus{border-color:var(--fire)}
-.btn-p{width:100%;padding:12px;border-radius:10px;background:var(--fire);color:#fff;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s;box-shadow:0 3px 12px rgba(255,69,0,.2)}
-body.dark .btn-p{background:linear-gradient(135deg,var(--fire),var(--ember))}
+.btn-p{width:100%;padding:12px;border-radius:10px;background:var(--fire);color:#fff;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s}
 .btn-p:disabled{opacity:.5;cursor:not-allowed}
 .prog{display:none;margin-top:8px}
 .prog-b{height:4px;background:var(--b1);border-radius:2px;overflow:hidden;margin-bottom:4px}
 .prog-f{height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));transition:width .3s;width:0%}
 .prog-t{font-size:10px;color:var(--soft);text-align:center}
 .apk-prev{background:var(--card2);border:1px solid var(--b1);border-radius:10px;padding:10px;margin-bottom:10px;display:none;direction:ltr}
-.apk-prev-inner{display:flex;align-items:center;gap:10px}
-.apk-prev-icon{width:42px;height:42px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--card);border:1px solid var(--b1);flex-shrink:0}
-.apk-prev-icon img{width:100%;height:100%;object-fit:cover}
 
-/* ══ AUTH ══ */
+/* Auth */
 .auth-tabs{display:flex;background:var(--card2);border-radius:8px;padding:2px;margin-bottom:12px}
 .auth-tab{flex:1;padding:7px;text-align:center;font-size:12px;font-weight:700;border-radius:7px;cursor:pointer;color:var(--muted);transition:all .2s;font-family:inherit;background:none;border:none}
 .auth-tab.active{background:var(--surf);color:var(--text);box-shadow:0 1px 3px var(--shadow)}
 .u-box{display:flex;align-items:center;gap:10px;padding:12px;background:var(--card2);border-radius:10px;margin-bottom:10px;border:1px solid var(--b1);direction:ltr}
-.u-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--fire),var(--ember));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.u-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--fire),#FF6B35);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .u-name{font-size:13px;font-weight:700;color:var(--text)}
 .u-role{font-size:10px;color:var(--muted)}
 .btn-out{padding:6px 12px;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2);color:var(--red);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
 
-/* ══ SETTINGS/ABOUT ══ */
+/* About */
 .s-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--b1);font-size:12px;direction:ltr}
 .s-row:last-child{border-bottom:none}
 .s-v{font-size:11px;color:var(--muted)}
@@ -183,9 +137,8 @@ body.dark .btn-p{background:linear-gradient(135deg,var(--fire),var(--ember))}
 .tgl-btn.active{background:rgba(255,69,0,.12);border-color:var(--fire);color:var(--fire)}
 .about-box{text-align:center;padding:22px;background:var(--card);border-radius:13px;margin-bottom:10px;border:1px solid var(--b1)}
 .contact-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--fire);color:#fff;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;font-family:inherit}
-body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember))}
 
-/* ══ PENDING ══ */
+/* Pending */
 .p-item{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--b1);direction:ltr}
 .p-item:last-child{border-bottom:none}
 .p-name{flex:1;font-size:12px;font-weight:700;color:var(--text);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -193,31 +146,50 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
 .btn-approve{padding:5px 10px;background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);color:var(--green);border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit}
 .btn-rej{padding:5px 8px;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2);color:var(--red);border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit}
 
-/* ══ REQUIRE LOGIN ══ */
 .req{text-align:center;padding:28px 16px;color:var(--muted)}
 .req-i{font-size:40px;margin-bottom:8px}
 .req-t{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--soft)}
 
-/* ══ BNAV ══ */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--surf);border-top:1px solid var(--b1);display:flex;z-index:100;box-shadow:0 -1px 6px var(--shadow)}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 10px;cursor:pointer;color:var(--muted);font-size:10px;font-weight:700;transition:color .2s;font-family:inherit;background:none;border:none}
 .bi.active{color:var(--fire)}
 .bi-i{font-size:20px;line-height:1}
 
-/* ══ EMPTY ══ */
 .empty{text-align:center;padding:40px 16px;color:var(--muted)}
 .empty-i{font-size:44px;margin-bottom:8px;opacity:.4}
 .empty-t{font-size:13px;font-weight:700;color:var(--soft)}
 
-/* ══ TOAST ══ */
-.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--card);border:1px solid var(--b2);color:var(--text);padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;z-index:300;opacity:0;transition:all .22s;white-space:nowrap;box-shadow:0 3px 16px var(--shadow);pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,69,0,.2);border-top-color:var(--fire);border-radius:50%;animation:sp .7s linear infinite}
+/* Loading spinner */
+.loading{text-align:center;padding:20px;color:var(--muted)}
+.spin{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,69,0,.2);border-top-color:var(--fire);border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.loading{text-align:center;padding:36px;color:var(--muted)}
+
+/* Load more */
+.load-more-wrap{text-align:center;padding:16px}
+.btn-more{padding:10px 28px;border-radius:20px;font-size:13px;font-weight:700;background:var(--card2);border:1.5px solid var(--b1);color:var(--soft);cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-more:hover{border-color:var(--fire);color:var(--fire)}
+
+/* Toast */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--card);border:1px solid var(--b1);color:var(--text);padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;z-index:300;opacity:0;transition:all .22s;white-space:nowrap;box-shadow:0 3px 16px var(--shadow);pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* PWA install */
+.pwa-banner{display:none;background:linear-gradient(135deg,var(--fire),#FF6B35);color:#fff;padding:10px 14px;align-items:center;gap:10px}
+.pwa-banner.show{display:flex}
+.pwa-txt{flex:1;font-size:12px;font-weight:700}
+.pwa-btn{padding:6px 14px;background:#fff;color:var(--fire);border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0}
+.pwa-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;flex-shrink:0}
 </style>
 </head>
 <body class="light">
+
+<!-- PWA Install Banner -->
+<div class="pwa-banner" id="pwaBanner">
+  <span class="pwa-txt" id="t-pwatxt">Install PhoenixStore as an app!</span>
+  <button class="pwa-btn" id="t-pwabtn" onclick="installPWA()">Install</button>
+  <button class="pwa-close" onclick="document.getElementById('pwaBanner').classList.remove('show')">✕</button>
+</div>
+
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-inner">
@@ -250,14 +222,22 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
 </div></div>
 
 <!-- SDK FILTER -->
-<div class="sdk-wrap"><div class="sdks" id="sdkBar">
+<div class="sdk-wrap"><div class="sdks">
   <div class="sdk active" onclick="filterSdk('',this)">🤖 All</div>
   <div class="sdk" onclick="filterSdk('2.3',this)">Android 2.3+</div>
   <div class="sdk" onclick="filterSdk('4.0',this)">Android 4.0+</div>
   <div class="sdk" onclick="filterSdk('4.4',this)">Android 4.4+</div>
   <div class="sdk" onclick="filterSdk('5.0',this)">Android 5.0+</div>
-  <div class="sdk" onclick="filterSdk('6.0',this)">Android 6.0+</div>
 </div></div>
+
+<!-- SORT -->
+<div class="sort-wrap">
+  <span class="sort-label" id="t-sortby">Sort:</span>
+  <button class="sort-btn active" onclick="setSort('date',this)" id="t-newest">Newest</button>
+  <button class="sort-btn" onclick="setSort('downloads',this)" id="t-popular">Popular</button>
+  <button class="sort-btn" onclick="setSort('name',this)" id="t-name">A-Z</button>
+  <button class="sort-btn" onclick="setSort('size',this)" id="t-size">Size</button>
+</div>
 
 <!-- STATS -->
 <div class="stats">
@@ -286,9 +266,15 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
     <div class="sec"><span class="sec-t" id="t-games">🎮 Games</span></div>
     <div class="games-grid" id="gamesList"></div>
   </div>
-  <div class="sec"><span class="sec-t" id="t-apps">📱 All Apps</span></div>
+  <div class="sec">
+    <span class="sec-t" id="t-apps">📱 All Apps</span>
+    <span class="sec-count" id="totalCount"></span>
+  </div>
   <div class="app-list" id="appsList">
-    <div class="loading"><div class="spin"></div><br>Loading...</div>
+    <div class="loading"><div class="spin"></div></div>
+  </div>
+  <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+    <button class="btn-more" id="loadMoreBtn" onclick="loadMore()">Load More</button>
   </div>
 </div>
 
@@ -298,32 +284,33 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
     <div id="uploadNoAuth" class="req" style="display:none">
       <div class="req-i">🔒</div>
       <div class="req-t" id="t-needlogin">Login required to upload</div>
-      <button onclick="goTo('account')" style="padding:8px 18px;background:var(--fire);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer" id="t-loginbtn">Login</button>
+      <button onclick="goTo('account')" style="padding:8px 18px;background:var(--fire);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">Login</button>
     </div>
     <div id="uploadForm" class="card">
       <div class="card-t" id="t-uploadTitle">⬆️ Upload New App</div>
       <div class="apk-prev" id="apkPrev">
-        <div style="font-size:10px;color:var(--green);margin-bottom:6px">✅ <span id="t-extracted">Info extracted automatically</span></div>
-        <div class="apk-prev-inner">
-          <div class="apk-prev-icon" id="prevIcon">📦</div>
+        <div style="font-size:10px;color:var(--green);margin-bottom:6px">✅ Info extracted</div>
+        <div style="display:flex;align-items:center;gap:10px;direction:ltr">
+          <div id="prevIcon" style="width:42px;height:42px;border-radius:10px;background:var(--card);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:22px">📦</div>
           <div><div style="font-size:13px;font-weight:700;color:var(--text)" id="prevName">-</div><div style="font-size:10px;color:var(--muted)" id="prevVer">-</div><div style="font-size:10px;color:var(--blue)" id="prevSdk">-</div></div>
         </div>
       </div>
       <div class="dz" id="dropZone" onclick="document.getElementById('apkFile').click()" ondragover="dov(event)" ondragleave="dol()" ondrop="dof(event)">
         <div class="dz-i" id="dzI">📦</div>
-        <div class="dz-t" id="dzT">Tap to select APK file</div>
-        <div class="dz-s" id="dzS">Or drag file here</div>
+        <div class="dz-t" id="dzT">Tap to select APK</div>
+        <div class="dz-s" id="dzS">Or drag here</div>
         <input type="file" id="apkFile" accept=".apk" style="display:none" onchange="fileSel(this)">
       </div>
-      <div class="fl"><label id="t-cat">Category</label>
+      <div class="fl"><label id="t-cat">Category (auto-detected)</label>
         <select class="fs" id="appCat">
+          <option value="">Auto Detect ✨</option>
           <option value="Browser">🌐 Browser</option>
           <option value="Video">🎬 Video</option>
           <option value="Social">💬 Social</option>
           <option value="Files">📁 Files</option>
           <option value="Security">🔒 Security</option>
           <option value="Games">🎮 Games</option>
-          <option value="General" selected>📦 General</option>
+          <option value="General">📦 General</option>
         </select>
       </div>
       <div class="fl"><label id="t-desc">Description</label><input type="text" class="fi" id="appDesc" placeholder=""></div>
@@ -343,31 +330,31 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
         <button class="btn-out" onclick="doLogout()" id="t-logout">Logout</button>
       </div>
       <div id="pendingSection" style="display:none">
-        <div class="card"><div class="card-t" id="t-pending">⏳ Pending Approval</div><div id="pendingList"></div></div>
+        <div class="card"><div class="card-t" id="t-pending">⏳ Pending</div><div id="pendingList"></div></div>
       </div>
     </div>
     <div id="authView">
       <div class="card">
         <div class="auth-tabs">
-          <button class="auth-tab active" id="tabLogin" onclick="showAuth('login')" >Login</button>
+          <button class="auth-tab active" id="tabLogin" onclick="showAuth('login')">Login</button>
           <button class="auth-tab" id="tabReg" onclick="showAuth('register')">Register</button>
         </div>
         <div id="formLogin">
           <div class="fl"><label id="t-email">Email</label><input type="email" class="fi" id="lEmail" placeholder="example@email.com"></div>
           <div class="fl"><label id="t-pass">Password</label><input type="password" class="fi" id="lPass" placeholder="••••••••"></div>
-          <br><button class="btn-p" onclick="doLogin()">🔑 <span id="t-loginBtn2">Login</span></button>
+          <br><button class="btn-p" onclick="doLogin()">🔑 Login</button>
         </div>
         <div id="formReg" style="display:none">
-          <div class="fl"><label id="t-user">Username *</label><input type="text" class="fi" id="rUser" placeholder="min 3 chars"></div>
-          <div class="fl"><label id="t-remail">Email *</label><input type="email" class="fi" id="rEmail" placeholder="example@email.com"></div>
-          <div class="fl"><label id="t-rpass">Password *</label><input type="password" class="fi" id="rPass" placeholder="min 6 chars"></div>
-          <br><button class="btn-p" onclick="doRegister()">✅ <span id="t-regBtn">Create Account</span></button>
+          <div class="fl"><label>Username *</label><input type="text" class="fi" id="rUser" placeholder="min 3 chars"></div>
+          <div class="fl"><label>Email *</label><input type="email" class="fi" id="rEmail" placeholder="example@email.com"></div>
+          <div class="fl"><label>Password *</label><input type="password" class="fi" id="rPass" placeholder="min 6 chars"></div>
+          <br><button class="btn-p" onclick="doRegister()">✅ Create Account</button>
         </div>
       </div>
       <div class="card">
-        <div class="card-t" id="t-adminTitle">🔐 Admin Access</div>
-        <div class="fl"><label id="t-adminLabel">Admin Token</label><input type="password" class="fi" id="adminIn" placeholder="Enter admin token"></div>
-        <br><button class="btn-p" onclick="saveAdmin()" id="t-adminBtn">🔓 Enter</button>
+        <div class="card-t">🔐 Admin Access</div>
+        <div class="fl"><label>Admin Token</label><input type="password" class="fi" id="adminIn" placeholder="Enter token"></div>
+        <br><button class="btn-p" onclick="saveAdmin()">🔓 Enter</button>
       </div>
     </div>
   </div>
@@ -379,33 +366,31 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
     <div class="about-box">
       <div style="font-size:52px;margin-bottom:8px">🔥</div>
       <div style="font-size:19px;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:3px">PhoenixStore</div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:14px" id="t-ver">Version 2.0 · 2026</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:14px">Version 2.1 · 2026</div>
       <div style="font-size:12px;color:var(--soft);margin-bottom:18px;line-height:1.7" id="t-aboutDesc">Free app store for old Android devices<br>Supports Android 2.3.6 to 7.1<br>No Google · HTTP · Open for all</div>
-      <a href="mailto:samanx2003@yahoo.com" class="contact-btn">📧 <span id="t-contact">Contact Us</span></a>
+      <a href="mailto:samanx2003@yahoo.com" class="contact-btn">📧 Contact Us</a>
     </div>
     <div class="card">
-      <div class="card-t" id="t-features">✨ Features</div>
-      <div class="s-row"><span id="f1">Auto icon extraction</span><span>✅</span></div>
-      <div class="s-row"><span id="f2">HTTP for old devices</span><span>✅</span></div>
-      <div class="s-row"><span id="f3">Secure login</span><span>✅</span></div>
-      <div class="s-row"><span id="f4">Dark & Light mode</span><span>✅</span></div>
-      <div class="s-row"><span id="f5">Arabic & English</span><span>✅</span></div>
-      <div class="s-row"><span id="f6">App detail pages</span><span>✅</span></div>
+      <div class="card-t">📊 Statistics</div>
+      <div class="s-row"><span>Total Apps</span><span class="s-v g" id="stA">-</span></div>
+      <div class="s-row"><span>Total Downloads</span><span class="s-v g" id="stD">-</span></div>
+      <div class="s-row"><span>Visits</span><span class="s-v g" id="stV">-</span></div>
     </div>
     <div class="card">
-      <div class="card-t" id="t-stats">📊 Statistics</div>
-      <div class="s-row"><span id="t-tA">Total Apps</span><span class="s-v g" id="stA">-</span></div>
-      <div class="s-row"><span id="t-tD">Total Downloads</span><span class="s-v g" id="stD">-</span></div>
-      <div class="s-row"><span id="t-tV">Visits</span><span class="s-v g" id="stV">-</span></div>
-    </div>
-    <div class="card">
-      <div class="card-t" id="t-langTitle">🌐 Language & Theme</div>
-      <div class="s-row"><span id="t-langLabel">Language</span>
+      <div class="card-t">🌐 Language & Theme</div>
+      <div class="s-row"><span>Language</span>
         <div class="tgl"><button class="tgl-btn" id="btnAr" onclick="applyLang('ar')">عربي</button><button class="tgl-btn active" id="btnEn" onclick="applyLang('en')">English</button></div>
       </div>
-      <div class="s-row"><span id="t-themeLabel">Theme</span>
+      <div class="s-row"><span>Theme</span>
         <div class="tgl"><button class="tgl-btn active" id="btnLight" onclick="applyTheme('light')">☀️ Light</button><button class="tgl-btn" id="btnDark" onclick="applyTheme('dark')">🌙 Dark</button></div>
       </div>
+    </div>
+    <div class="card">
+      <div class="card-t">🔗 API</div>
+      <div class="s-row"><span>Apps</span><span class="s-v">GET /api/apps</span></div>
+      <div class="s-row"><span>Search</span><span class="s-v">?search=query</span></div>
+      <div class="s-row"><span>Sort</span><span class="s-v">?sort=downloads</span></div>
+      <div class="s-row"><span>Sitemap</span><span class="s-v">/sitemap.xml</span></div>
     </div>
   </div>
 </div>
@@ -418,75 +403,56 @@ body.dark .contact-btn{background:linear-gradient(135deg,var(--fire),var(--ember
   <button class="bi" onclick="goTo('about')"><span class="bi-i">ℹ️</span><span id="bn-about">About</span></button>
 </div>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay" onclick="closeM(event)">
-  <div class="modal"><div class="m-handle"></div><div id="mBody"></div></div>
-</div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ══ STATE ══
-let allApps=[], curCat='All', curSearch='', curSdk='';
+let curLang=localStorage.getItem('px_lang')||'';
+let curTheme=localStorage.getItem('px_theme')||'light';
 let userToken=localStorage.getItem('px_ut')||'';
 let userName=localStorage.getItem('px_un')||'';
 let adminToken=localStorage.getItem('px_at')||'';
-let curLang=localStorage.getItem('px_lang')||'';
-let curTheme=localStorage.getItem('px_theme')||'light';
+let curCat='All', curSdk='', curSearch='', curSort='date';
+let currentPage=1, totalPages=1, isLoading=false;
+let allGames=[];
+
+// PWA
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredPrompt=e;
+  document.getElementById('pwaBanner').classList.add('show');
+});
+function installPWA(){
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;}
+  document.getElementById('pwaBanner').classList.remove('show');
+}
 
 // ══ TRANSLATIONS ══
 const T={
-  en:{
-    search:'Search apps...',apps:'Apps',downloads:'Downloads',visits:'Visits',
-    home:'Home',upload:'Upload',account:'Account',about:'About',
-    btag:'🔥 Welcome',bh:'Revive Your Old Phone',bs:'Android 2.3 → 7.1 · No Google · Free',bbtn:'⬆️ Upload App',
-    games:'🎮 Games',allapps:'📱 All Apps',
-    needlogin:'Login required to upload',loginbtn:'Login',
-    uploadTitle:'⬆️ Upload New App',extracted:'Info extracted automatically',
-    apkselect:'Tap to select APK file',drag:'Or drag file here',
-    cat:'Category',desc:'Description',uploadBtn:'Upload App',
-    email:'Email',pass:'Password',loginBtn2:'Login',
-    user:'Username *',remail:'Email *',rpass:'Password *',regBtn:'Create Account',
-    logout:'Logout',pending:'⏳ Pending Approval',
-    adminTitle:'🔐 Admin Access',adminLabel:'Admin Token',adminBtn:'🔓 Enter',
-    ver:'Version 2.0 · 2026',
-    aboutDesc:'Free app store for old Android devices<br>Supports Android 2.3.6 to 7.1<br>No Google · HTTP · Open for all',
-    contact:'Contact Us',features:'✨ Features',
-    f1:'Auto icon extraction',f2:'HTTP for old devices',f3:'Secure login',
-    f4:'Dark & Light mode',f5:'Arabic & English',f6:'App detail pages',
-    stats:'📊 Statistics',tA:'Total Apps',tD:'Total Downloads',tV:'Visits',
-    langTitle:'🌐 Language & Theme',langLabel:'Language',themeLabel:'Theme',
-    install:'Install',free:'Free',version:'Version',size:'Size',dlcount:'Downloads',
-    approve:'Approve',adminRole:'Full Access ✅',userRole:'Registered User ✅',adminName:'👑 Admin',
-    noApps:'No apps found',similar:'Similar Apps',share:'Share',sdkAll:'🤖 All',
-    tabLogin:'Login',tabReg:'Register',
-  },
-  ar:{
-    search:'ابحث عن تطبيق...',apps:'تطبيق',downloads:'تحميل',visits:'زيارة',
-    home:'الرئيسية',upload:'رفع',account:'حسابي',about:'حول',
-    btag:'🔥 مرحباً بك',bh:'أحيِ هاتفك القديم',bs:'أندرويد 2.3 → 7.1 · بدون Google · مجاناً',bbtn:'⬆️ ارفع تطبيقاً',
-    games:'🎮 الألعاب',allapps:'📱 جميع التطبيقات',
-    needlogin:'يجب تسجيل الدخول للرفع',loginbtn:'تسجيل الدخول',
-    uploadTitle:'⬆️ رفع تطبيق جديد',extracted:'تم استخراج المعلومات تلقائياً',
-    apkselect:'اضغط لاختيار ملف APK',drag:'أو اسحب الملف هنا',
-    cat:'الفئة',desc:'الوصف',uploadBtn:'رفع التطبيق',
-    email:'البريد الإلكتروني',pass:'كلمة المرور',loginBtn2:'تسجيل الدخول',
-    user:'اسم المستخدم *',remail:'البريد الإلكتروني *',rpass:'كلمة المرور *',regBtn:'إنشاء الحساب',
-    logout:'خروج',pending:'⏳ انتظار الموافقة',
-    adminTitle:'🔐 دخول الأدمن',adminLabel:'رمز الأدمن',adminBtn:'🔓 دخول',
-    ver:'الإصدار 2.0 · 2026',
-    aboutDesc:'متجر تطبيقات مجاني للأجهزة القديمة<br>يدعم أندرويد 2.3.6 حتى 7.1<br>بدون Google · HTTP · مفتوح للجميع',
-    contact:'تواصل معنا',features:'✨ المميزات',
-    f1:'استخراج الأيقونة تلقائياً',f2:'دعم HTTP للأجهزة القديمة',f3:'تسجيل دخول آمن',
-    f4:'وضع ليلي ونهاري',f5:'عربي وإنجليزي',f6:'صفحة خاصة لكل تطبيق',
-    stats:'📊 إحصائيات',tA:'إجمالي التطبيقات',tD:'إجمالي التحميلات',tV:'الزيارات',
-    langTitle:'🌐 اللغة والوضع',langLabel:'اللغة',themeLabel:'المظهر',
-    install:'تثبيت',free:'مجاني',version:'الإصدار',size:'الحجم',dlcount:'تحميل',
-    approve:'موافقة',adminRole:'صلاحيات كاملة ✅',userRole:'مستخدم مسجل ✅',adminName:'👑 أدمن',
-    noApps:'لا توجد تطبيقات',similar:'تطبيقات مشابهة',share:'مشاركة',sdkAll:'🤖 الكل',
-    tabLogin:'تسجيل الدخول',tabReg:'إنشاء حساب',
-  }
+  en:{search:'Search apps...',apps:'Apps',downloads:'Downloads',visits:'Visits',
+      home:'Home',upload:'Upload',account:'Account',about:'About',
+      btag:'🔥 Welcome',bh:'Revive Your Old Phone',bs:'Android 2.3 → 7.1 · No Google · Free',bbtn:'⬆️ Upload App',
+      games:'🎮 Games',allapps:'📱 All Apps',needlogin:'Login required',
+      uploadTitle:'⬆️ Upload New App',cat:'Category (auto-detected)',desc:'Description',
+      uploadBtn:'Upload App',email:'Email',pass:'Password',logout:'Logout',
+      pending:'⏳ Pending',install:'Install',free:'Free',
+      sortby:'Sort:',newest:'Newest',popular:'Popular',name:'A-Z',size:'Size',
+      pwatxt:'Install PhoenixStore as an app!',pwabtn:'Install',
+      aboutDesc:'Free app store for old Android devices<br>Supports Android 2.3.6 to 7.1<br>No Google · HTTP · Open for all',
+      loadmore:'Load More',noApps:'No apps found',adminName:'👑 Admin',
+      adminRole:'Full Access ✅',userRole:'Registered User ✅'},
+  ar:{search:'ابحث عن تطبيق...',apps:'تطبيق',downloads:'تحميل',visits:'زيارة',
+      home:'الرئيسية',upload:'رفع',account:'حسابي',about:'حول',
+      btag:'🔥 مرحباً بك',bh:'أحيِ هاتفك القديم',bs:'أندرويد 2.3 → 7.1 · بدون Google · مجاناً',bbtn:'⬆️ ارفع تطبيقاً',
+      games:'🎮 الألعاب',allapps:'📱 جميع التطبيقات',needlogin:'يجب تسجيل الدخول',
+      uploadTitle:'⬆️ رفع تطبيق جديد',cat:'الفئة (تلقائي)',desc:'الوصف',
+      uploadBtn:'رفع التطبيق',email:'البريد الإلكتروني',pass:'كلمة المرور',logout:'خروج',
+      pending:'⏳ انتظار الموافقة',install:'تثبيت',free:'مجاني',
+      sortby:'ترتيب:',newest:'الأحدث',popular:'الأكثر تحميلاً',name:'أ-ي',size:'الحجم',
+      pwatxt:'ثبّت PhoenixStore كتطبيق!',pwabtn:'تثبيت',
+      aboutDesc:'متجر تطبيقات مجاني للأجهزة القديمة<br>يدعم أندرويد 2.3.6 حتى 7.1<br>بدون Google · HTTP · مفتوح للجميع',
+      loadmore:'تحميل المزيد',noApps:'لا توجد تطبيقات',adminName:'👑 أدمن',
+      adminRole:'صلاحيات كاملة ✅',userRole:'مستخدم مسجل ✅'}
 };
 
 // ══ INIT ══
@@ -499,86 +465,155 @@ window.onload=function(){
   applyTheme(curTheme);
   applyLang(curLang);
   updateAuthUI();
-  loadApps();
+  loadApps(1);
   loadStats();
 };
 
 // ══ THEME ══
 function applyTheme(t){
-  curTheme=t;
+  curTheme=t; localStorage.setItem('px_theme',t);
   document.body.classList.remove('light','dark');
   document.body.classList.add(t);
   document.getElementById('themeBtn').textContent=t==='light'?'🌙':'☀️';
   document.getElementById('btnLight').classList.toggle('active',t==='light');
   document.getElementById('btnDark').classList.toggle('active',t==='dark');
-  localStorage.setItem('px_theme',t);
 }
 function toggleTheme(){applyTheme(curTheme==='light'?'dark':'light')}
 
 // ══ LANG ══
 function applyLang(lang){
-  curLang=lang;
-  localStorage.setItem('px_lang',lang);
-  const t=T[lang];
+  curLang=lang; localStorage.setItem('px_lang',lang);
   const isAr=lang==='ar';
-  // HTML dir
+  document.body.classList.toggle('ar',isAr);
   document.documentElement.dir=isAr?'rtl':'ltr';
-  document.documentElement.lang=lang;
-  // lang btn
   document.getElementById('langBtn').textContent=isAr?'EN':'عر';
   document.getElementById('btnAr').classList.toggle('active',isAr);
   document.getElementById('btnEn').classList.toggle('active',!isAr);
-  // update all text
+  const t=T[lang];
   const s=id=>document.getElementById(id);
   s('searchInput').placeholder=t.search;
   s('sl1').textContent=t.apps; s('sl2').textContent=t.downloads; s('sl3').textContent=t.visits;
-  s('tab-home').innerHTML='🏠 '+t.home;
-  s('tab-upload').innerHTML='⬆️ '+t.upload;
-  s('tab-account').innerHTML='👤 '+t.account;
-  s('tab-about').innerHTML='ℹ️ '+t.about;
+  s('tab-home').innerHTML='🏠 '+t.home; s('tab-upload').innerHTML='⬆️ '+t.upload;
+  s('tab-account').innerHTML='👤 '+t.account; s('tab-about').innerHTML='ℹ️ '+t.about;
   s('bn-home').textContent=t.home; s('bn-upload').textContent=t.upload;
   s('bn-account').textContent=t.account; s('bn-about').textContent=t.about;
   s('b-tag').textContent=t.btag; s('b-h').textContent=t.bh;
   s('b-s').textContent=t.bs; s('b-btn').textContent=t.bbtn;
   s('t-games').textContent=t.games; s('t-apps').textContent=t.allapps;
-  s('t-needlogin').textContent=t.needlogin; s('t-loginbtn').textContent=t.loginbtn;
-  s('t-uploadTitle').textContent=t.uploadTitle; s('t-extracted').textContent=t.extracted;
-  s('dzT').textContent=t.apkselect; s('dzS').textContent=t.drag;
+  s('t-uploadTitle').textContent=t.uploadTitle;
   s('t-cat').textContent=t.cat; s('t-desc').textContent=t.desc;
   s('t-uploadBtn').textContent=t.uploadBtn;
   s('t-email').textContent=t.email; s('t-pass').textContent=t.pass;
-  s('t-loginBtn2').textContent=t.loginBtn2;
-  s('t-user').textContent=t.user; s('t-remail').textContent=t.remail;
-  s('t-rpass').textContent=t.rpass; s('t-regBtn').textContent=t.regBtn;
   s('t-logout').textContent=t.logout; s('t-pending').textContent=t.pending;
-  s('t-adminTitle').textContent=t.adminTitle; s('t-adminLabel').textContent=t.adminLabel;
-  s('t-adminBtn').textContent=t.adminBtn;
-  s('t-ver').textContent=t.ver; s('t-aboutDesc').innerHTML=t.aboutDesc;
-  s('t-contact').textContent=t.contact; s('t-features').textContent=t.features;
-  ['f1','f2','f3','f4','f5','f6'].forEach(f=>s(f).textContent=t[f]);
-  s('t-stats').textContent=t.stats; s('t-tA').textContent=t.tA;
-  s('t-tD').textContent=t.tD; s('t-tV').textContent=t.tV;
-  s('t-langTitle').textContent=t.langTitle; s('t-langLabel').textContent=t.langLabel;
-  s('t-themeLabel').textContent=t.themeLabel;
-  s('tabLogin').textContent=t.tabLogin; s('tabReg').textContent=t.tabReg;
-  // update cats
+  s('t-sortby').textContent=t.sortby;
+  s('t-newest').textContent=t.newest; s('t-popular').textContent=t.popular;
+  s('t-name').textContent=t.name; s('t-size').textContent=t.size;
+  s('t-pwatxt').textContent=t.pwatxt; s('t-pwabtn').textContent=t.pwabtn;
+  s('t-aboutDesc').innerHTML=t.aboutDesc;
+  s('loadMoreBtn').textContent=t.loadmore;
   const catLabels=isAr?['الكل','🌐 متصفح','🎬 فيديو','💬 سوشيال','📁 ملفات','🔒 أمان','🎮 ألعاب','📦 عام']:['All','🌐 Browser','🎬 Video','💬 Social','📁 Files','🔒 Security','🎮 Games','📦 General'];
   document.querySelectorAll('.cat').forEach((c,i)=>{if(catLabels[i])c.textContent=catLabels[i]});
-  document.querySelector('.sdk').textContent=t.sdkAll;
-  renderApps();
   updateAuthUI();
 }
 function toggleLang(){applyLang(curLang==='ar'?'en':'ar')}
 
-// ══ LOAD ══
-async function loadApps(){
+// ══ LOAD APPS ══
+async function loadApps(page=1){
+  if(isLoading) return;
+  isLoading=true;
+  if(page===1){
+    document.getElementById('appsList').innerHTML='<div class="loading"><div class="spin"></div></div>';
+    document.getElementById('loadMoreWrap').style.display='none';
+    document.getElementById('gamesSection').style.display='none';
+  }
   try{
-    const r=await fetch('/api/apps');
-    allApps=await r.json(); renderApps();
+    let url=`/api/apps?page=${page}&limit=20&sort=${curSort}`;
+    if(curCat&&curCat!=='All') url+=`&cat=${curCat}`;
+    if(curSearch) url+=`&search=${encodeURIComponent(curSearch)}`;
+    if(curSdk) url+=`&sdk=${curSdk}`;
+    const r=await fetch(url);
+    const data=await r.json();
+    const apps=data.apps||data;
+    totalPages=data.pages||1;
+    currentPage=page;
+    const total=data.total||apps.length;
+    document.getElementById('totalCount').textContent=`(${total})`;
+    if(page===1){
+      // games
+      allGames=apps.filter(a=>a.cat==='Games');
+      if(allGames.length&&curCat==='All'){
+        document.getElementById('gamesSection').style.display='block';
+        document.getElementById('gamesList').innerHTML=allGames.map(a=>`
+          <div class="game-card" onclick="openApp('${a.slug||a.file}')">
+            <div class="game-thumb" style="background:${a.color||'#1A1A2E'}">${getIcon(a,90)}</div>
+            <div class="game-info">
+              <div class="game-name">${a.name}</div>
+              <div class="game-sdk">${a.min_android?'Android '+a.min_android+'+':a.cat}</div>
+            </div>
+          </div>`).join('');
+      }
+      const others=curCat==='Games'?apps:apps.filter(a=>a.cat!=='Games');
+      renderList(others, false);
+    }else{
+      const others=curCat==='Games'?apps:apps.filter(a=>a.cat!=='Games');
+      renderList(others, true);
+    }
+    // Load More
+    const wrap=document.getElementById('loadMoreWrap');
+    const btn=document.getElementById('loadMoreBtn');
+    if(currentPage<totalPages){
+      wrap.style.display='block';
+      btn.textContent=T[curLang].loadmore;
+      btn.disabled=false;
+    }else{
+      wrap.style.display='none';
+    }
   }catch(e){
     document.getElementById('appsList').innerHTML='<div class="empty"><div class="empty-i">⚠️</div><div class="empty-t">Connection Error</div></div>';
   }
+  isLoading=false;
 }
+
+function renderList(apps, append){
+  const list=document.getElementById('appsList');
+  const t=T[curLang];
+  if(!apps.length&&!append){
+    list.innerHTML=`<div class="empty"><div class="empty-i">📦</div><div class="empty-t">${t.noApps}</div></div>`;
+    return;
+  }
+  const html=apps.map(a=>`
+    <div class="app-item" onclick="openApp('${a.slug||a.file}')">
+      <div class="app-ico" style="background:${a.color||'#1A1A2E'}">${getIcon(a,54)}</div>
+      <div class="app-info">
+        <div class="app-name">${a.name}</div>
+        <div class="app-sub">${a.cat} · ${a.uploader||'admin'}</div>
+        <div class="app-row">
+          <span class="app-stars">★★★★★</span>
+          <span class="app-sz">${a.size||'?'}</span>
+          ${a.min_android?`<span class="app-sdk-badge">Android ${a.min_android}+</span>`:''}
+          ${a.downloads>0?`<span style="font-size:10px;color:var(--muted)">·${a.downloads}⬇️</span>`:''}
+        </div>
+      </div>
+      <button class="btn-get" onclick="event.stopPropagation();doInstall('${a.file}','${a.name}')">${t.install}</button>
+    </div>`).join('');
+  if(append) list.insertAdjacentHTML('beforeend',html);
+  else list.innerHTML=html;
+}
+
+function loadMore(){
+  const btn=document.getElementById('loadMoreBtn');
+  btn.disabled=true;
+  btn.textContent='...';
+  loadApps(currentPage+1);
+}
+
+function getIcon(a,sz){
+  const st=`width:${sz}px;height:${sz}px;object-fit:cover;border-radius:${sz-3}px`;
+  if(a.icon_path) return `<img src="/${a.icon_path}" style="${st}" onerror="this.outerHTML='📦'">`;
+  if(a.package) return `<img src="https://play-lh.googleusercontent.com/a/${a.package}" style="${st}" onerror="this.outerHTML='📦'">`;
+  return '📦';
+}
+
 async function loadStats(){
   try{
     const r=await fetch('/api/stats'); const s=await r.json();
@@ -591,90 +626,49 @@ async function loadStats(){
   }catch(e){}
 }
 
-// ══ ICON ══
-function getIconImg(a,sz){
-  const style=`width:${sz}px;height:${sz}px;object-fit:cover;border-radius:${sz-2}px`;
-  if(a.icon_path) return `<img src="/${a.icon_path}" style="${style}" onerror="this.outerHTML='📦'">`;
-  if(a.package){
-    const pkg=a.package;
-    return `<img src="https://play-lh.googleusercontent.com/a/${pkg}" style="${style}" onerror="this.src='https://www.apkmirror.com/wp-content/themes/APKMirror/images/icon-64x64.png'">`;
-  }
-  return '📦';
+// ══ FILTERS ══
+function filterCat(cat,el){
+  curCat=cat; currentPage=1;
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
+  if(el)el.classList.add('active');
+  loadApps(1);
+}
+function filterSdk(sdk,el){
+  curSdk=sdk; currentPage=1;
+  document.querySelectorAll('.sdk').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  loadApps(1);
+}
+function setSort(sort,el){
+  curSort=sort; currentPage=1;
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  loadApps(1);
 }
 
-// ══ SDK COMPARE ══
-function sdkOk(appVer,filter){
-  if(!filter||!appVer) return true;
-  const n=v=>v.split('.').reduce((a,b,i)=>a+parseInt(b||0)*Math.pow(100,2-i),0);
-  return n(appVer)>=n(filter);
+// ══ SEARCH ══
+let searchTimer;
+function doSearch(q){
+  clearTimeout(searchTimer);
+  searchTimer=setTimeout(()=>{
+    curSearch=q.trim(); currentPage=1;
+    loadApps(1);
+  },400);
+}
+function clearSearch(){
+  document.getElementById('searchInput').value='';
+  curSearch=''; currentPage=1;
+  loadApps(1);
 }
 
-// ══ RENDER ══
-function renderApps(){
-  const t=T[curLang];
-  let apps=[...allApps];
-  if(curCat!=='All') apps=apps.filter(a=>a.cat===curCat);
-  if(curSearch){const s=curSearch.toLowerCase();apps=apps.filter(a=>a.name.toLowerCase().includes(s)||(a.desc||'').toLowerCase().includes(s))}
-  if(curSdk) apps=apps.filter(a=>sdkOk(a.min_android,curSdk));
-  const games=apps.filter(a=>a.cat==='Games');
-  const others=curCat==='Games'?apps:apps.filter(a=>a.cat!=='Games');
-  // games
-  const gSec=document.getElementById('gamesSection');
-  if(games.length&&curCat==='All'){
-    gSec.style.display='block';
-    document.getElementById('gamesList').innerHTML=games.map(a=>`
-      <div class="game-card" onclick="openApp('${a.file}')">
-        <div class="game-thumb" style="background:${a.color||'#1A1A2E'}">${getIconImg(a,90)}</div>
-        <div class="game-info">
-          <div class="game-name">${a.name}</div>
-          <div class="game-sdk">${a.min_android?'Android '+a.min_android+'+':a.cat}</div>
-        </div>
-      </div>`).join('');
-  }else gSec.style.display='none';
-  // apps
-  const list=document.getElementById('appsList');
-  if(!others.length){list.innerHTML=`<div class="empty"><div class="empty-i">📦</div><div class="empty-t">${t.noApps}</div></div>`;return}
-  list.innerHTML=others.map(a=>`
-    <div class="app-item" onclick="openApp('${a.file}')">
-      <div class="app-ico" style="background:${a.color||'#1A1A2E'}">${getIconImg(a,54)}</div>
-      <div class="app-info">
-        <div class="app-name">${a.name}</div>
-        <div class="app-sub">${a.cat} · ${a.uploader||'admin'}</div>
-        <div class="app-row">
-          <span class="app-stars">★★★★★</span>
-          <span class="app-sz">${a.size||'?'}</span>
-          ${a.min_android?`<span class="app-sdk-badge">Android ${a.min_android}+</span>`:''}
-        </div>
-      </div>
-      <div class="app-btn-wrap">
-        <button class="btn-inst" onclick="event.stopPropagation();doInstall('${a.file}','${a.name}')">${t.install}</button>
-      </div>
-    </div>`).join('');
+// ══ OPEN APP ══
+function openApp(slug){
+  window.location.href='/app/'+encodeURIComponent(slug);
 }
-
-// ══ OPEN APP PAGE (URL) ══
-function openApp(file){
-  window.location.href='/app/'+encodeURIComponent(file);
-}
-
-// ══ MODAL (keep for quick view) ══
-function openModal(id){
-  const a=allApps.find(x=>x.id===id); if(!a)return;
-  openApp(a.file);
-}
-
-function closeM(e){if(e.target===document.getElementById('overlay'))closeMD()}
-function closeMD(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=''}
-
-// ══ FILTER ══
-function doSearch(q){curSearch=q.trim();renderApps()}
-function clearSearch(){document.getElementById('searchInput').value='';curSearch='';renderApps()}
-function filterCat(cat,el){curCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));if(el)el.classList.add('active');renderApps()}
-function filterSdk(sdk,el){curSdk=sdk;document.querySelectorAll('.sdk').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');renderApps()}
 
 // ══ INSTALL ══
 async function doInstall(file,name){
-  try{await fetch('/api/download/'+file,{method:'POST'})}catch(e){}
+  try{await fetch('/api/download/'+encodeURIComponent(file),{method:'POST'})}catch(e){}
   const a=document.createElement('a');a.href='/apks/'+file;a.download=file;a.click();
   showToast('⬇️ '+(curLang==='ar'?'جارٍ تحميل ':'Downloading ')+name);
   loadStats();
@@ -700,15 +694,13 @@ function fileSel(inp){
 async function uploadApk(){
   if(!userToken&&!adminToken){showToast('⚠️ Login required');return}
   const fi=document.getElementById('apkFile');
-  if(!fi.files[0]){showToast('⚠️ Select APK first');return}
+  if(!fi.files[0]){showToast('⚠️ Select APK');return}
   const btn=document.getElementById('uploadBtn');
   const prog=document.getElementById('prog');
-  const fill=document.getElementById('progF');
-  const txt=document.getElementById('progT');
   btn.disabled=true;prog.style.display='block';
   document.getElementById('apkPrev').style.display='none';
   let p=0;
-  const iv=setInterval(()=>{p+=Math.random()*8+4;if(p>85)p=85;fill.style.width=p+'%';txt.textContent=Math.round(p)+'%'},200);
+  const iv=setInterval(()=>{p+=Math.random()*8+4;if(p>85)p=85;document.getElementById('progF').style.width=p+'%';document.getElementById('progT').textContent=Math.round(p)+'%'},200);
   const fd=new FormData();
   fd.append('file',fi.files[0]);
   fd.append('cat',document.getElementById('appCat').value);
@@ -718,7 +710,7 @@ async function uploadApk(){
   try{
     const r=await fetch('/api/upload',{method:'POST',body:fd});
     const data=await r.json();
-    clearInterval(iv);fill.style.width='100%';txt.textContent='100% ✅';
+    clearInterval(iv);document.getElementById('progF').style.width='100%';document.getElementById('progT').textContent='100% ✅';
     if(data.name){
       document.getElementById('apkPrev').style.display='block';
       document.getElementById('prevName').textContent=data.name;
@@ -726,16 +718,7 @@ async function uploadApk(){
       document.getElementById('prevSdk').textContent=data.min_android?`Android ${data.min_android}+`:'';
     }
     showToast('✅ '+data.message);
-    setTimeout(()=>{
-      prog.style.display='none';btn.disabled=false;fill.style.width='0%';
-      document.getElementById('dzI').textContent='📦';
-      document.getElementById('dzT').textContent=T[curLang].apkselect;
-      document.getElementById('dzT').style.color='';
-      document.getElementById('dropZone').style.borderColor='';
-      document.getElementById('appDesc').value='';
-      loadApps();
-      if(adminToken)goTo('home');
-    },2000);
+    setTimeout(()=>{prog.style.display='none';btn.disabled=false;document.getElementById('progF').style.width='0%';document.getElementById('dzT').textContent=T[curLang].apkselect;document.getElementById('dzT').style.color='';document.getElementById('dropZone').style.borderColor='';document.getElementById('appDesc').value='';loadApps(1);if(adminToken)goTo('home');},2000);
   }catch(e){clearInterval(iv);showToast('❌ Upload failed');btn.disabled=false;prog.style.display='none'}
 }
 
@@ -757,7 +740,7 @@ async function doLogin(){
     const data=await r.json();
     userToken=data.token;userName=data.username;
     localStorage.setItem('px_ut',userToken);localStorage.setItem('px_un',userName);
-    updateAuthUI();showToast('✅ '+(curLang==='ar'?'مرحباً ':'Welcome ')+userName);
+    updateAuthUI();showToast('✅ Welcome '+userName);
   }catch(e){showToast('❌ Error')}
 }
 async function doRegister(){
@@ -772,7 +755,7 @@ async function doRegister(){
     const data=await r.json();
     userToken=data.token;userName=data.username;
     localStorage.setItem('px_ut',userToken);localStorage.setItem('px_un',userName);
-    updateAuthUI();showToast('✅ '+(curLang==='ar'?'تم إنشاء الحساب':'Account created'));
+    updateAuthUI();showToast('✅ Account created!');
   }catch(e){showToast('❌ Error')}
 }
 function saveAdmin(){
@@ -785,7 +768,7 @@ function saveAdmin(){
 function doLogout(){
   userToken='';userName='';adminToken='';
   localStorage.removeItem('px_ut');localStorage.removeItem('px_un');localStorage.removeItem('px_at');
-  updateAuthUI();showToast('👋 '+(curLang==='ar'?'تم الخروج':'Logged out'));
+  updateAuthUI();showToast('👋 Logged out');
 }
 function updateAuthUI(){
   const loggedIn=userToken!==''||adminToken!=='';
@@ -808,25 +791,24 @@ async function loadPending(){
     const r=await fetch('/api/pending',{headers:{'X-Admin-Token':adminToken}});
     const apps=await r.json();
     const sec=document.getElementById('pendingSection');
-    const t=T[curLang];
     if(apps.length){
       sec.style.display='block';
       document.getElementById('pendingList').innerHTML=apps.map(a=>`
         <div class="p-item">
           <div class="p-name">${a.name}</div>
           <div class="p-by">${a.uploader}</div>
-          <button class="btn-approve" onclick="approveApp('${a.file}')">${t.approve}</button>
+          <button class="btn-approve" onclick="approveApp('${a.file}')">✅</button>
           <button class="btn-rej" onclick="delApp('${a.file}','${a.name}')">🗑️</button>
         </div>`).join('');
     }else sec.style.display='none';
   }catch(e){}
 }
 async function approveApp(file){
-  try{await fetch('/api/approve/'+file,{method:'POST',headers:{'X-Admin-Token':adminToken}});showToast('✅ Approved!');loadApps();loadPending();}catch(e){showToast('❌ Error')}
+  try{await fetch('/api/approve/'+file,{method:'POST',headers:{'X-Admin-Token':adminToken}});showToast('✅ Approved!');loadPending();}catch(e){}
 }
 async function delApp(file,name){
   if(!confirm('Delete "'+name+'"?'))return;
-  try{const r=await fetch('/api/delete/'+file,{method:'DELETE',headers:{'X-Admin-Token':adminToken}});if(r.ok){showToast('🗑️ '+name);loadApps();loadPending();}}catch(e){showToast('❌ Error')}
+  try{const r=await fetch('/api/delete/'+file,{method:'DELETE',headers:{'X-Admin-Token':adminToken}});if(r.ok){showToast('🗑️ Deleted');loadApps(1);loadPending();}}catch(e){}
 }
 
 // ══ NAV ══
@@ -837,6 +819,7 @@ function goTo(name){
   document.querySelectorAll('.bi').forEach((b,i)=>b.classList.toggle('active',PAGES[i]===name));
   window.scrollTo(0,0);
   if(name==='account'&&adminToken)loadPending();
+  if(name==='about')loadStats();
 }
 
 // ══ TOAST ══
